@@ -1,0 +1,47 @@
+% Định nghĩa định dạng mới cho phần section =====================================================
+\titleformat{\section}[hang]
+{\centering\normalfont\Large\bfseries}
+{\MakeUppercase{Chương \thesection:}}
+{0.5em}
+{\MakeUppercase}
+[]
+
+\titleformat*{\subsection}{\fontsize{13}{15.6}\selectfont\bfseries}
+\titleformat*{\subsubsection}{\fontsize{13}{15.6}\selectfont\bfseries}
+
+
+% Setting header and footer ======================================================================
+\pagestyle{fancy}
+\lhead{\fontsize{13pt}{15.6}\selectfont Báo cáo Đồ án tốt nghiệp}
+\rhead{\fontsize{13pt}{15.6}\selectfont Trường Đại học Mỏ - Địa chất}
+\lfoot{\fontsize{13pt}{15.6}\selectfont Hồ Văn Đức}
+\cfoot{}
+\rfoot{\fontsize{13pt}{15.6}\selectfont \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Setting table of content ========================================================================
+\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\contentsname}{\MakeUppercase{Mục lục}}
+
+
+% Setting font ====================================================================================
+\fontsize{13pt}{15.6}\selectfont
+\renewcommand{\baselinestretch}{1.5} 
+
+% Định nghĩa định dạng font Time New Roma =========================================================
+% \makeatletter
+% % \patchcmd{<cmd>}{<search>}{<replace>}{<success>}{<failure>}
+% \patchcmd{\@makechapterhead}{\huge}{\large}{}{}% for \chapter
+% \patchcmd{\@makechapterhead}{\Huge}{\large}{}{}% for \chapter
+% \patchcmd{\@makeschapterhead}{\Huge}{\large}{}{}% for \chapter*
+% \makeatother
+
+% Setting sub section level 4 =====================================================================
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\fontsize{13}{15.6}\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}

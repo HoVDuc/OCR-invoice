@@ -1,0 +1,49 @@
+\documentclass[13pt, a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{vietnam}
+\usepackage[left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{indentfirst}
+\usepackage[backend=biber, style=ieee]{biblatex}
+% \usepackage{mathptmx}
+% \usepackage{etoolbox}
+\addbibresource{references.bib}
+
+\title{Report Đồ án}
+\author{Duc Ho V}
+\date{July 2023}
+
+\begin{document}
+
+% template =====================================================================
+\input{template.tex}
+
+\maketitle
+% Mục lục ======================================================================
+\newpage
+\tableofcontents
+
+% Mở đầu ========================================================================
+\newpage
+\addcontentsline{toc}{section}{MỞ ĐẦU}
+\section*{MỞ ĐẦU}
+
+% Chương 1 ======================================================================
+\newpage
+\input{chapter1.tex}
+
+% Chương 2 ======================================================================
+\newpage
+\input{chapter2.tex}
+
+% Chương 3 ======================================================================
+\newpage
+\input{chapter3.tex}
+
+\newpage
+\printbibliography
+\end{document}
