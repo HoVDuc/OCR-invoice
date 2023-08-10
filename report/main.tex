@@ -1,6 +1,7 @@
-\documentclass[13pt, a4paper]{article}
+\documentclass[a4paper]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[utf8]{vietnam}
+\usepackage[fontsize=13pt]{fontsize}
 \usepackage[left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{blindtext}
 \usepackage{fancyhdr}
@@ -8,12 +9,33 @@
 \usepackage{titlesec}
 \usepackage{tocloft}
 \usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{caption}
 \usepackage[backend=biber, style=ieee]{biblatex}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listofitems} % for \readlist to create arrays
+\usepackage{xcolor}
+\usepackage[outline]{contour} % glow around text
+
+
 % \usepackage{mathptmx}
 % \usepackage{etoolbox}
 \addbibresource{references.bib}
+\graphicspath{./images/}
+\tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
 
-\title{Report Đồ án}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Đồ án},
+    pdfpagemode=FullScreen,
+}
+\def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
+
+\title{\Huge Đồ án tốt nghiệp}
 \author{Duc Ho V}
 \date{July 2023}
 
