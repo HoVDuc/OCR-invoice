@@ -40,6 +40,17 @@ Ngày nay, công nghệ OCR tiên tiến và phức tạp hơn bao giờ hết. 
 
 Lịch sử OCR bắt đầu với những phát minh mang tính cách mạng được thiết kế để cải thiện chất lượng cuộc sống cho nhân loại. Nhiều thập kỷ sau, công nghệ này vẫn đang trải qua quá trình phát triển và cải tiến liên tục, đồng thời là một yếu tố quyết định quan trọng của thời đại kỹ thuật số. OCR đã trải qua một chặng đường dài và đang thực sự cải thiện chất lượng cuộc sống của phần lớn nhân loại. Ngày nay, nhiều ngành công nghiệp và ứng dụng sử dụng OCR. Trong những thập kỷ tới, nó sẽ đóng một vai trò quan trọng trong quá trình chuyển đổi kỹ thuật số toàn cầu.\cite{veryfi}
 
+\subsubsection{Nguyên tắc hoạt động của OCR}
+OCR hoạt động bằng cách phân tích hình ảnh văn bản và sau đó tạo ra một bản sao văn bản kỹ thuật số của hình ảnh đó. Quá trình này thường được thực hiện theo các bước sau:
+\begin{itemize}
+    \item Quét tài liệu: Tài liệu được quét bằng máy quét để tạo ra một hình ảnh kỹ thuật số của tài liệu.
+    \item Phân tích và xử lý hình ảnh: Trước khi nhận dạng văn bản, ảnh được tiền xử lý để làm sạch và cải thiện chất lượng. Điều này có thể bao gồm việc điều chỉnh độ tương phản, loại bỏ nhiễu, cắt biên và xoay ảnh để đảm bảo văn bản nằm ngang. Sau đó hình ảnh được phân tích để xác định các vùng văn bản.
+    \item Nhận dạng ký tự: Trong bước này, hình ảnh được chuyển đổi thành dạng dữ liệu văn bản bằng cách nhận dạng các ký tự riêng lẻ. Các thuật toán và mô hình máy học được sử dụng để so khớp các đặc trưng trong hình ảnh với các ký tự đã biết từ bộ dữ liệu huấn luyện.
+    \item Phân tích cấu trúc: Sau khi xác định được các ký tự, công cụ OCR cũng cố gắng xác định cấu trúc của văn bản, bao gồm việc xác định các đoạn, đoạn văn bản, tiêu đề, danh sách và các yếu tố cấu trúc khác.
+    \item Sửa lỗi và kiểm tra: Sau khi nhận dạng, dữ liệu văn bản thường cần được kiểm tra lại và sửa lỗi do các lỗi nhận dạng có thể xảy ra. Điều này có thể thực hiện tự động hoặc thông qua giao diện người dùng để đảm bảo tính chính xác của kết quả.
+    \item Tạo bản sao văn bản kỹ thuật số: Một bản sao văn bản kỹ thuật số của hình ảnh được tạo ra bằng cách kết hợp các ký tự đã được nhận dạng.
+\end{itemize}
+Các công nghệ OCR ngày càng phát triển, sử dụng các mô hình học sâu và học máy để cải thiện khả năng nhận dạng và xử lý ngôn ngữ tự nhiên, tạo ra kết quả chính xác hơn và phức tạp hơn.
 \subsection{Học sâu và ứng dụng trong OCR}
 Trong việc ứng dụng OCR để nhận dạng hóa đơn, mạng học sâu đã chơi một vai trò quan trọng và mang lại những cải tiến đáng kể cho quá trình này. Trước khi sự xuất hiện của học sâu, các hệ thống nhận dạng dựa trên các phương pháp truyền thống thường gặp khó khăn trong việc xử lý các biến thể phức tạp của hình ảnh hóa đơn và khả năng xử lý đa dạng của chúng. Nhưng với mạng nơron học sâu, khả năng học và tự điều chỉnh của mô hình đã mở ra những cánh cửa mới cho việc nhận dạng hóa đơn hiệu quả hơn.
 
@@ -104,10 +115,206 @@ Hiện nay các kiến trúc học sâu như mạng nơ-ron sâu, mạng niềm 
 
 \end{figure}
 
+\subsubsection{Ứng dụng trong OCR}
+Học sâu đã được chứng minh là có hiệu quả hơn các phương pháp OCR truyền thống \cite{ai-vs-traditional}, đặc biệt là đối với các tài liệu có chất lượng thấp hoặc bị định dạng phức tạp.
 
-\subsection{Nguyên tắc hoạt động của OCR}
+Một số ứng dụng của Học sâu trong OCR bao gồm:
+\begin{itemize}
+    \item Nhận dạng hóa đơn: Học sâu có thể được sử dụng để nhận dạng các trường thông tin quan trọng trên hóa đơn, chẳng hạn như tên người mua, người bán, ngày giao dịch, số lượng, giá và tổng số tiền. Điều này có thể giúp tiết kiệm thời gian và chi phí cho các doanh nghiệp, đồng thời cải thiện độ chính xác của việc xử lý hóa đơn.
+    \item Nhận dạng tài liệu y tế: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu y tế, chẳng hạn như tên bệnh nhân, chẩn đoán, phương pháp điều trị và các loại thuốc được kê đơn. Điều này có thể giúp cải thiện chất lượng chăm sóc bệnh nhân và giảm chi phí chăm sóc sức khỏe.
+    \item Nhận dạng tài liệu pháp lý: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu pháp lý, chẳng hạn như tên các bên liên quan, ngày tháng, các điều khoản của thỏa thuận và các điều khoản của hợp đồng. Điều này có thể giúp các luật sư và chuyên gia pháp lý tìm kiếm thông tin nhanh chóng và dễ dàng hơn.
+    \item Nhận dạng tài liệu tài chính: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu tài chính, chẳng hạn như tên công ty, giá cổ phiếu, số lượng cổ phiếu và giá trị thị trường của cổ phiếu. Điều này có thể giúp các nhà đầu tư và các chuyên gia tài chính đưa ra quyết định đầu tư tốt hơn.
+\end{itemize}
+Học sâu là một công nghệ mạnh mẽ có thể được sử dụng để cải thiện độ chính xác và hiệu quả của OCR. Với sự phát triển của Học sâu, OCR sẽ trở nên dễ dàng và thuận tiện hơn trong tương lai.
+
+\subsection{Các thuật toán OCR}
+Mặc dù OCR tương đối cụ thể, nhưng nó liên quan đến nhiều khía cạnh của công nghệ, bao gồm phát hiện văn bản, nhận dạng văn bản, nhận dạng văn bản từ đầu đến cuối, phân tích tài liệu, v.v. Nghiên cứu học thuật về các công nghệ liên quan của OCR phát triển mạnh mẽ. Phần này đây sẽ giới thiệu sơ lược về một số công nghệ chính trong tác vụ OCR.
 \subsubsection{Phát hiện văn bản}
-\paragraph{DBNet}
-\paragraph{SAST}
+Công việc phát hiện văn bản là để xác định vùng chứa văn bản trên ảnh đầu vào. Trong những năm gần đây, có nhiều nghiên cứu học thuật về phát hiện văn bản. Một lớp phương pháp coi việc phát hiện văn bản như một tình huống cụ thể trong việc phát hiện mục tiêu, và điều chỉnh các thuật toán phát hiện mục tiêu chung để phù hợp với việc phát hiện văn bản. Ví dụ, TextBoxes dựa trên một bộ phát hiện mục tiêu một giai đoạn là SSD. Thuật toán điều chỉnh khung mục tiêu để vừa với các dòng văn bản có tỷ lệ khía cạnh cực đoan, trong khi CTPN được phát triển từ Faster RCNN. Tuy nhiên, vẫn có một số khác biệt giữa phát hiện văn bản và phát hiện mục tiêu về thông tin mục tiêu và nhiệm vụ chính. Ví dụ, văn bản thường dài và trông giống "vạch", khoảng cách giữa các dòng nhỏ, văn bản có thể uốn cong, v.v. Do đó, nhiều thuật toán đặc biệt cho việc phát hiện văn bản đã được phát triển, như EAST, PSENet, DBNet, và nhiều thuật toán khác \cite{Dive-into-ocr-2022}.
+\begin{figure}
+    \includegraphics[scale=0.7]{images/text-detection.png}
+    \centering
+    \caption{Ví dụ về nhiệm vụ phát hiện văn bản}
+\end{figure}
+
+Hiện tại, một số thuật toán phát hiện văn bản phổ biến có thể được chia ra một cách đại khái thành hai loại: \textbf{Thuật toán dựa trên Hồi quy} và \textbf{Thuật toán dựa trên Phân đoạn}. Cũng có một số thuật toán kết hợp cả hai loại này. Các thuật toán dựa trên hồi quy lấy cảm hứng từ các thuật toán phát hiện đối tượng chung, thực hiện việc hồi quy hộp phát hiện bằng cách đặt các anchor, hoặc thậm chí trực tiếp thực hiện hồi quy điểm ảnh. Loại phương pháp này hoạt động tốt trong việc phân biệt văn bản có hình dạng đều đặn, nhưng kém trong việc phát hiện văn bản có hình dạng không đều. Ví dụ, CTPN tốt trong việc nhận dạng văn bản ngang, nhưng kém trong việc phát hiện văn bản uốn cong và xoắn. SegLink phù hợp hơn với văn bản dài, nhưng không thích hợp cho việc phát hiện văn bản phân tán thưa thớt. Các thuật toán dựa trên phân đoạn giới thiệu Mask-RCNN, loại thuật toán này có thể hoạt động tốt hơn trong việc phát hiện trong các tình huống và văn bản có các hình dạng khác nhau, nhưng hạn chế là việc xử lý sau cùng phức tạp, vì vậy có thể chậm về tốc độ và không thể phát hiện được văn bản chồng lấn \cite{Dive-into-ocr-2022}.
+
+
+
+\begin{figure}[h]
+
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,783); %set diagram left start at 0, and has height of 783
+    
+    %Rounded Rect [id:dp12536916830339373] 
+    \draw  [color={rgb, 255:red, 246; green, 35; blue, 35 }  ,draw opacity=1 ][fill={rgb, 255:red, 246; green, 35; blue, 35 }  ,fill opacity=1 ] (79.8,126.47) .. controls (79.8,120.47) and (84.67,115.6) .. (90.67,115.6) -- (238.49,115.6) .. controls (244.5,115.6) and (249.37,120.47) .. (249.37,126.47) -- (249.37,159.1) .. controls (249.37,165.1) and (244.5,169.97) .. (238.49,169.97) -- (90.67,169.97) .. controls (84.67,169.97) and (79.8,165.1) .. (79.8,159.1) -- cycle ;
+    %Straight Lines [id:da35079927471568495] 
+    \draw    (484.18,93.97) -- (484.52,110.57) ;
+    \draw [shift={(484.58,113.57)}, rotate = 268.83] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+    %Straight Lines [id:da3515453488418392] 
+    \draw    (484.18,93.97) -- (164.67,93.67) ;
+    %Straight Lines [id:da8167979499170375] 
+    \draw    (164.67,93.67) -- (164.67,111.07) ;
+    \draw [shift={(164.67,114.07)}, rotate = 270] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+    %Straight Lines [id:da24241956645024332] 
+    \draw    (324.61,75.97) -- (324.42,93.82) ;
+    %Rounded Rect [id:dp4800123674594827] 
+    \draw  [color={rgb, 255:red, 0; green, 33; blue, 205 }  ,draw opacity=1 ][fill={rgb, 255:red, 0; green, 33; blue, 205 }  ,fill opacity=1 ] (399.8,125.67) .. controls (399.8,119.67) and (404.67,114.8) .. (410.67,114.8) -- (558.49,114.8) .. controls (564.5,114.8) and (569.37,119.67) .. (569.37,125.67) -- (569.37,158.3) .. controls (569.37,164.3) and (564.5,169.17) .. (558.49,169.17) -- (410.67,169.17) .. controls (404.67,169.17) and (399.8,164.3) .. (399.8,158.3) -- cycle ;
+    %Rounded Rect [id:dp7078369789993373] 
+    \draw  [color={rgb, 255:red, 36; green, 159; blue, 255 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=0 ] (242.2,31.67) .. controls (242.2,25.67) and (247.07,20.8) .. (253.07,20.8) -- (400.89,20.8) .. controls (406.9,20.8) and (411.77,25.67) .. (411.77,31.67) -- (411.77,64.3) .. controls (411.77,70.3) and (406.9,75.17) .. (400.89,75.17) -- (253.07,75.17) .. controls (247.07,75.17) and (242.2,70.3) .. (242.2,64.3) -- cycle ;
+    %Rounded Rect [id:dp5367367596794104] 
+    \draw  [fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=0 ][dash pattern={on 4.5pt off 4.5pt}] (22.33,240.83) .. controls (22.33,209.04) and (48.1,183.27) .. (79.89,183.27) -- (252.57,183.27) .. controls (284.36,183.27) and (310.13,209.04) .. (310.13,240.83) -- (310.13,489.65) .. controls (310.13,521.44) and (284.36,547.21) .. (252.57,547.21) -- (79.89,547.21) .. controls (48.1,547.21) and (22.33,521.44) .. (22.33,489.65) -- cycle ;
+    %Rounded Rect [id:dp2663541401208218] 
+    \draw  [fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=0 ][dash pattern={on 4.5pt off 4.5pt}] (342.33,237.83) .. controls (342.33,206.04) and (368.1,180.27) .. (399.89,180.27) -- (572.57,180.27) .. controls (604.36,180.27) and (630.13,206.04) .. (630.13,237.83) -- (630.13,486.65) .. controls (630.13,518.44) and (604.36,544.21) .. (572.57,544.21) -- (399.89,544.21) .. controls (368.1,544.21) and (342.33,518.44) .. (342.33,486.65) -- cycle ;
+    
+    
+    % Text Node
+    \draw (42,364.54) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0,0.09,0.75}{Ưu: Thường tốt cho văn bản }\\\textcolor[rgb]{0,0.09,0.75}{hình dạng thông thường.}\\\textcolor[rgb]{0,0.09,0.75}{Nhược: \ Không được chính xác}\\\textcolor[rgb]{0,0.09,0.75}{khi phát hiện văn bản có hình dạng}\\\textcolor[rgb]{0,0.09,0.75}{ bất thường}};
+    % Text Node
+    \draw (282.8,46.8) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\small \textbf{phát hiện}}};
+    % Text Node
+    \draw (270.85,32.97) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\small \textbf{Các thuật toán}}};
+    % Text Node
+    \draw (104.35,135.57) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\small \textcolor[rgb]{1,1,1}{Dựa trên hồi quy}}};
+    % Text Node
+    \draw (423.47,135.37) node [anchor=north west][inner sep=0.75pt]   [align=left] {{\small \textcolor[rgb]{1,1,1}{Dựa trên phân vùng}}};
+    % Text Node
+    \draw (84,208.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {CTPN\\Textboxes/Texboxes++\\EAST\\CRAFT\\...};
+    % Text Node
+    \draw (404,207.67) node [anchor=north west][inner sep=0.75pt]   [align=left] {Pixel embeding\\PSENet\\PAN\\DB/DB++\\...};
+    % Text Node
+    \draw (363,361.54) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textcolor[rgb]{0,0.09,0.75}{Ưu: Xử lý tốt với văn bản có hình }\\\textcolor[rgb]{0,0.09,0.75}{dạng khác nhau.}\\\textcolor[rgb]{0,0.09,0.75}{Nhược: \ Quá trình hậu xử lý phức}\\\textcolor[rgb]{0,0.09,0.75}{tạp, tốn thời gian và hiệu quả kém}\\\textcolor[rgb]{0,0.09,0.75}{với văn bản chồng chéo}};
+    
+    
+    \end{tikzpicture}
+    \centering
+    \caption{Tổng quan về thuật toán phát hiện văn bản}
+\end{figure}
 \subsubsection{Nhận dạng văn bản}
-\subsubsection{Trích xuất thông tin chính}
+Nhận dạng văn bản là việc nhận biết nội dung văn bản trong hình ảnh, và đầu vào thường là từ phần vùng chứa văn bản của ảnh được cắt ra bằng hộp văn bản được tạo ra từ việc phát hiện văn bản. Nhận dạng văn bản có thể được chia thành hai loại chính: \textbf{Nhận dạng Văn bản Đều đặn} và \textbf{Nhận dạng Văn bản Không đều đặn} dựa trên đường viền của văn bản cần nhận dạng.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.4]{images/regular-irregular-text.png}
+    \centering
+    \caption{Văn bản đều đặn (trái) và Văn bản không đều đặn (phải)}
+\end{figure}
+
+Văn bản đều đặn chủ yếu đề cập đến các phông chữ in, văn bản được quét, và các nguồn tương tự có hướng chính đều. Văn bản không đều đặn thường không nằm trong tư thế ngang, thường uốn cong, bị che khuất và mờ mờ. Các tình huống văn bản không đều đặn thách thức rất lớn, và đó cũng là hướng nghiên cứu chính trong việc nhận dạng văn bản.
+
+Các thuật toán nhận dạng văn bản đều đặn có thể được chia thành hai loại dựa trên các phương pháp giải mã khác nhau: Thuật toán dựa trên CTC và Thuật toán dựa trên Sequence2Sequence. Chúng khác nhau trong cách chuyển đổi các đặc trưng chuỗi mà mạng học học được thành kết quả nhận dạng cuối cùng. Một ví dụ đại diện cho thuật toán dựa trên CTC là CRNN cổ điển.
+
+\begin{figure}[p]
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,819); %set diagram left start at 0, and has height of 819
+    
+    %Rounded Rect [id:dp7357497005786489] 
+    \draw  [dash pattern={on 4.5pt off 4.5pt}] (78.38,111.44) .. controls (78.38,78.6) and (105,51.98) .. (137.84,51.98) -- (484.66,51.98) .. controls (517.5,51.98) and (544.12,78.6) .. (544.12,111.44) -- (544.12,289.82) .. controls (544.12,322.66) and (517.5,349.28) .. (484.66,349.28) -- (137.84,349.28) .. controls (105,349.28) and (78.38,322.66) .. (78.38,289.82) -- cycle ;
+    %Up Down Arrow [id:dp10182102951041139] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 255; green, 0; blue, 0 }  ,fill opacity=1 ] (206.27,365.77) -- (220.2,357.52) -- (234.13,365.77) -- (227.16,365.77) -- (227.16,382.27) -- (234.13,382.27) -- (220.2,390.52) -- (206.27,382.27) -- (213.23,382.27) -- (213.23,365.77) -- cycle ;
+    %Up Down Arrow [id:dp6666173009893719] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 255; green, 0; blue, 0 }  ,fill opacity=1 ] (406.67,365.77) -- (420.6,357.52) -- (434.53,365.77) -- (427.56,365.77) -- (427.56,382.27) -- (434.53,382.27) -- (420.6,390.52) -- (406.67,382.27) -- (413.63,382.27) -- (413.63,365.77) -- cycle ;
+    %Rounded Rect [id:dp06853301880737295] 
+    \draw  [dash pattern={on 4.5pt off 4.5pt}] (77.38,457.44) .. controls (77.38,424.6) and (104,397.98) .. (136.84,397.98) -- (483.66,397.98) .. controls (516.5,397.98) and (543.12,424.6) .. (543.12,457.44) -- (543.12,635.82) .. controls (543.12,668.66) and (516.5,695.28) .. (483.66,695.28) -- (136.84,695.28) .. controls (104,695.28) and (77.38,668.66) .. (77.38,635.82) -- cycle ;
+    
+    
+    
+    % Text Node
+    \draw (222,465.41) node   [align=left] {\begin{minipage}[lt]{68pt}\setlength\topsep{0pt}
+    CRNN\\STAR-Net\\Rosetta\\...
+    \end{minipage}};
+    % Text Node
+    \draw (407,465.91) node   [align=left] {\begin{minipage}[lt]{68pt}\setlength\topsep{0pt}
+    R2AM\\SAR\\RARE\\...
+    \end{minipage}};
+    % Text Node
+    \draw (209.63,593.06) node   [align=left] {\begin{minipage}[lt]{134.82pt}\setlength\topsep{0pt}
+    \textcolor[rgb]{0,0.45,0.08}{Ưu: Hiệu quả cao, tốt cho văn bản thông thường và dài}\\\textcolor[rgb]{1,0,0}{Nhược: Không sử dụng thông tin ngữ cảnh}
+    \end{minipage}};
+    % Text Node
+    \draw (419.63,581.49) node   [align=left] {\begin{minipage}[lt]{134.82pt}\setlength\topsep{0pt}
+    \textcolor[rgb]{0,0.45,0.08}{Ưu: Độ chính xác cao}\\\textcolor[rgb]{1,0,0}{Nhược: Hiệu quả kém cho văn bản quá dài hoặc quá ngắn}
+    \end{minipage}};
+    % Text Node
+    \draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ]  (247.07,78.7) .. controls (247.07,69.86) and (254.24,62.7) .. (263.07,62.7) -- (346.07,62.7) .. controls (354.91,62.7) and (362.07,69.86) .. (362.07,78.7) -- (362.07,92.7) .. controls (362.07,101.53) and (354.91,108.7) .. (346.07,108.7) -- (263.07,108.7) .. controls (254.24,108.7) and (247.07,101.53) .. (247.07,92.7) -- cycle  ;
+    \draw (304.57,85.7) node   [align=left] {\begin{minipage}[lt]{75.58pt}\setlength\topsep{0pt}
+    \begin{center}
+    Thuật toán nhận dạng
+    \end{center}
+    
+    \end{minipage}};
+    % Text Node
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 145; green, 9; blue, 181 }  ,fill opacity=1 ]  (158.74,151.2) .. controls (158.74,142.37) and (165.9,135.2) .. (174.74,135.2) -- (257.74,135.2) .. controls (266.58,135.2) and (273.74,142.37) .. (273.74,151.2) -- (273.74,167.2) .. controls (273.74,176.04) and (266.58,183.2) .. (257.74,183.2) -- (174.74,183.2) .. controls (165.9,183.2) and (158.74,176.04) .. (158.74,167.2) -- cycle  ;
+    \draw (216.24,159.2) node  [color={rgb, 255:red, 255; green, 255; blue, 255 }  ,opacity=1 ] [align=left] {\begin{minipage}[lt]{75.58pt}\setlength\topsep{0pt}
+    \begin{center}
+    CTC-based
+    \end{center}
+    
+    \end{minipage}};
+    % Text Node
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 0; green, 81; blue, 33 }  ,fill opacity=1 ]  (347.41,152.04) .. controls (347.41,143.2) and (354.57,136.04) .. (363.41,136.04) -- (446.41,136.04) .. controls (455.24,136.04) and (462.41,143.2) .. (462.41,152.04) -- (462.41,166.04) .. controls (462.41,174.88) and (455.24,182.04) .. (446.41,182.04) -- (363.41,182.04) .. controls (354.57,182.04) and (347.41,174.88) .. (347.41,166.04) -- cycle  ;
+    \draw (404.91,159.04) node  [color={rgb, 255:red, 255; green, 255; blue, 255 }  ,opacity=1 ] [align=left] {\begin{minipage}[lt]{75.58pt}\setlength\topsep{0pt}
+    \begin{center}
+    Attention-based
+    \end{center}
+    
+    \end{minipage}};
+    % Text Node
+    \draw (146.33,205.31) node [anchor=north west][inner sep=0.75pt]   [align=left] {\mbox{-} CRNN+CTC\\\mbox{-} Giới thiệu một ký tự không \\gian\\\mbox{-} Nhãn không yêu cầu căn \\chỉnh cấp độ ký tự};
+    % Text Node
+    \draw (337,206.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {\mbox{-} Seq2Seq+attention};
+    % Connection
+    \draw    (276.93,108.7) -- (246.62,133.92) ;
+    \draw [shift={(245.08,135.2)}, rotate = 320.24] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+    % Connection
+    \draw    (336.04,108.7) -- (371.83,134.86) ;
+    \draw [shift={(373.44,136.04)}, rotate = 216.17] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+    
+    \end{tikzpicture}
+    \centering
+    \caption{CTC-based recognition algorithm VS. Attention-based recognition algorithm}
+\end{figure}
+
+Các thuật toán nhận dạng cho văn bản không đều đặn phong phú hơn. Các phương pháp như STAR-Net sửa chữa đường viền của văn bản không đều đặn thành các hình chữ nhật đều đặn bằng cách thêm các mô-đun sửa chữa như TPS trước khi thực hiện việc nhận dạng. Các phương pháp dựa trên Attention như RARE chú trọng hơn đến mối quan hệ giữa các phần trong chuỗi. Các phương pháp dựa trên phân đoạn xử lý mỗi ký tự trên dòng văn bản như một đơn vị riêng lẻ, làm cho việc nhận dạng ký tự đã phân đoạn dễ dàng hơn so với việc nhận dạng toàn bộ dòng văn bản sau khi sửa chữa. Ngoài ra, với sự phát triển nhanh chóng của Transformer và hiệu quả đã được xác minh trong các nhiệm vụ khác nhau trong những năm gần đây, nhiều thuật toán nhận dạng văn bản dựa trên transformer đã phát triển mạnh mẽ. Loại giải pháp này sử dụng cấu trúc transformer để giải quyết việc mô hình hóa sự phụ thuộc lâu dài trong CNN và đã đạt được kết quả tốt.
+
+\begin{figure}
+    \includegraphics[scale=0.42]{images/recognition-based-charcter-segmentation.png}
+    \centering
+    \caption{Thuật toán nhận dạng dựa trên phân vùng ký tự}
+\end{figure}
+
+\subsubsection{Nhận dạng cấu trúc tài liệu}
+Công nghệ OCR có thể đáp ứng yêu cầu về phát hiện và nhận dạng văn bản. Tuy nhiên, trong các tình huống thực tế, điều chúng ta thường cần là thông tin có cấu trúc, chẳng hạn như trích xuất thông tin từ thẻ ID và hóa đơn, xác định có cấu trúc của bảng, và vân vân. Các tình huống ứng dụng của công nghệ OCR chủ yếu là trích xuất tài liệu nhanh, so sánh nội dung hợp đồng, so sánh thông tin tài chính trên các tài liệu cần thanh toán, và xác định tài liệu vận chuyển. Kết quả OCR + xử lý sau cùng là một kế hoạch cấu trúc thường được sử dụng, nhưng phức tạp và cần thiết phải được thiết kế cẩn thận, và thiếu sự tổng quát. Với sự phát triển liên tục của công nghệ OCR và nhu cầu về trích xuất thông tin có cấu trúc đang gia tăng, các công nghệ liên quan đến phân tích tài liệu thông minh, như phân tích bố cục, nhận dạng bảng, và trích xuất thông tin quan trọng, đã nhận được sự chú ý ngày càng tăng.
+
+\paragraph{Phân tích bố cục}
+Phân tích bố cục được thực hiện để phân loại nội dung của hình ảnh tài liệu thành các loại như văn bản thuần túy, tiêu đề, bảng biểu, hình ảnh, v.v. Các phương pháp hiện tại thường thực hiện việc phát hiện hoặc phân đoạn chúng một cách riêng biệt. Ví dụ, Soto Carlos sử dụng thông tin ngữ cảnh và vị trí tự nhiên của nội dung tài liệu để cải thiện hiệu suất phát hiện vùng dựa trên thuật toán phát hiện mục tiêu Faster R-CNN. Sarkar Mausoom và đồng nghiệp đề xuất một cơ chế phân đoạn dựa trên tiên biết để huấn luyện mô hình phân đoạn tài liệu với các hình ảnh có độ phân giải cao, giải quyết vấn đề rằng các cấu trúc khác nhau trong các khu vực dày đặc không thể phân biệt và hợp nhất do việc giảm quá mức của hình ảnh gốc.
+
+\paragraph{Nhận dạng bảng}
+Nhận dạng bảng là việc xác định và chuyển thông tin bảng của tài liệu thành một tệp Excel. Có nhiều loại và phong cách bảng khác nhau trong hình ảnh văn bản, chẳng hạn như các hàng và cột khác nhau và các loại văn bản khác nhau. Ngoài ra, phong cách của tài liệu và môi trường ánh sáng khi chụp ảnh đã đặt ra những thách thức lớn cho việc nhận dạng bảng, làm cho việc nhận dạng bảng trở thành một vấn đề nghiên cứu khó khăn trong việc hiểu tài liệu. Có nhiều phương pháp nhận dạng bảng. Ví dụ, vào những ngày đầu tiên, có các thuật toán truyền thống dựa trên các quy tắc heuristics, như thuật toán T-Rect được đề xuất bởi Kieninger và cộng sự, thường sử dụng quy tắc thiết kế thủ công và phát hiện và phân tích miền kết nối. Trong những năm gần đây, khi học sâu tiếp tục phát triển, một số thuật toán nhận dạng cấu trúc bảng dựa trên mạng CNN đã xuất hiện, như DeepTabStR được đề xuất bởi Siddiqui Shoaib Ahmed và cộng sự và TabStruct-Net được đề xuất bởi Raja Sachin và cộng sự. Ngoài ra, với sự gia tăng của Mạng Neural Đồ thị, một số nhà nghiên cứu đã thử áp dụng Mạng Neural Đồ thị vào việc nhận dạng cấu trúc bảng và coi việc nhận dạng bảng như một vấn đề tái tạo đồ thị dựa trên Mạng Neural Đồ thị. Đây là cách mà TGRNet được đề xuất bởi Xue Wenyuan và cộng sự hoạt động. Hơn nữa, có các giải pháp end-to-end có kết quả đầu ra cấu trúc bảng dưới dạng HTML bằng mạng. Hầu hết trong số này áp dụng Seq2Seq để dự đoán cấu trúc bảng như những thuật toán dựa trên attention hoặc transformer, bao gồm TableMaster.
+
+\paragraph{Trích xuất thông tin chính}
+Trích xuất thông tin quan trọng (KIE) là một nhiệm vụ quan trọng trong Hỏi và Trả lời Văn bản (Document VQA). Nó liên quan đến việc trích xuất thông tin cần thiết từ hình ảnh, chẳng hạn như tên và số ID từ thẻ ID. Thông tin như vậy thường được xác định trong một nhiệm vụ, nhưng khác nhau giữa các nhiệm vụ khác nhau.
+
+KIE thường được chia thành hai phần nhiệm vụ con để nghiên cứu (Hình \ref{fig8:ser-re}):
+\begin{itemize}
+    \item SER: Đây là việc nhận dạng thực thể ngữ nghĩa, phân loại từng đoạn văn bản được phát hiện. Ví dụ, nó chia văn bản thành tên và số thẻ ID như hình dưới đây.
+    \item RE: Đây là việc trích xuất mối quan hệ, phân loại từng đoạn văn bản. Ví dụ, nó có thể phân loại văn bản thành câu hỏi và câu trả lời, sau đó tìm câu trả lời tương ứng cho mỗi câu hỏi. Như hình dưới đây, các hộp đỏ và đen đại diện cho câu hỏi và câu trả lời tương ứng, và các mũi tên màu vàng chỉ sự tương ứng giữa câu hỏi và câu trả lời.
+\end{itemize}
+
+\begin{figure}[h]
+    \includegraphics[scale=0.6]{images/re-vs-ser.png}
+    \centering
+    \caption{RE(trái) VS SER(phải)}
+    \label{fig8:ser-re}
+\end{figure}
+
+Phương pháp KIE thông thường được phát triển dựa trên nhận dạng thực thể đặt tên (NER), nhưng loại phương pháp này chỉ sử dụng thông tin văn bản trong hình ảnh mà không sử dụng thông tin hình ảnh và cấu trúc. Do đó, nó không đạt độ chính xác cao. Trong những năm gần đây, nhiều giải pháp đã bắt đầu kết hợp thông tin hình ảnh và cấu trúc với thông tin văn bản. Do sử dụng các nguyên tắc khác nhau trong việc kết hợp thông tin đa tầng, các phương pháp này có thể được chia thành bốn loại:
+\begin{itemize}
+    \item Phương pháp dựa trên lưới
+    \item Phương pháp dựa trên token
+    \item Phương pháp dựa trên Graph Convolutional Network
+    \item Phương pháp end-to-end
+\end{itemize}
