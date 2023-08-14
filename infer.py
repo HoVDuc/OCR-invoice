@@ -28,6 +28,29 @@ def recog(image, transcripts, weight_path):
         trans['transcription'] = detector.predict(roi)
     return transcripts 
 
+def get_info(results):
+    info = {
+        'Nơi bán': '',
+        'Địa chỉ': '',
+        'Thời gian': '',
+        'Sản phẩm': [],
+        'Tổng tiền': 0
+    }
+    
+    for result in results:
+        if result['pred'] == 'SELLER':
+            info['Nơi bán'] = result['transcription']
+        elif result['pred'] == 'ADDRESS':
+            info['Địa chỉ'] = result['transcription']
+        elif result['pred'] == 'TIMESTAMP':
+            info['Thời gian'] = result['transcription']
+        elif result['pred'] == 'PRODUCT':
+            info['Sản phẩm'].append(result['transcription'])
+        elif result['pred'] == 'TOTAL_COST':
+            info['Tổng tiền'] = result['transcription']
+    
+    return info
+            
 def infer(image_path):
     opt = {
         'config': './src/config/kie/vi_layoutxlm/ser_mcocr.yml',
@@ -41,7 +64,8 @@ def infer(image_path):
     output = main(opt)
     result = recog(image_path, output, weight_path)
     img_res = draw_ser_results(image_path, result)
-    return img_res, result
+    info = get_info(result)
+    return img_res, info
         
 def GUI():
     demo = gr.Interface(
