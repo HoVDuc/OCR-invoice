@@ -1,80 +1,108 @@
 import os
 import sys
+import json
 __dir__ = os.path.join('src', 'ppocr')
 sys.path.append(__dir__)
 sys.path.append('./src/')
 
-from PIL import Image
 from src.ppocr.tools.infer_kie_token_ser_test import *
 from src.ppocr.ppocr.utils.visual import draw_ser_results
-from src.ocr.tools.predictor import Predictor
-from src.ocr.tools.config import Cfg
-from PIL import Image
-from tqdm import tqdm
-import numpy as np
-import matplotlib.pyplot as plt
 import gradio as gr
 
-def recog(image, transcripts, weight_path):
-    config = Cfg.load_config_from_name('vgg_transformer')
-    config['predictor']['import'] = weight_path
-    config['predictor']['beamsearch'] = True
-    config['cnn']['pretrained']=False
-    config['device'] = 'cuda:0'
-    detector = Predictor(config)
-    for trans in tqdm(transcripts):
-        x, y, w, h = trans['bbox']
-        roi = Image.fromarray(image[y:h, x:w])
-        trans['transcription'] = detector.predict(roi)
-    return transcripts 
 
-def get_info(results):
-    info = {
-        'Nơi bán': '',
-        'Địa chỉ': '',
-        'Thời gian': '',
-        'Sản phẩm': [],
-        'Tổng tiền': 0
-    }
+class Inference:
     
-    for result in results:
-        if result['pred'] == 'SELLER':
-            info['Nơi bán'] = result['transcription']
-        elif result['pred'] == 'ADDRESS':
-            info['Địa chỉ'] = result['transcription']
-        elif result['pred'] == 'TIMESTAMP':
-            info['Thời gian'] = result['transcription']
-        elif result['pred'] == 'PRODUCT':
-            info['Sản phẩm'].append(result['transcription'])
-        elif result['pred'] == 'TOTAL_COST':
-            info['Tổng tiền'] = result['transcription']
+    def __init__(self, otp) -> None:
+        self.config = main(otp)
+        self.ser_engine = SerPredictor(self.config)
     
-    return info
+    
+    
+    def process_info(self, results):
+        info = {
+            'SELLER': '',
+            'ADDRESS': '',
+            'STAFF': '',
+            'TIMESTAMP': '',
+            'CODE': '',
+            'PRODUCTS': [],
+            'TOTAL_COST': 0
+        }
+        
+        current_product = {
+            'PRODUCT': '',
+            'NUMBER': 0,
+            'PRICE': 0
+        }
+        
+        products = []
+        for result in results:
+            label = result['pred']
+            transcription = result['transcription']
             
-def infer(image_path):
-    opt = {
+            if label != 'O':
+                if label in ['PRODUCT', 'NUMBER', 'PRICE']:
+                    if label == 'PRODUCT':
+                        current_product['PRODUCT'] = transcription
+                        products.append(current_product.copy())
+                    else:
+                        products[-1][label] = transcription
+                else: 
+                    if label == 'TIMESTAMP':
+                        text = transcription
+                        code, time = text.split('Ngày')
+                        info['CODE'] = code.strip()
+                        info['TIMESTAMP'] = time[1:]
+                    else:
+                        info[label] = transcription
+                        
+        info['PRODUCTS'] = products 
+        return json.dumps(info, indent=1, ensure_ascii=False)
+            
+    def __call__(self, image_path):
+        self.config['Global']['infer_img'] = image_path
+        if self.config["Global"].get("infer_mode", None) is False:
+            data_dir = self.config['Eval']['dataset']['data_dir']
+            with open(self.config['Global']['infer_img'], "rb") as f:
+                infer_imgs = f.readlines()
+        else:
+            try:
+                infer_imgs = get_image_file_list(self.config['Global']['infer_img'])
+            except:
+                infer_imgs = [self.config['Global']['infer_img']]
+
+        for idx, info in enumerate(infer_imgs):
+            if self.config["Global"].get("infer_mode", None) is False:
+                data_line = info.decode('utf-8')
+                substr = data_line.strip("\n").split("\t")
+                img_path = os.path.join(data_dir, substr[0])
+                data = {'img_path': img_path, 'label': substr[1]}
+            else:
+                img_path = info
+                data = {'img_path': img_path}
+
+            result, _ = self.ser_engine(data)
+            result = result[0]      
+        
+        img_res = draw_ser_results(image_path, result)
+        info = self.process_info(result)
+        return img_res, info
+        
+def GUI():
+    otp = {
         'config': './src/config/kie/vi_layoutxlm/ser_mcocr.yml',
         'otp': {
             'Architecture.Backbone.checkpoints': './src/weights/mcocr/best_accuracy',
-            'Global.infer_img': image_path
         }
     }
-
-    weight_path = './src/weights/vgg_transformerocr_1M_500k.pth'
-    output = main(opt)
-    result = recog(image_path, output, weight_path)
-    img_res = draw_ser_results(image_path, result)
-    info = get_info(result)
-    return img_res, info
-        
-def GUI():
+    infer = Inference(otp)
     demo = gr.Interface(
         fn=infer,
         inputs=[gr.Image()],
         outputs=["image", "text"]
     )
 
-    demo.launch()
+    demo.launch(share=True)
 
 if __name__ == "__main__":
     GUI()

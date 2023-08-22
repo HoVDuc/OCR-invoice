@@ -20,15 +20,20 @@ import numpy as np
 
 import os
 import sys
+import threading
 
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(__dir__)
 sys.path.insert(0, os.path.abspath(os.path.join(__dir__, '..')))
+sys.path.append('./src/')
 
 os.environ["FLAGS_allocator_strategy"] = 'auto_growth'
 import cv2
 import json
 import paddle
+
+from src.ocr.tools.predictor import Predictor
+from src.ocr.tools.config import Cfg
 
 from ppocr.data import create_operators, transform
 from ppocr.modeling.architectures import build_model
@@ -36,6 +41,9 @@ from ppocr.postprocess import build_post_process
 from ppocr.utils.save_load import load_model
 from ppocr.utils.visual import draw_ser_results
 from ppocr.utils.utility import get_image_file_list, load_vqa_bio_label_maps
+
+from PIL import Image
+from tqdm import tqdm
 import tools.program as program
 
 
@@ -66,6 +74,13 @@ class SerPredictor(object):
 
         # build model
         self.model = build_model(config['Architecture'])
+        self.config = Cfg.load_config_from_name('vgg_transformer')
+        self.config['predictor']['import'] = global_config['rec_weight']
+        self.config['predictor']['beamsearch'] = True
+        self.config['cnn']['pretrained'] = False
+        self.config['device'] = 'cuda' if global_config['use_gpu'] else 'cpu'
+        self.detector = Predictor(self.config)
+        
 
         load_model(
             config, self.model, model_type=config['Architecture']["model_type"])
@@ -93,11 +108,19 @@ class SerPredictor(object):
                 ]
 
             transforms.append(op)
+        
         if config["Global"].get("infer_mode", None) is None:
             global_config['infer_mode'] = True
         self.ops = create_operators(config['Eval']['dataset']['transforms'],
                                     global_config)
         self.model.eval()
+
+    def recog(self, image, transcripts):
+        for trans in tqdm(transcripts):
+            x, y, w, h = trans['bbox']
+            roi = Image.fromarray(image[y:h, x:w])
+            trans['transcription'] = self.detector.predict(roi)
+        return transcripts 
 
     def __call__(self, data):
         try:
@@ -109,9 +132,9 @@ class SerPredictor(object):
             
         data["image"] = img
         batch = transform(data, self.ops)
+        self.recog(data['image'], batch[7])
         batch = to_tensor(batch)
         preds = self.model(batch)
-
         post_result = self.post_process_class(
             preds, segment_offset_ids=batch[6], ocr_infos=batch[7])
         return post_result, batch
@@ -121,30 +144,10 @@ def main(otp):
     config, device, logger, vdl_writer = program.preprocess(otp)
     os.makedirs(config['Global']['save_res_path'], exist_ok=True)
 
-    ser_engine = SerPredictor(config)
+    # ser_engine = SerPredictor(config)
+    
+    return config
 
-    if config["Global"].get("infer_mode", None) is False:
-        data_dir = config['Eval']['dataset']['data_dir']
-        with open(config['Global']['infer_img'], "rb") as f:
-            infer_imgs = f.readlines()
-    else:
-        try:
-            infer_imgs = get_image_file_list(config['Global']['infer_img'])
-        except:
-            infer_imgs = [config['Global']['infer_img']]
-
-    for idx, info in enumerate(infer_imgs):
-        if config["Global"].get("infer_mode", None) is False:
-            data_line = info.decode('utf-8')
-            substr = data_line.strip("\n").split("\t")
-            img_path = os.path.join(data_dir, substr[0])
-            data = {'img_path': img_path, 'label': substr[1]}
-        else:
-            img_path = info
-            data = {'img_path': img_path}
-
-        result, _ = ser_engine(data)
-        result = result[0]
         
         # img_res = draw_ser_results(img_path, result)
     
