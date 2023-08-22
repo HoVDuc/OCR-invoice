@@ -4,6 +4,7 @@
 \usepackage[fontsize=13pt]{fontsize}
 \usepackage[left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{blindtext}
+\usepackage{amsmath}
 \usepackage{fancyhdr}
 \usepackage{sectsty}
 \usepackage{titlesec}
@@ -11,6 +12,7 @@
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{kantlipsum,setspace}
 \usepackage[backend=biber, style=ieee]{biblatex}
 \usepackage{hyperref}
 \usepackage{tikz}
@@ -18,12 +20,14 @@
 \usepackage{xcolor}
 \usepackage[outline]{contour} % glow around text
 \usepackage{enumitem}
+\usepackage{circuitikz}
 % \usepackage{mathptmx}
-% \usepackage{etoolbox}
+\usepackage{etoolbox}
 
 \addbibresource{references.bib}
 \graphicspath{./images/}
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
+\linespread{1.45} %regulate line spacing
 
 \hypersetup{
     colorlinks=true,
@@ -65,6 +69,9 @@
 % Chương 3 ======================================================================
 \newpage
 \input{chapter3.tex}
+% Chương 3 ======================================================================
+\newpage
+\input{chapter4.tex}
 
 \newpage
 \printbibliography
