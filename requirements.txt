@@ -40,3 +40,4 @@ scikit-image
 imgaug
 numpy
 gradio
+paddlenlp

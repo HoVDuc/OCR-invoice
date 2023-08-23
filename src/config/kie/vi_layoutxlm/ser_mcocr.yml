@@ -1,5 +1,5 @@
 Global:
-  use_gpu: true
+  use_gpu: false
   epoch_num: &epoch_num 200
   log_smooth_window: 10
   print_batch_step: 10
@@ -53,7 +53,7 @@ Optimizer:
     
 PostProcess:
   name: VQASerTokenLayoutLMPostProcess
-  class_path: &class_path train_data/class_list.txt
+  class_path: &class_path ./src/config/kie/class_list.txt
 
 Metric:
   name: VQASerTokenMetric
