@@ -74,7 +74,7 @@ class SerPredictor(object):
 
         # build model
         self.model = build_model(config['Architecture'])
-        self.config = Cfg.load_config_from_name('vgg_transformer')
+        self.config = Cfg.load_config_from_file(global_config['rec_config_path'])
         self.config['predictor']['import'] = global_config['rec_weight']
         self.config['predictor']['beamsearch'] = True
         self.config['cnn']['pretrained'] = False
@@ -90,7 +90,7 @@ class SerPredictor(object):
         self.ocr_engine = PaddleOCR(
             use_angle_cls=False,
             show_log=False,
-            rec_model_dir=global_config.get("kie_rec_model_dir", None),
+            # rec_model_dir=global_config.get("kie_rec_model_dir", None),
             det_model_dir=global_config.get("kie_det_model_dir", None),
             use_gpu=global_config['use_gpu'])
 

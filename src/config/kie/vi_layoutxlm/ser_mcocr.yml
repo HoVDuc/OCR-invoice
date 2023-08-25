@@ -1,5 +1,5 @@
 Global:
-  use_gpu: false
+  use_gpu: true
   epoch_num: &epoch_num 200
   log_smooth_window: 10
   print_batch_step: 10
@@ -17,6 +17,7 @@ Global:
   # infer_img: train_data/XFUND/zh_val/val.json
   # infer_mode: False
   rec_weight: ./src/weights/vgg_transformerocr_1M_500k.pth
+  rec_config_path: ./src/config/rec/vgg-transformer.yml
   save_res_path: ./output/ser/xfund_zh/res
   kie_rec_model_dir:
   kie_det_model_dir:

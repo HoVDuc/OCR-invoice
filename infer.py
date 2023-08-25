@@ -1,6 +1,3 @@
-import gradio as gr
-from src.ppocr.ppocr.utils.visual import draw_ser_results
-from src.ppocr.tools.infer_kie_token_ser_test import *
 import os
 import sys
 import json
@@ -8,12 +5,19 @@ __dir__ = os.path.join('src', 'ppocr')
 sys.path.append(__dir__)
 sys.path.append('./src/')
 
-class Inference:
+from src.ppocr.tools.infer_kie_token_ser_test import *
+from src.ppocr.ppocr.utils.visual import draw_ser_results
+import gradio as gr
 
+
+class Inference:
+    
     def __init__(self, otp) -> None:
         self.config = main(otp)
         self.ser_engine = SerPredictor(self.config)
-
+    
+    
+    
     def process_info(self, results):
         info = {
             'SELLER': '',
@@ -24,18 +28,18 @@ class Inference:
             'PRODUCTS': [],
             'TOTAL_COST': 0
         }
-
+        
         current_product = {
             'PRODUCT': '',
             'NUMBER': 0,
             'PRICE': 0
         }
-
+        
         products = []
         for result in results:
             label = result['pred']
             transcription = result['transcription']
-
+            
             if label != 'O':
                 if label in ['PRODUCT', 'NUMBER', 'PRICE']:
                     if label == 'PRODUCT':
@@ -43,7 +47,7 @@ class Inference:
                         products.append(current_product.copy())
                     else:
                         products[-1][label] = transcription
-                else:
+                else: 
                     if label == 'TIMESTAMP':
                         text = transcription
                         code, time = text.split('Ngày')
@@ -51,10 +55,10 @@ class Inference:
                         info['TIMESTAMP'] = time[1:]
                     else:
                         info[label] = transcription
-
-        info['PRODUCTS'] = products
+                        
+        info['PRODUCTS'] = products 
         return json.dumps(info, indent=1, ensure_ascii=False)
-
+            
     def __call__(self, image_path):
         self.config['Global']['infer_img'] = image_path
         if self.config["Global"].get("infer_mode", None) is False:
@@ -63,8 +67,7 @@ class Inference:
                 infer_imgs = f.readlines()
         else:
             try:
-                infer_imgs = get_image_file_list(
-                    self.config['Global']['infer_img'])
+                infer_imgs = get_image_file_list(self.config['Global']['infer_img'])
             except:
                 infer_imgs = [self.config['Global']['infer_img']]
 
@@ -79,13 +82,12 @@ class Inference:
                 data = {'img_path': img_path}
 
             result, _ = self.ser_engine(data)
-            result = result[0]
-
+            result = result[0]      
+        
         img_res = draw_ser_results(image_path, result)
         info = self.process_info(result)
         return img_res, info
-
-
+        
 def GUI():
     otp = {
         'config': './src/config/kie/vi_layoutxlm/ser_mcocr.yml',
@@ -100,8 +102,7 @@ def GUI():
         outputs=["image", "text"]
     )
 
-    demo.launch(share=True)
-
+    demo.launch(share=False)
 
 if __name__ == "__main__":
     GUI()
