@@ -1,13 +1,14 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[utf8]{vietnam}
 \usepackage[fontsize=13pt]{fontsize}
 \usepackage[left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{blindtext}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \usepackage{fancyhdr}
 \usepackage{sectsty}
 \usepackage{titlesec}
+\usepackage{array}
 \usepackage{tocloft}
 \usepackage{indentfirst}
 \usepackage{graphicx}
@@ -21,13 +22,20 @@
 \usepackage[outline]{contour} % glow around text
 \usepackage{enumitem}
 \usepackage{circuitikz}
+\usepackage{listings}
 % \usepackage{mathptmx}
 \usepackage{etoolbox}
+\usepackage{tvietlistings}
+\usepackage{wrapfig}
 
 \addbibresource{references.bib}
 \graphicspath{./images/}
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
 \linespread{1.45} %regulate line spacing
+
+\DefineBibliographyStrings{english}{
+  bibliography = {Tài liệu tham khảo},
+}
 
 \hypersetup{
     colorlinks=true,
@@ -39,12 +47,12 @@
 }
 \def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
 
+
 \title{\Huge Đồ án tốt nghiệp}
 \author{Duc Ho V}
 \date{July 2023}
 
 \begin{document}
-
 % template =====================================================================
 \input{template.tex}
 
@@ -56,7 +64,7 @@
 % Mở đầu ========================================================================
 \newpage
 \addcontentsline{toc}{section}{MỞ ĐẦU}
-\section*{MỞ ĐẦU}
+\section*{Mở đầu}
 
 % Chương 1 ======================================================================
 \newpage
@@ -69,9 +77,12 @@
 % Chương 3 ======================================================================
 \newpage
 \input{chapter3.tex}
-% Chương 3 ======================================================================
+% Chương 4 ======================================================================
 \newpage
 \input{chapter4.tex}
+% Chương 5 ======================================================================
+\newpage
+\input{chapter5.tex}
 
 \newpage
 \printbibliography

@@ -1,11 +1,12 @@
 % Định nghĩa định dạng mới cho phần section =====================================================
-\titleformat{\section}[hang]
-{\centering\normalfont\Large\bfseries}
-{\MakeUppercase{Chương \thesection:}}
-{0.5em}
-{\MakeUppercase}
-[]
+% \titleformat{\section}[hang]
+% {\centering\normalfont\Large\bfseries}
+% {\MakeUppercase{Chương \thesection:}}
+% {0.5em}
+% {\MakeUppercase}
+% []
 
+\titleformat*{\section}{\selectfont\bfseries}
 \titleformat*{\subsection}{\selectfont\bfseries}
 \titleformat*{\subsubsection}{\selectfont\bfseries}
 
@@ -76,6 +77,36 @@
 }
 \def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
 
-% Chỉnh caption
-\captionsetup[table]{font={stretch=1.45}}     %% change 1.2 as you like
+% Chỉnh caption ==========================================================================================================
+\captionsetup[table]{font={stretch=1.45}}      %% change 1.2 as you like
 \captionsetup[figure]{font={stretch=1.45}}
+
+% Setting Code styles
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\small\ttfamily\footnotesize,
+    columns=fullflexible,
+    breakatwhitespace=false,         
+    breaklines=true,    
+    lineskip={1.5pt},             
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    inputencoding=utf8,
+    extendedchars=true,
+}
+\lstset{style=mystyle}
