@@ -1,10 +1,10 @@
-\chapter{Xây dựng chương trình \& Kết quả}
+\chapter{Xây dựng chương trình và Kết quả} \label{build_and_result}
 
-Chương này là sẽ trình quá trình xây dựng một chương trình ứng dụng hoàn chỉnh cho việc nhận dạng hóa đơn thông qua công nghệ OCR và kết quả đạt được của chương trình.
+Chương này, em mô tả quá trình xây dựng một chương trình ứng dụng hoàn chỉnh cho việc nhận dạng hóa đơn thông qua công nghệ OCR và kết quả đạt được của chương trình.
 \section{Ý tưởng}
 Để xây dựng được một chương trình hoàn chỉnh cho đề tài ``\textbf{Nghiên cứu ứng dụng OCR nhận dạng hóa đơn}'', chương trình sẽ cần sự kết hợp của nhiều mô hình với các nhiệm vụ khác nhau để tạo thành một chương trình hoàn chỉnh Hình \ref{pipeline}. Ý tưởng của chương trình này là từ bức ảnh đầu vào ảnh sẽ cho qua các bước tiền xử lý hình ảnh để tăng chất lượng ảnh đầu vào tiếp đến ảnh sẽ được cho qua bước phát hiện văn bản ở bước này đầu ra của ảnh sẽ là các 4 điểm tọa độ $(x, y)$ của vùng văn bản đã được mô hình phát hiện, các điểm này sẽ được dùng làm đầu vào cho mô hình nhận dạng văn bản và KIE. Bước nhận dạng sẽ dự đoán văn bản trong vùng được phát hiện còn KIE sẽ thực hiện phân loại nhãn cho vùng văn văn bản. Sau đó cả hai sẽ được qua hàm hậu xử lý để cải thiện chất lượng và độ chính xác của văn bản dễ dàng cho các bước tiếp. Trích xuất các thông tin quan trọng và trực quan hóa hình ảnh, đưa về dữ liệu có cấu trúc \ldots
 \begin{figure}
-    \includegraphics[scale=0.53]{images/pipeline.png}
+    \input{code-image/diagram-program.tex}
     \centering
     \caption{Lưu đồ của chương trình nhận dạng hóa đơn}
     \label{pipeline}
@@ -329,3 +329,4 @@ Dưới đây là một số kết quả đạt được của đề tài:
     \caption{Kết quả Excel của hóa đơn 3}
 \end{figure}
 
+Điều này đã kết thúc chương \ref{build_and_result}, trong chương này em đã mô tả quá trình xây dựng chương trình hoàn chỉnh của đề tài bao gồm kết quả của chương trình. Kết quả đạt được của chương trình cho người dùng có một cái nhìn tổng quát về những gì mà mô hình trích xuất, và thông tin hóa đơn được chương trình lưu trữ lại dưới dạng dữ liệu có cấu trúc. 

@@ -5,14 +5,16 @@
 % {0.5em}
 % {\MakeUppercase}
 % []
+\setcounter{page}{-1}
 
-\titleformat*{\section}{\selectfont\bfseries}
-\titleformat*{\subsection}{\selectfont\bfseries}
-\titleformat*{\subsubsection}{\selectfont\bfseries}
+\titleformat*{\section}{\fontsize{13pt}{15.6}\selectfont\bfseries}
+\titleformat*{\subsection}{\fontsize{13pt}{15.6}\selectfont\bfseries}
+\titleformat*{\subsubsection}{\fontsize{13pt}{15.6}\selectfont\bfseries}
 
 
 % Setting header and footer ======================================================================
 \pagestyle{fancy}
+\fancypagestyle{plain}{}
 \lhead{\fontsize{13pt}{15.6}\selectfont Báo cáo Đồ án tốt nghiệp}
 \rhead{\fontsize{13pt}{15.6}\selectfont Trường Đại học Mỏ - Địa chất}
 \lfoot{\fontsize{13pt}{15.6}\selectfont Hồ Văn Đức}
@@ -26,6 +28,12 @@
 \renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\contentsname}{\MakeUppercase{Mục lục}}
 
+\renewcommand\cftloftitlefont{\Large\bfseries\centering}
+% \renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
+% \renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand\listfigurename{Danh sách hình ảnh} % Thay đổi tiêu đề ở đây
+
+\renewcommand\cftlottitlefont{\Large\bfseries}
 
 % Setting font ====================================================================================
 \renewcommand{\baselinestretch}{1.5} 
@@ -110,3 +118,6 @@
     extendedchars=true,
 }
 \lstset{style=mystyle}
+
+% setting bibliography 
+\defbibheading{talikarng}{\section*{\Large\selectfont\centering Tài Liệu Tham Khảo}}

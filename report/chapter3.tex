@@ -1,16 +1,12 @@
-\chapter{Phương pháp thực hiện}
-Chương này sẽ trình bày các phương pháp và quy trình mà em sử dụng để thực hiện. Đây là phần quan trọng trong đề tài, nơi mô tả cách tiến hành thu thập dữ liệu, xây dựng mô hình, đánh giá hiệu suất và ứng dụng thực tế của công nghệ OCR trong việc nhận dạng và xử lý hóa đơn.
-
-Dưới đây là các bước trình bày chi tiết:
+\chapter{Công cụ và môi trường thực hiện}
+Trong trương này em sẽ trình bày những công cụ và môi trường cần thiết trong quá trình huấn luyện mô hình \acrshort*{ocr}. Dưới đây là các bước trình bày chi tiết:
 \begin{enumerate}
-    \item \textbf{Phầm mềm và công cụ hỗ trợ:} Trình bày các phầm mềm và công cụ cho quá trình chuẩn bị dữ liệu, xây dựng và huấn luyện mô hình.
-    \item \textbf{Tạo môi trường và cài công cụ cần thiết}: Trong phần này, sẽ mô tả quá trình cài đặt môi trường cho đề tài và thiết lập một số môi trường cần thiết để chạy.
-    \item \textbf{Thu thập dữ liệu:} Mô tả quy trình thu thập dữ liệu, bao gồm cách chọn các hình ảnh hóa đơn, cách đảm bảo tính đa dạng và độ phủ của dữ liệu, và việc chuẩn bị dữ liệu cho quá trình huấn luyện và kiểm tra mô hình.
-    \item \textbf{Huấn luyện và tinh chỉnh:} Mô tả cách huấn luyện mô hình trên tập dữ liệu đã thu thập. Điều chỉnh tham số, tối ưu hóa và giải quyết vấn đề overfitting hoặc underfitting.
+    \item \textbf{Phầm mềm và công cụ hỗ trợ:} Trình bày các phầm mềm và công cụ cho quá trình chuẩn bị dữ liệu, huấn luyện và xây dựng mô hình.
+    \item \textbf{Tạo môi trường và cài công cụ cần thiết}: Trình bày các bước cài đặt môi trường cho đề tài và thiết lập một số môi trường cần thiết để chạy.
 
 \end{enumerate}
 
-Chương ``Phương pháp thực hiện'' là nền tảng quan trọng cho việc thực hiện nghiên cứu, giúp định hình cách tiến hành các bước quan trọng trong đề tài ``Nghiên cứu ứng dụng công nghệ OCR nhận dạng hóa đơn''.
+Các công cụ và môi trường là nền tảng quan trọng cho việc thực hiện nghiên cứu, giúp định hình cách tiến hành các bước quan trọng trong đề tài ``Nghiên cứu ứng dụng công nghệ OCR nhận dạng hóa đơn''.
 
 \section{Phầm mềm và công cụ hỗ trợ}
 \subsection{Google Colab}
@@ -22,6 +18,37 @@ Colab có thể chia sẻ notebook của mình với người khác thông qua l
 
 Google Colab thường được sử dụng trong việc học, nghiên cứu và phát triển các dự án liên quan đến khoa học dữ liệu, học máy và trí tuệ nhân tạo mà không cần đầu tư nhiều vào cấu hình phần cứng.
 
+\subsection{Vast.ai}
+Vast.ai là một nền tảng tính toán phi tập trung cho phép bất cứ ai cho thuê công suất tính toán dư thừa của mình để kiếm tiền. Nó kết nối những người cần công suất tính toán bổ sung cho các tác vụ như học máy với những người có GPU hoặc CPU nhàn rỗi trên máy tính của họ. Một số tính năng chính của Vast.ai:
+
+\begin{itemize}
+    \item Mạng phi tập trung: Vast.ai chạy trên mạng ngang hàng phi tập trung thay vì máy chủ tập trung. Điều này làm cho nó bền vững và minh bạch hơn.
+    \item Cho thuê công suất tính toán dư thừa: Mọi người có thể cài đặt ứng dụng khách Vast.ai trên máy tính của họ để cho thuê bất kỳ chu kỳ GPU hoặc CPU không sử dụng nào và được trả bằng tiền điện tử. Điều này cho phép mọi người kiếm tiền từ các tài nguyên tính toán dư thừa.
+    \item Thuê công suất tính toán: Các nhà nghiên cứu, nhà phát triển và những người khác cần công suất tính toán bổ sung cho các ứng dụng như huấn luyện học máy có thể thuê GPU và CPU theo yêu cầu thông qua sàn giao dịch vast.ai. Giá được định giá động dựa trên cung và cầu.
+    \item Mã nguồn mở: Vast.ai là một dự án nguồn mở được xây dựng trên các công nghệ phi tập trung hiện có. Điều này cho phép tính minh bạch và đóng góp của cộng đồng vào nền tảng.
+\end{itemize}
+Vast.ai tạo ra mô hình kinh tế chia sẻ cho công suất tính toán, kết nối những người có nguồn lực dư thừa với những người cần chúng theo cách ngang hàng phi tập trung. Nó cung cấp một cách dễ dàng để bất cứ ai có thể kiếm tiền từ công suất tính toán không sử dụng.
+
+\subsection{CUDA Toolkit}
+CUDA Toolkit (Compute Unified Device Architecture Toolkit) là một bộ công cụ và thư viện phát triển bởi NVIDIA dành cho việc phát triển ứng dụng và tính toán sử dụng các GPU của NVIDIA. CUDA là một mô hình lập trình và nền tảng tích hợp vào GPU để thực hiện tính toán đồng thời và xử lý dữ liệu song song. Điều này cho phép các ứng dụng thực hiện tính toán nhanh hơn trên GPU so với việc sử dụng CPU truyền thống.
+
+CUDA Toolkit bao gồm các thành phần quan trọng sau đây:
+\begin{enumerate}
+    \item \textbf{CUDA Runtime}: CUDA Runtime là một tập hợp các thư viện và API cho phép ứng dụng tương tác với GPU và thực hiện các phép tính trên GPU. Nó cho phép bạn chạy các chương trình CUDA trên GPU của NVIDIA.
+    \item \textbf{CUDA Compiler}: CUDA Toolkit đi kèm với trình biên dịch nvcc để biên dịch mã CUDA C/C++ thành mã máy GPU thực thi được.
+    \item \textbf{CUDA Libraries}: CUDA Toolkit cung cấp một loạt thư viện cho các loại tính toán khác nhau, bao gồm thư viện đại số tuyến tính, thư viện xử lý ảnh, thư viện tính toán máy học (cuDNN, cuBLAS), và nhiều thư viện khác.
+    \item \textbf{CUDA SDK}: CUDA SDK cung cấp các ví dụ và tài liệu hướng dẫn để bạn có thể bắt đầu phát triển ứng dụng sử dụng CUDA.
+    \item \textbf{NVIDIA GPU Driver}: CUDA Toolkit yêu cầu cài đặt đúng phiên bản driver cho GPU của bạn để hoạt động.
+\end{enumerate}
+
+CUDA Toolkit thường được sử dụng trong lĩnh vực deep learning, scientific computing, và các ứng dụng đòi hỏi tính toán song song và xử lý số lớn. Nó cho phép các nhà phát triển tận dụng sức mạnh của GPU để gia tăng hiệu suất tính toán và tốc độ xử lý dữ liệu cho các ứng dụng của họ.
+
+\subsection{cuDNN}
+Đây là một thư viện phần mềm do NVIDIA phát triển, được tối ưu hóa cho việc thực hiện các phép tính liên quan đến mạng nơ-ron trên GPU. Tên gọi "cuDNN" viết tắt của "CUDA Deep Neural Network library," cho thấy rằng nó được phát triển để hỗ trợ hiệu suất cao khi sử dụng GPU để huấn luyện và triển khai các mô hình mạng nơ-ron sâu (deep neural networks).
+
+Thư viện cung cấp một loạt các chức năng và thư viện tối ưu hóa để thực hiện các phép tính phổ biến trong deep learning, bao gồm các phép tính như: Convolution, Pooling, Normalization, Activation, Recurrent, \ldots
+
+cuDNN được tích hợp vào nhiều framework deep learning phổ biến như TensorFlow và PyTorch, giúp cải thiện hiệu suất huấn luyện và triển khai mô hình trên GPU. Nó đóng vai trò quan trọng trong việc tăng tốc quá trình huấn luyện và triển khai mô hình deep learning trên nền tảng GPU của NVIDIA.
 \subsection{PaddleOCR}
 PaddleOCR là một dự án mã nguồn mở do PaddlePaddle phát triển, nhằm cung cấp một giải pháp toàn diện cho các nhiệm vụ liên quan đến xử lý ảnh và văn bản, bao gồm cả nhận dạng ký tự, nhận dạng văn bản và các tác vụ liên quan đến OCR. Dự án này được xây dựng trên cơ sở của các mô hình học sâu và sử dụng các thuật toán tiên tiến để giải quyết các thách thức trong việc xử lý ảnh và văn bản.
 
@@ -51,8 +78,53 @@ PPOCRLabel được tạo ra để hỗ trợ quá trình chuẩn bị dữ li�
 
 PPOCRLabel là một công cụ cực kỳ hữu ích trong quá trình chuẩn bị dữ liệu cho việc huấn luyện mô hình liên quan đến OCR, giúp tăng cường hiệu suất và chính xác của mô hình cuối cùng.
 
+\subsection{Pytorch}
+PyTorch là một thư viện mã nguồn mở được phát triển bởi Facebook's AI Research lab dùng cho việc xây dựng và huấn luyện các mạng nơ-ron. Nó được thiết kế đặc biệt để hỗ trợ tính toán trên mạng nơ-ron và dự án thực tế với sự linh hoạt và hiệu suất cao. PyTorch là một trong những thư viện phổ biến nhất cho deep learning và machine learning trong cộng đồng nghiên cứu và phát triển AI.
+
+Một số điểm mạnh của PyTorch bao gồm:
+\begin{enumerate}
+    \item Tính năng tạo đồ thị động: PyTorch sử dụng một cơ chế đồ thị tính toán động, cho phép bạn xây dựng và điều chỉnh mô hình một cách linh hoạt trong quá trình chạy. Điều này rất hữu ích khi bạn cần xây dựng các mô hình phức tạp hoặc thực hiện các thay đổi động.
+    \item Hỗ trợ GPU: PyTorch có tích hợp sẵn hỗ trợ tính toán trên GPU, giúp gia tăng tốc độ huấn luyện mô hình đáng kể.
+    \item Cộng đồng phát triển mạnh mẽ: PyTorch có một cộng đồng người dùng và phát triển đông đảo, nên bạn có thể tìm thấy nhiều tài liệu học tập và hỗ trợ từ cộng đồng.
+    \item Sử dụng dễ dàng: PyTorch có một cú pháp Python thân thiện và dễ đọc, giúp người dùng dễ dàng hiểu và sử dụng.
+\end{enumerate}
+PyTorch cung cấp các thành phần cơ bản để xây dựng và huấn luyện mạng nơ-ron, bao gồm tensor, autograd (tự động tính đạo hàm), và một loạt các lớp và hàm tiện ích để xây dựng mô hình. Nó đã trở thành một trong những công cụ quan trọng cho nghiên cứu và phát triển trong lĩnh vực deep learning.
+
+\subsection{Gradio}
+Gradio là một thư viện mã nguồn mở được sử dụng để xây dựng giao diện người dùng cho các mô hình học máy và học sâu một cách dễ dàng và nhanh chóng. Thư viện này giúp tạo ra các ứng dụng web hoặc desktop đơn giản để tương tác với các mô hình đã huấn luyện mà bạn đã xây dựng hoặc sử dụng.
+
+Thư viện cung cấp một API Python dễ sử dụng để bạn có thể định nghĩa các giao diện người dùng tương tác cho các mô hình học máy và học sâu của mình. Với Gradio, ta có thể tạo các biểu đồ, hộp văn bản, nút bấm và các phần tử UI khác để tương tác với mô hình. Gradio cũng hỗ trợ việc hiển thị kết quả và dự đoán từ mô hình trực tiếp trong giao diện người dùng.
+
+Gradio được thiết kế để đơn giản hóa việc tạo giao diện người dùng cho các mô hình học máy mà không cần kiến thức về phát triển web phức tạp. Tương thích với nhiều loại mô hình có thể sử dụng Gradio với các mô hình học máy, deep learning và thậm chí cả các mô hình không cần kết nối mạng. Hỗ trợ cả ứng dụng web và desktop, cho phép triển khai giao diện người dùng trên nhiều nền tảng.
+
+Thư viện có khả năng tích hợp với các framework học máy và deep learning phổ biến như TensorFlow, PyTorch, và Scikit-Learn. Người dùng có thể tùy chỉnh giao diện người dùng của mình bằng cách thêm các phần tử UI và tuỳ chỉnh cách hiển thị kết quả.
+
+Gradio giúp nhanh chóng tạo ra các ứng dụng tương tác cho các mô hình học máy của bạn mà không cần kiến thức chuyên sâu về phát triển giao diện người dùng. Điều này có thể rất hữu ích trong việc trình bày và thử nghiệm các mô hình với người dùng cuối.
+
+\section{Cấu hình phần cứng}
+Huấn luyện một mô hình học sâu đòi hỏi xử lý một lượng lớn dữ liệu và tính toán phức tạp. Cần phần cứng mạnh mẽ để xử lý nhanh chóng và hiệu quả. Phần cứng yếu sẽ làm chậm quá trình huấn luyện.Pphần cứng chất lượng cao cho phép huấn luyện nhanh hơn, với dữ liệu lớn hơn và mô hình phức tạp hơn. Do đó với từng tác vụ khác nhau em sẽ xử dụng một cấu hình khác nhau. Dưới đây là bảng so sánh phần cứng của từng tác vụ:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{| c | c | c | c |} 
+     \hline
+               & \textbf{Detection} & \textbf{KIE} & \textbf{Recognition} \\
+     \hline\hline
+     \textbf{Server}    & Colab & Colab & Vast.ai \\ 
+     \textbf{OS}        & Ubuntu 22.04.2 & Ubuntu 22.04.2 & Ubuntu 22.04.2 \\
+     \textbf{Python}    & 3.10 & 3.10 & 3.10 \\
+     \textbf{CUDA}      & 12.0 & 12.0 & 11.7 \\
+     \textbf{Framework} & PaddlePaddle & PaddlePaddle & Pytorch     \\
+     \textbf{RAM}       & 13GB & 13GB & 64GB     \\
+     \textbf{GPU}       & NVIDIA T4 & NVIDIA T4 & NVIDIA RTX 3060\\
+     \hline
+    \end{tabular}
+    \caption{So sánh cấu hình phần cứng huấn luyện của từng tác vụ OCR}
+    \label{table:hardward}
+\end{table}
+
 \section{Tạo môi trường và cài công cụ cần thiết}
-\subsubsection*{Cài đặt Miniconda:}
+\subsection{Cài đặt Miniconda:}
 Miniconda là một công cụ quản lý môi trường và gói thư viện Python nhẹ và tối giản. Dưới đây là hướng dẫn cách tạo môi trường Miniconda trên hệ điều hành Ubuntu:
 
 \textbf{Bước 1:} Tải Miniconda
@@ -85,7 +157,42 @@ Nhấn y để cài đặt
     \caption{Môi trường đã được kích hoạt}
 \end{figure}
 
-\subsubsection*{Cài đặt PaddleOCR}
+\subsection{Cài đặt CUDA Toolkit:}
+\begin{lstlisting}[language=bash]
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+$ sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+$ wget https://developer.download.nvidia.com/compute/cuda/11.7.0/local_installers/cuda-repo-ubuntu2204-11-7-local_11.7.0-515.43.04-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu2204-11-7-local_11.7.0-515.43.04-1_amd64.deb
+$ sudo cp /var/cuda-repo-ubuntu2204-11-7-local/cuda-*-keyring.gpg /usr/share/keyrings/
+$ sudo apt-get update
+$ sudo apt-get -y install cuda
+\end{lstlisting}
+
+\subsection{Cài đặt cuDNN}
+\textbf{Bước 1:} Tải xuống cuDNN
+\begin{lstlisting}[language=bash]
+wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.9.4/local_installers/11.x/cudnn-local-repo-ubuntu2204-8.9.4.25_1.0-1_amd64.deb
+\end{lstlisting}
+
+\textbf{Bước 2:} Cài đặt gói phần mềm
+\begin{lstlisting}
+sudo dpkg -i cudnn-local-repo-ubuntu2204-8.9.4.25_1.0-1_amd64.deb
+\end{lstlisting}
+
+\textbf{Bước 3:} Nhập khóa CUDA GPG
+\begin{lstlisting}
+sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
+\end{lstlisting}
+
+\textbf{Bước 4:} Làm mới và cài đặt thư viện
+\begin{lstlisting}
+sudo apt-get update
+sudo apt-get install libcudnn8=8.9.4.25_1.0-1+cuda11.7
+sudo apt-get install libcudnn8-dev=8.9.4.25_1.0-1+cuda11.7
+\end{lstlisting}
+
+
+\subsection{Cài đặt PaddleOCR}
 \textbf{Bước 1:} Cài đặt PaddlePaddle
 \begin{lstlisting}[language=bash]
     python3 -m pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
@@ -97,311 +204,10 @@ Nhấn y để cài đặt
     pip install -r PaddleOCR/requirements.txt
 \end{lstlisting}
 
-\subsubsection*{Cài đặt PPOCRLabel}
+\subsection{Cài đặt PPOCRLabel}
 \begin{lstlisting}[language=bash]
     pip3 install PPOCRLabel
     pip3 install trash-cli
 \end{lstlisting}
 
-
-\section{Thu thập và chuẩn bị dữ liệu huấn luyện}
-\subsection{Lựa chọn hóa đơn}
-Trong phần này, em xác định loại hóa đơn mà nghiên cứu sẽ tập trung nhằm mục tiêu ứng dụng công nghệ OCR trong việc nhận dạng và trích xuất thông tin. Loại hóa đơn được chọn là hóa đơn bán hàng ở cửa hàng tiện lợi và siêu thị, là một phần quan trọng của cuộc sống hàng ngày và có sự đại diện cho nhiều thông tin đa dạng cần được xử lý.
-
-Hóa đơn bán hàng cửa hàng tiện lợi và siêu thị được lựa chọn vì nó thường chứa các thông tin cần thiết như địa chỉ, ngày mua, sản phẩm, số lượng, cũng như các khoản phí.\ldots Loại hóa đơn này thường đa dạng về cấu trúc và kiểu dáng, bao gồm vùng văn bản in và cả phần hình ảnh với các dữ liệu chú thích. Do đó, ứng dụng công nghệ OCR để tự động nhận dạng và trích xuất thông tin từ loại hóa đơn này đem lại giá trị thực tiễn và hứa hẹn trong việc tối ưu hóa quá trình xử lý hóa đơn và quản lý tài liệu.
-
-Để thực hiện đề tài này em sử dụng mẫu hóa đơn của cửa hàng tiện lợi Okono và VinMart (Hình \ref{fig9-okono-vincom}) để thực hiện trích xuất thông tin.
-
-\begin{figure}[h]
-    \includegraphics[scale=0.20]{images/okono-vincom.png}
-    \centering
-    \caption{Hóa đơn Okono(trái) và VinCommerce(phải)}
-    \label{fig9-okono-vincom}
-\end{figure}
-
-Qua việc tập trung vào loại hóa đơn bán hàng cửa hàng tiện lợi và siêu thị, mong muốn thực hiện một nghiên cứu chi tiết về cách ứng dụng công nghệ OCR vào việc nhận dạng và xử lý dữ liệu từ hóa đơn trong ngữ cảnh thực tế.
-
-\subsection{Chuẩn bị dữ liệu}
-Chuẩn bị dữ liệu đây là một bước quan trọng để đảm bảo rằng mô hình OCR hoạt động tốt trên các dữ liệu thực tế. Trong phần này, em sẽ trình bày quá trình chuẩn bị và xử lý dữ liệu hình ảnh của hóa đơn. Tùy với nhiệm vụ khác nhau trong OCR ta có cách chuẩn bị dữ liệu khác nhau. Để thực hiện gán nhãn dữ liệu OCR, em sử dụng công cụ PPOCRLabel. Dưới đây là các bước thực hiện:
-
-\textbf{Bước 1}: Chuẩn bị tập dữ liệu cần gãn nhãn
-Ở bước này em chuẩn bị hơn 75 ảnh hóa đơn của cửa hàng tiện lợi Okono và xác định số lớp cần gãn nhãn cho bài toán KIE.  
-
-\textbf{Bước 2}: Chạy chương trình PPOCRLabel
-\begin{lstlisting}[language=bash]
-    PPOCRLabel --kie True # [KIE mode] for [detection + recognition + keyword extraction] labeling
-\end{lstlisting}
-\begin{figure}[h]
-    \includegraphics[scale=0.25]{images/UI-ppocr.png}
-    \centering
-    \caption{Giao diện PPOCRLabel}
-\end{figure}
-
-\textbf{Bước 3}: Nhấp vào nút "Open Dir" để mở thư mục chứa các hình ảnh cần gán nhãn. Các hình ảnh sẽ hiển thị trong danh sách.
-\begin{figure}[h]
-    \includegraphics[scale=0.26]{images/UI-ppocr-image.png}
-    \centering
-    \caption{Danh sách ảnh PPOCRLabel}
-\end{figure}
-
-\textbf{Bước 4}: Chọn một hình ảnh, sử dụng các công cụ vẽ để khoanh vùng văn bản và gán nhãn tương ứng. Có thể gán nhiều vùng văn bản cho một hình ảnh.
-\begin{itemize}
-    \item W: để tạo một hộp cho phát hiện văn bản.
-    \item Ctrl + E: Sửa nhãn của hộp.
-    \item Ctrl + X: Thay đổi lớp của nhãn dùng cho gãn nhãn KIE.
-\end{itemize}
-Ở đây số lớp của bài toán KIE em xác định bao gồm các lớp sau:
-\begin{itemize}
-    \item OTHER: 
-    \item SELLER: Tên cửa hàng
-    \item ADDRESS: Địa chỉ 
-    \item TIMESTAMP: Thời gian mua
-    \item STAFF: Nhân viên bán hàng
-    \item PRODUCT: Sản phẩm đã mua
-    \item NUMBER: Số lượng sản phẩm
-    \item PRICE: Giá của sản phẩm
-    \item TOTAL\_COST: Tổng tiền thanh toán
-\end{itemize}
-\begin{figure}[h]
-    \includegraphics[scale=0.26]{images/GUI-ppocr-labeled.png}
-    \centering
-    \caption{Gán nhãn ảnh với PPOCRLabel}
-\end{figure}
-
-\textbf{Bước 5}: Lưu các thay đổi bằng nút "Save" hoặc tự động lưu khi thoát chương trình.
-
-\textbf{Bước 6}: Tiếp tục gán nhãn cho các hình ảnh còn lại.
-
-\textbf{Bước 7}: Nhấn nút "Export Recognition Result" để cắt ảnh cho tác vụ training nhận dạng văn bản.
-\begin{figure}[h]
-    \includegraphics[scale=0.5]{images/data-invoice-text-recognition.png}
-    \centering
-    \caption{Dữ liệu hóa đơn được export từ PPOCRLabel}
-\end{figure}
-
-\textbf{Bước 8}: Kết thúc trương trình
-
-Sau khi gãn nhãn xong ta thu được một file Label.txt, file có format như sau: 
-\begin{lstlisting}[language=bash]
-    image_files/IMG20230626141447.jpg	[{"transcription": "Okono", "points": [[440, 195], [807, 201], [805, 333], [438, 327]], "difficult": false, "key_cls": "SELLER"}...]
-    image_files/IMG20230628105753.jpg	[{"transcription": "Okono", "points": [[429, 469], [700, 469], [700, 542], [429, 542]], "difficult": true, "key_cls": "SELLER"}...]
-\end{lstlisting}
-
-Các điểm trong các từ điển đó biểu thị tọa độ $(x, y)$ của bốn điểm của hộp văn bản, được sắp xếp theo chiều kim đồng hồ từ điểm ở góc trên bên trái. Trong transcription đại diện cho văn bản trong hộp, và key\_cls đại diện cho lớp của văn bản.
-
-Dữ liệu cho nhận dạng văn bản khi export từ PPOCRLabel có format như sau:
-\begin{lstlisting}[language=bash]
-    #Tên ảnh                      #Thông tin chú thích ảnh
-    IMG20230626141447_crop_0.jpg	Okono
-    IMG20230626141447_crop_2.jpg	PHIẾU BÁN HÀNG/ INVOICE
-    IMG20230626141447_crop_5.jpg	Mã số BBB
-    IMG20230626141447_crop_6.jpg	Tên hàng
-    IMG20230626141447_crop_7.jpg	SL
-    ...
-\end{lstlisting}
-Để cho đúng dữ liệu cho bài toán này ta cần đưa nó về chuẩn LMDB:
-
-\subsection{Tổng quan về dữ liệu đào tạo}
-Dữ liệu cho nhiệm vụ phát hiện văn bản và KIE có cấu trúc như sau:
-\begin{lstlisting}[language=bash]
-|-train_data
-    |- invoice
-        |- train
-            |- image_files
-                |- image_001.jpg
-                |- image_002.jpg
-                | ...
-            | train.txt
-        |- valid
-            |- image_files
-                |- image_001.jpg
-                |- image_002.jpg
-                | ...
-            | valid.txt  
-\end{lstlisting}
-
-Bao gồm 
-Dữ liệu cho nhiệm vụ phát hiện văn bản và KIE có cấu trúc như sau:
-\begin{lstlisting}[language=bash]
-    |-train_data
-        |- invoice-rec
-            |- images
-                |- image_001.jpg
-                |- image_002.jpg
-                | ...
-            |- train.txt
-            |- valid.txt
-    \end{lstlisting}
-
-\section{Huấn luyện mô hình}
-Để huấn luyện mô hình OCR cho nhiệm vụ nhận diện hóa đơn đây là một quá trình phức tạp đòi hỏi sự kết hợp giữa nhiều nhiệm vụ khác nhau, mỗi nhiệm vụ là một quá trình huấn luyện riêng biệt. Điều này đảm bảo chất lượng của quá trình nhận dạng như Phát hiện vùng văn bản, Nhận dạng văn bản và Hiểu tài liệu(Document Understanding).
-
-\subsection{Cấu hình phần cứng huấn luyện}
-Với nhiệm vụ Phát hiện văn bản và KIE em sử dụng Colab pro để thực hiện huấn luyện mô hình:
-\begin{itemize}
-    \item Hệ điều hành: Linux
-    \item Ngôn ngữ: Python 3.10
-    \item CUDA: 11.7
-    \item Framework: PaddlePaddle 1.4.2
-    \item RAM: 13GB
-    \item GPU: NVIDIA T4 - 16G
-\end{itemize}
-
-Còn đối với nhiệm vụ Nhận dạng văn bản em sử dụng server của vast.ai để thực hiện huấn luyện mô hình:
-\begin{itemize}
-    \item Hệ điều hành: Linux
-    \item Ngôn ngữ: Python 3.8
-    \item CUDA: 11.7
-    \item Framework: Python 2.0.1
-    \item CPU: AMD Ryzen Threadripper 1900X 8-Core Processor
-    \item GPU: NVIDIA RTX 3060 - 12GB
-    \item RAM: 64GB 
-\end{itemize}
-
-\subsection{Phát hiện văn bản}
-Ở tác vụ này em lựa chọn thuật toán DBNet để phát hiện vùng văn bản. Sau khi quyết định được mô hình, download pre-trained model đã được train sẵn với dataset tiếng anh là ICDAR2015 dataset. Với backbone là ResNet50\_vd
-\begin{lstlisting}[language=bash]
-    # download the pre-trained model ResNet50_vd
-    wget -P ./pretrain_models/ https://paddleocr.bj.bcebos.com/pretrained/ResNet50_vd_ssld_pretrained.pdparams
-\end{lstlisting}
-
-Bắt đầu training 
-\begin{lstlisting}[language=bash]
-python3 tools/train.py -c configs/det/det_r50_vd_db.yml  -o \
-    Global.pretrained_model='./pretrain_models/ResNet50_vd_ssld_pretrained.pdparams' \
-    Train.dataset.data_dir='./train_data/Okono_3/train/image/' \
-    Train.dataset.label_file_list=['./train_data/Okono_3/train/train.txt'] \
-    Train.loader.batch_size_per_card=12 \
-    Eval.dataset.data_dir='./train_data/Okono_3/valid/image/' \
-    Eval.dataset.label_file_list=['./train_data/Okono_3/valid/valid.txt'] \
-    Global.save_model_dir='../drive/MyDrive/save/' \
-    Global.checkpoints='/content/PaddleOCR/output/det_r50_vd' \
-    Global.eval_batch_step=100 \
-    Global.cal_metric_during_train=True \
-\end{lstlisting}
-\begin{lstlisting}[language=bash]
-[2023/08/25 11:14:07] ppocr INFO: Architecture : 
-[2023/08/25 11:14:07] ppocr INFO:     Backbone : 
-[2023/08/25 11:14:07] ppocr INFO:         layers : 50
-[2023/08/25 11:14:07] ppocr INFO:         name : ResNet_vd
-[2023/08/25 11:14:07] ppocr INFO:     Head : 
-[2023/08/25 11:14:07] ppocr INFO:         k : 50
-[2023/08/25 11:14:07] ppocr INFO:         name : DBHead
-[2023/08/25 11:14:07] ppocr INFO:     Neck : 
-[2023/08/25 11:14:07] ppocr INFO:         name : DBFPN
-[2023/08/25 11:14:07] ppocr INFO:         out_channels : 256
-[2023/08/25 11:14:07] ppocr INFO:     Transform : None
-[2023/08/25 11:14:07] ppocr INFO:     algorithm : DB
-[2023/08/25 11:14:07] ppocr INFO:     model_type : det
-...
-eval model:: 100% 31/31 [00:03<00:00,  2.97it/s]
-[2023/08/25 13:22:35] ppocr INFO: cur metric, precision: 0.2653061224489796, recall: 0.17067833698030635, hmean: 0.20772303595206393, fps: 14.512030517908638
-[2023/08/25 13:22:35] ppocr INFO: best metric, hmean: 0.8958, is_float16: False, start_epoch: 156, precision: 0.9292, recall: 0.8648, fps: 13.95, best_epoch: 280
-\end{lstlisting}
-
-\subsection{Phát hiện văn bản}
-Với tác vụ nhận dạng văn bản em sử dụng VietOCR. Dưới đây là các bước huấn luyện mô hình:
-\begin{lstlisting}[language=Python]
-    from vietocr.tool.config import Cfg
-    from vietocr.model.trainer import Trainer
-\end{lstlisting}
-
-Load config VGG19 + Transformer và điều chỉnh tham số:
-\begin{lstlisting}[language=Python]
-    config = Cfg.load_config_from_name('vgg_transformer')
-    dataset_params = {
-        'name':'hw',
-        'data_root':'./train_data/invoice-rec/',
-        'train_annotation':'train.txt',
-        'valid_annotation':'valid.txt'
-    }
-
-    params = {
-            'print_every':200,
-            'valid_every':15*200,
-            'iters':20000,
-            'checkpoint':'./checkpoint/transformerocr_checkpoint.pth',    
-            'export':'./weights/transformerocr.pth',
-            'metrics': 10000
-            }
-
-    config['trainer'].update(params)
-    config['dataset'].update(dataset_params)
-    config['device'] = 'cuda:0'
-\end{lstlisting}
-
-Bắt đầu huấn luyện mô hình:
-\begin{lstlisting}[language=Python]
-    trainer.train()
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python]
-iter: 000200 - train loss: 2.627 - lr: 1.51e-05 - load time: 0.72 - gpu time: 97.80
-iter: 000400 - train loss: 2.367 - lr: 2.45e-05 - load time: 0.06 - gpu time: 91.02
-iter: 000600 - train loss: 2.212 - lr: 3.95e-05 - load time: 0.07 - gpu time: 93.54
-...
-iter: 029600 - train loss: 0.526 - lr: 1.63e-07 - load time: 0.06 - gpu time: 84.60
-iter: 029800 - train loss: 0.541 - lr: 4.14e-08 - load time: 0.06 - gpu time: 90.35
-iter: 030000 - train loss: 0.550 - lr: 1.20e-09 - load time: 0.07 - gpu time: 90.14
-iter: 030000 - valid loss: 0.551 - acc full seq: 0.8101 - acc per char: 0.9543
-\end{lstlisting}
-
-\subsection{Key information extraction}
-Cuối cùng là mô hình KIE, ở đây em sử dụng LayoutXLM SER để huấn luyện. Dưới đây là các bước:
-
-Download pretrained model và giải nén.
-\begin{lstlisting}[language=bash]
-    mkdir pretrained_model
-    cd pretrained_model
-    wget https://paddleocr.bj.bcebos.com/ppstructure/models/vi_layoutxlm/ser_vi_layoutxlm_xfund_pretrained.tar
-    tar -xf ser_vi_layoutxlm_xfund_pretrained.tar
-\end{lstlisting}
-
-Bắt đầu huấn luyện mô hình:
-\begin{lstlisting}[language=bash]
-python tools/train.py -c ./configs/kie/vi_layoutxlm/ser_vi_layoutxlm_xfund_zh.yml -o \
-    Architecture.Backbone=&num_classes \
-    Train.dataset.data_dir=train_data/invoice/train/image_files \
-    Eval.datasetdata_dir=train_data/invoice/valid/image_files \
-    PostProcess.class_path=train_data/invoice/class_list.txt
-\end{lstlisting}
-
-\begin{lstlisting}[language=bash]
-[2023/08/14 17:40:07] ppocr INFO: Architecture : 
-[2023/08/14 17:40:07] ppocr INFO:     Backbone : 
-[2023/08/14 17:40:07] ppocr INFO:         checkpoints : None
-[2023/08/14 17:40:07] ppocr INFO:         mode : vi
-[2023/08/14 17:40:07] ppocr INFO:         name : LayoutXLMForSer
-[2023/08/14 17:40:07] ppocr INFO:         num_classes : 17
-[2023/08/14 17:40:07] ppocr INFO:         pretrained : True
-[2023/08/14 17:40:07] ppocr INFO:     Transform : None
-[2023/08/14 17:40:07] ppocr INFO:     algorithm : LayoutXLM
-[2023/08/14 17:40:07] ppocr INFO:     model_type : kie
-...
-[2023/08/14 19:05:50] ppocr INFO: cur metric, precision: 0.9857, recall: 0.9928, hmean: 0.9892, fps: 24
-[2023/08/14 19:08:10] ppocr INFO: save best model is to ./output/ser_vi_layoutxlm_xfund_zh/best_accuracy
-[2023/08/14 19:08:10] ppocr INFO: best metric, hmean: 0.9857, precision: 0.9928, recall: 0.9892, fps: 24, best_epoch: 57
-\end{lstlisting}
-
-\subsection{Kết quả mô hình}
-\begin{table}[h]
-    \centering
-    \begin{tabular}{ | c | c | c | c | c | c | } 
-        \hline
-        \textbf{Task} & \textbf{Task} & \textbf{Backbone} & \textbf{Hmean} & \textbf{Precision} & \textbf{Recall} \\ 
-        \hline
-        Detection & DBNet & ResNet50vd & $89.58\%$ & $92.92\%$ & $86.48\%$ \\ 
-        \hline
-        KIE & LayoutXLM & LayoutXLM & $98.57\%$ & $99.28\%$ & $98.92\%$ \\ 
-        \hline
-        \hline
-        \textbf{Task} & \textbf{Task} & \textbf{Backbone} & \textbf{Accuracy} & \multicolumn{2}{c|}{\textbf{Accuracy char}}   \\ 
-        \hline
-        Recognition & VietOCR & VGG19 & $81.01\%$ & \multicolumn{2}{c|}{$95.43\%$} \\ 
-        \hline
-    \end{tabular}
-    \caption{Độ chính xác của cả 3 mô hình}
-    \label{table:1}
-\end{table}
-
-
+Trong chương này đã giới thiệu các công cụ và thư viện quan trọng trong đồ án. Phần tiếp theo em sẽ trình bày về dữ liệu và các bước huấn luyện mô hình OCR.

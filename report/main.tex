@@ -10,6 +10,7 @@
 \usepackage{titlesec}
 \usepackage{array}
 \usepackage{tocloft}
+\usepackage{titletoc}
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -19,6 +20,7 @@
 \usepackage{tikz}
 \usepackage{listofitems} % for \readlist to create arrays
 \usepackage{xcolor}
+\usepackage{multicol}
 \usepackage[outline]{contour} % glow around text
 \usepackage{enumitem}
 \usepackage{circuitikz}
@@ -27,16 +29,14 @@
 \usepackage{etoolbox}
 \usepackage{tvietlistings}
 \usepackage{wrapfig}
-
+\usepackage[acronym,toc]{glossaries}
+\usepackage{microtype}
+\input{template.tex}
 \addbibresource{references.bib}
 \graphicspath{./images/}
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
 \linespread{1.45} %regulate line spacing
-
-\DefineBibliographyStrings{english}{
-  bibliography = {Tài liệu tham khảo},
-}
-
+\usetikzlibrary{shapes, arrows}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -47,29 +47,111 @@
 }
 \def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
 
-
 \title{\Huge Đồ án tốt nghiệp}
 \author{Duc Ho V}
 \date{July 2023}
+\input{acronym.tex}
+
+\makeglossaries
 
 \begin{document}
 % template =====================================================================
-\input{template.tex}
-
-\maketitle
+\input{cover.tex}
 % Mục lục ======================================================================
 \newpage
+\addcontentsline{toc}{chapter}{Mục lục}
 \tableofcontents
 
-% Mở đầu ========================================================================
+% Mục lục ======================================================================
 \newpage
-\addcontentsline{toc}{section}{MỞ ĐẦU}
-\section*{Mở đầu}
+\addcontentsline{toc}{chapter}{Danh sách hình vẽ}
+\listoffigures
 
+% Mục lục ========================================================================
+\newpage
+\addcontentsline{toc}{chapter}{Danh sách bảng}
+\listoftables
+
+% % Mở đầu ========================================================================
+% \newpage
+% \addcontentsline{toc}{section}{MỞ ĐẦU}
+% \section*{Mở đầu}
+\newpage
+\section*{\Large\selectfont Danh mục các từ viết tắt, dịch thuật}
+\addcontentsline{toc}{chapter}{Danh mục các từ viết tắt, dịch thuật}
+
+\begin{center}
+  \begin{tabular}{| c | m{6.5cm} | m{6.0cm} |}
+  \hline
+  \textbf{STT} & \textbf{Tên Tiếng Anh/Viết tắt} & \textbf{Ý nghĩa} \\ 
+  \hline
+  1 & Artificial intelligence (AI) & Trí tuệ nhân tạo \\ 
+  \hline
+  2 & \acrfull*{ocr}  & Nhận dạng ký tự quang học \\ 
+  \hline
+  3 & \acrfull*{kie} & Trích xuất thông tin \\ 
+  \hline
+  4 & \acrshort*{ssd} & \acrlong*{ssd} \\ 
+  \hline
+  5 & \acrshort*{ctpn} & \acrlong*{ctpn} \\ 
+  \hline
+  6 & \acrshort*{east} & \acrlong*{east} \\ 
+  \hline
+  7 & \acrshort*{psenet} & \acrlong*{psenet} \\ 
+  \hline
+  8 & \acrshort*{dbnet} & \acrlong*{dbnet} \\ 
+  \hline
+  9 & \acrshort*{ctc} & \acrlong*{ctc} \\ 
+  \hline
+  10 & \acrshort*{startnet} & \acrlong*{startnet} \\ 
+  \hline
+  11 & \acrshort*{tps} & \acrlong*{tps} \\ 
+  \hline
+  12 & \acrshort*{rare} & \acrlong*{rare} \\ 
+  \hline
+  13 & \acrfull*{cnn} & Mạng nơ-ron tích chập \\ 
+  \hline
+  14 & \acrfull*{vqa} & Trả lời câu hỏi trực quan \\ 
+  \hline
+  15 & \acrshort*{ser} & \acrlong*{ser} \\ 
+  \hline
+  16 & \acrshort*{re} & \acrlong*{re} \\ 
+  \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{| c | m{6.5cm} | m{6.0cm} |}
+  \hline
+  \textbf{STT} & \textbf{Tên Tiếng Anh/Viết tắt} & \textbf{Ý nghĩa} \\ 
+  \hline
+  17 & \acrfull*{ner} & Nhận dạng tên thực thể \\ 
+  \hline
+  18 & \acrshort*{resnet} & \acrlong*{resnet} \\ 
+  \hline
+  19 & \acrshort*{bert} & \acrlong*{bert} \\ 
+  \hline
+  20 & \acrshort*{gpt} & \acrlong*{gpt} \\ 
+  \hline
+  21 & \acrshort*{xfund} & \acrlong*{xfund} \\ 
+  \hline
+  22 & \acrshort*{mvlm} & \acrlong*{mvlm} \\ 
+  \hline
+  23 & \acrshort*{tia} & \acrlong*{tia} \\ 
+  \hline
+  24 & \acrshort*{tim} & \acrlong*{tim} \\ 
+  \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\section*{\Large\selectfont\centering Lời cảm ơn}
+
+\newpage
+\section*{\Large\selectfont\centering Mở đầu}
 % Chương 1 ======================================================================
 \newpage
 \input{chapter1.tex}
-
 % Chương 2 ======================================================================
 \newpage
 \input{chapter2.tex}
@@ -77,6 +159,9 @@
 % Chương 3 ======================================================================
 \newpage
 \input{chapter3.tex}
+
+\newpage
+\input{chapter4_.tex}
 % Chương 4 ======================================================================
 \newpage
 \input{chapter4.tex}
@@ -85,5 +170,6 @@
 \input{chapter5.tex}
 
 \newpage
-\printbibliography
+\addcontentsline{toc}{chapter}{Tài Liệu Tham Khảo}
+\printbibliography[heading=talikarng]
 \end{document}
