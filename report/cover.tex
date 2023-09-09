@@ -1,4 +1,15 @@
 \thispagestyle{empty}
+% make borded
+\begin{tikzpicture}[overlay, remember picture]
+    \draw [line width=3pt]
+    ($ (current page.north west) + (3.0cm,-2.0cm) $)
+    rectangle
+    ($ (current page.south east) + (-2.0cm,2.0cm) $);
+    \draw [line width=0.5pt]
+    ($ (current page.north west) + (3.1cm,-2.1cm) $)
+    rectangle
+    ($ (current page.south east) + (-2.1cm,2.1cm) $);
+\end{tikzpicture}
 \begin{center}
     \vspace{-6pt} \textbf{\fontsize{18pt}{0}\selectfont BỘ GIÁO DỤC VÀ ĐÀO TẠO} \\
     \vspace{1.5pt}\textbf{\fontsize{18pt}{0}\selectfont TRƯỜNG ĐẠI HỌC MỎ - ĐỊA CHẤT}
@@ -15,7 +26,7 @@
     \vspace{0.5cm}
     \textbf{\fontsize{18pt}{0}\selectfont NGHÀNH \\ \vspace{0.1cm} CÔNG NGHỆ THÔNG TIN} 
 
-    \vspace{9.0cm}
+    \vspace{9.5cm}
     \textbf{\fontsize{18pt}{0}\selectfont HÀ NỘI - 2023}
 \end{center}
 
@@ -45,7 +56,7 @@ nhận dạng hóa đơn}
         \noindent
         \textbf{\fontsize{15pt}{0}\selectfont SINH VIÊN THỰC HIỆN} \\
         \vspace{0.1cm}\textbf{\fontsize{15pt}{0}\selectfont HỒ VĂN ĐỨC} \\
-        \vspace{0.1cm}\textbf{\fontsize{15pt}{0}\selectfont DCCTKH64A}
+        \vspace{0.1cm}\textbf{\fontsize{15pt}{0}\selectfont LỚP DCCTKH64A}
     \end{center}
     
     \columnbreak
