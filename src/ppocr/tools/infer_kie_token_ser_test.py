@@ -71,7 +71,6 @@ class SerPredictor(object):
         # build post process
         self.post_process_class = build_post_process(config['PostProcess'],
                                                      global_config)
-
         # build model
         self.model = build_model(config['Architecture'])
         self.config = Cfg.load_config_from_file(global_config['rec_config_path'])
@@ -90,10 +89,9 @@ class SerPredictor(object):
         self.ocr_engine = PaddleOCR(
             use_angle_cls=False,
             show_log=False,
-            # rec_model_dir=global_config.get("kie_rec_model_dir", None),
             det_model_dir=global_config.get("kie_det_model_dir", None),
             use_gpu=global_config['use_gpu'])
-
+        
         # create data ops
         transforms = []
         for op in config['Eval']['dataset']['transforms']:
@@ -143,15 +141,7 @@ class SerPredictor(object):
 def main(otp):
     config, device, logger, vdl_writer = program.preprocess(otp)
     os.makedirs(config['Global']['save_res_path'], exist_ok=True)
-
-    # ser_engine = SerPredictor(config)
-    
     return config
-
-        
-        # img_res = draw_ser_results(img_path, result)
-    
-    return result
 
 if __name__ == "__main__":
     main()
