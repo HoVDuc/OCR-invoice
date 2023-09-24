@@ -337,6 +337,5 @@ test_tipc/web/node_modules/
 pretrained/
 pretrain_models/
 infer_kie.ipynb
-test.ipynb
-mcocr_public_145013aaprl.jpg
+invoice.xlsx
 weights

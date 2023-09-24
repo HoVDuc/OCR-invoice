@@ -8,6 +8,7 @@ sys.path.append('./src/')
 from src.ppocr.tools.infer_kie_token_ser_test import *
 from src.ppocr.ppocr.utils.visual import draw_ser_results
 import gradio as gr
+import pandas as pd
 
 
 class Inference:
@@ -47,7 +48,7 @@ class Inference:
                         products.append(current_product.copy())
                     else:
                         products[-1][label] = transcription
-                else: 
+                else:
                     if label == 'TIMESTAMP':
                         text = transcription
                         code, time = text.split('Ngày')
@@ -61,31 +62,39 @@ class Inference:
             
     def __call__(self, image_path):
         self.config['Global']['infer_img'] = image_path
-        if self.config["Global"].get("infer_mode", None) is False:
-            data_dir = self.config['Eval']['dataset']['data_dir']
-            with open(self.config['Global']['infer_img'], "rb") as f:
-                infer_imgs = f.readlines()
-        else:
-            try:
-                infer_imgs = get_image_file_list(self.config['Global']['infer_img'])
-            except:
-                infer_imgs = [self.config['Global']['infer_img']]
+        try:
+            infer_imgs = get_image_file_list(self.config['Global']['infer_img'])
+        except:
+            infer_imgs = self.config['Global']['infer_img']
 
-        for idx, info in enumerate(infer_imgs):
-            if self.config["Global"].get("infer_mode", None) is False:
-                data_line = info.decode('utf-8')
-                substr = data_line.strip("\n").split("\t")
-                img_path = os.path.join(data_dir, substr[0])
-                data = {'img_path': img_path, 'label': substr[1]}
-            else:
-                img_path = info
-                data = {'img_path': img_path}
+        img_path = infer_imgs
+        data = {'img_path': img_path}
 
-            result, _ = self.ser_engine(data)
-            result = result[0]      
-        
+        result, _ = self.ser_engine(data)
+        result = result[0]      
         img_res = draw_ser_results(image_path, result)
         info = self.process_info(result)
+        
+        info_ = json.loads(info)
+        product_rows = []
+        for product in info_["PRODUCTS"]:
+            product_row = [info_["SELLER"], info_["ADDRESS"], info_["STAFF"], info_["TIMESTAMP"], info_["CODE"],
+                        product["PRODUCT"], product["NUMBER"], product["PRICE"], info_["TOTAL_COST"]]
+            product_rows.append(product_row)
+
+        # Create a Pandas DataFrame
+        columns = ["SELLER", "ADDRESS", "STAFF", "TIMESTAMP", "CODE", "PRODUCT", "NUMBER", "PRICE", "TOTAL_COST"]
+        df = pd.DataFrame(product_rows, columns=columns)
+
+        # Create an Excel file
+        path_save = './invoice.xlsx'
+        try:
+            excel = pd.read_excel(path_save)
+            dataframe = pd.concat([excel, df])
+        except:
+            print('Created invoice.xlsx')
+            dataframe = df
+        dataframe.to_excel(path_save, index=False, engine="openpyxl")
         return img_res, info
         
 def GUI():
