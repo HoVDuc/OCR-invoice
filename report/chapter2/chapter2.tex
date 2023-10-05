@@ -1,0 +1,496 @@
+\chapter{Cơ sở lý thuyết liên quan}
+Với sự phát triển không ngừng của công nghệ, việc chuyển đổi thông tin từ tài liệu giấy trở thành dạng điện tử đã trở nên cực kỳ quan trọng đối với doanh nghiệp và cá nhân. Trước đây, việc nhập liệu thủ công từ hóa đơn và tài liệu tương tự tốn rất nhiều thời gian, công sức và có nguy cơ sai sót cao. Tuy nhiên, với sự xuất hiện của công nghệ OCR, quá trình này đã trở nên tự động và hiệu quả hơn, giúp tiết kiệm thời gian và tối ưu hóa quá trình làm việc.
+
+Trong chương này, sẽ bắt đầu bằng việc tìm hiểu về cơ bản của công nghệ OCR, một công nghệ quan trọng đã thay đổi cách chúng ta xử lý và quản lý thông tin, khám phá cách OCR có thể phân tích hình ảnh, xác định kí tự và từ, và biến đổi chúng thành dạng văn bản có thể xử lý.
+
+Qua đó, chương cơ sở lý thuyết này sẽ tạo nền tảng kiến thức quan trọng cho việc hiểu rõ hơn về công nghệ OCR và tầm quan trọng của nó trong việc tối ưu hóa quá trình nhận dạng hóa đơn.
+
+\section{Nhận dạng ký tự quang học}
+\subsection{Nhận dạng ký tự quang học là gì?}
+Nhận dạng ký tự quang học hay còn gọi là OCR đây là quá trình chuyển đổi một hình ảnh văn bản viết tay, đánh máy hoặc in thành định dạng văn bản mà máy có thể hiểu được. Nó được sử dụng rộng rãi để nhận dạng và tìm kiếm văn bản từ các tài liệu điện tử hoặc để xuất bản văn bản trên một trang web. \cite{aws, survey_ocr_Applications}
+
+OCR được sử dụng rộng rãi như một hình thức nhập dữ liệu từ các bản ghi dữ liệu giấy in - cho dù đó là tài liệu hộ chiếu, hóa đơn, sao kê ngân hàng, biên lai vi tính hóa, danh thiếp, thư, dữ liệu in hoặc bất kỳ tài liệu phù hợp nào - đó là một phương pháp phổ biến để số hóa các văn bản in sao cho chúng có thể được chỉnh sửa, tìm kiếm, lưu trữ bằng điện tử, hiển thị trực tuyến và được sử dụng trong các quy trình máy như điện toán nhận thức, dịch máy, chuyển văn bản thành giọng nói (trích xuất), dữ liệu chính và khai thác văn bản. OCR là một lĩnh vực nghiên cứu về nhận dạng mẫu, trí tuệ nhân tạo và thị giác máy tính.\cite{wiki}
+
+Nhận dạng ký tự quang học đã được áp dụng vào nhiều ứng dụng khác nhau. Dưới đây là một  số ứng dụng của OCR: \cite{survey_ocr_Applications}
+\begin{itemize}
+    \item \textbf{Nhận dạng chữ viết tay:} Máy tính để nhận và diễn dịch thông tin viết tay rõ ràng từ các nguồn như tài liệu giấy, ảnh, màn hình cảm ứng và các thiết bị khác. Hình ảnh văn bản viết có thể được cảm nhận ``ngoại tuyến'' từ tờ giấy thông qua quét quang học hoặc nhận dạng từ thông minh. Một cách khác, các chuyển động của đầu bút viết có thể được cảm nhận ``trực tuyến'', ví dụ như bề mặt màn hình máy tính dựa trên bút viết.
+    \item \textbf{Ngân hàng:} Được sử dụng để xử lý séc mà không cần sự tham gia của con người. Một tờ séc có thể được đặt vào máy, trong đó hệ thống quét số tiền cần phát hành và số tiền chính xác sẽ được chuyển khoản. Công nghệ này đã gần như được hoàn thiện cho các séc được in ấn và cũng khá chính xác đối với các séc viết tay, giảm thiểu thời gian chờ đợi tại ngân hàng.
+    \item \textbf{Chăm sóc sức khỏe:} Các chuyên gia y tế luôn phải đối mặt với số lượng lớn các biểu mẫu cho mỗi bệnh nhân, bao gồm cả biểu mẫu bảo hiểm cũng như các biểu mẫu sức khỏe chung. Để theo kịp với tất cả thông tin này, việc nhập dữ liệu liên quan vào một cơ sở dữ liệu điện tử có thể được truy cập khi cần thiết. Các công cụ xử lý biểu mẫu, được cung cấp bởi công nghệ OCR, có khả năng trích xuất thông tin từ các biểu mẫu và đưa vào cơ sở dữ liệu, để mỗi dữ liệu bệnh nhân được ghi lại đúng thời điểm.
+    \item \textbf{Captcha:} Trong CAPTCHA, một hình ảnh gồm các ký tự hoặc số được tạo ra, bị mờ đi bằng các kỹ thuật biến dạng hình ảnh, biến đổi kích thước và phông chữ, phông nền gây xao lãng, đoạn ngẫu nhiên, đánh dấu và nhiễu trong hình ảnh. Hệ thống này có thể được sử dụng để loại bỏ nhiễu và phân đoạn hình ảnh để làm cho hình ảnh dễ xử lý cho các hệ thống OCR
+    \item \textbf{Ảnh hóa đơn:} Được sử dụng rộng rãi trong nhiều ứng dụng kinh doanh để theo dõi hồ sơ tài chính và ngăn chặn việc tích lũy các khoản thanh toán chồng chất.
+    \item \textbf{Nhận dạng biển số xe}: Sử dụng để tự động nhận dạng và ghi nhận biển số xe trên các hình ảnh hoặc video.
+    \item \ldots
+\end{itemize}
+
+Từ những ứng dụng trên ta có thể thấy rằng OCR đang được sử dụng rộng rãi trong cuộc sống hàng ngày, nó đang đóng vai trò quan trọng trong việc chuyển đổi số hiện nay. Điều này rất quan trọng để tối ưu hóa quá trình làm việc với thông tin trong thời đại công nghệ thông tin.
+
+\subsection{Lịch sử của OCR}
+
+OCR được ra đời và cuối thế kỉ 19, được cấp bằng sáng chế tại Mỹ vào ngày 31 tháng 12 năm 1935 Gustav Tauschek đến từ Viên, Áo, đây là một trong những phát minh sớm nhất liên quan đến OCR. OCR ban đầu được sử dụng để số hóa các văn bản in và cho phép chúng có thể đọc được bằng máy. Khi công nghệ OCR tiếp tục phát triển, nó đã được sử dụng rộng rãi trong các ngành công nghiệp khác nhau.
+
+Sự khởi đầu thực sự của những hệ thống OCR ban đầu thực sự bắt đầu vào những năm 1960 và 1970. Các hệ thống này được thiết kế cho các trường hợp sử dụng cụ thể, chẳng hạn như phân loại thư dựa trên mã zip hoặc đọc số viết tay. Phông chữ có thể đọc bằng máy quang học đầu tiên OCR-A được phát triển vào năm 1968 bởi nhà thiết kế kiểu chữ người Thụy Sĩ Adrian Frutiger.
+
+Trong suốt những năm 1980, công nghệ OCR đã đạt được những bước tiến đáng kể với sự phát triển của các thuật toán mới và các máy tính mạnh hơn. Các hệ thống OCR có thể nhận dạng nhiều loại phông chữ hơn và có thể xử lý các hình ảnh phức tạp hơn, khiến chúng trở nên chính xác và hữu ích hơn cho nhiều ứng dụng hơn.
+
+Vào những năm 1990, việc sử dụng rộng rãi máy tính cá nhân và internet đã dẫn đến sự gia tăng đáng kể trong việc sử dụng công nghệ OCR. Các hệ thống OCR được sử dụng để số hóa sách, tạp chí và các tài liệu in khác, giúp tìm kiếm và truy cập thông tin dễ dàng hơn. Công nghệ này cũng được sử dụng để tự động hóa các quy trình nhập dữ liệu trong các ngành như tài chính, chăm sóc sức khỏe và chính phủ.
+
+Vào đầu những năm 2000, lịch sử của công nghệ OCR đã phát triển với việc giới thiệu các thuật toán mới và phần cứng được cải tiến. Các hệ thống OCR trở nên chính xác hơn và có thể nhận dạng nhiều loại ký tự và ngôn ngữ hơn. Điều này đã mở đường cho việc áp dụng rộng rãi công nghệ OCR trong nhiều ngành và ứng dụng khác nhau, chẳng hạn như quản lý tài liệu và xử lý hóa đơn. Trong khung thời gian này, Google cũng nổi tiếng (và gây tranh cãi) đã ra mắt Google Books, có tên mã là Project Ocean, sử dụng OCR để số hóa hàng chục triệu cuốn sách và làm cho văn bản của chúng có thể tìm kiếm được.
+
+Ngày nay, công nghệ OCR tiên tiến và phức tạp hơn bao giờ hết. Các hệ thống OCR có thể nhận dạng nhiều loại ký tự và ngôn ngữ, chữ viết tay và các hình ảnh phức tạp khác. Công nghệ OCR đang tiếp tục phát triển và những tiến bộ mới nhất về trí tuệ nhân tạo và máy học đang dẫn đến các hệ thống thậm chí còn phức tạp và chính xác hơn.
+
+Lịch sử OCR bắt đầu với những phát minh mang tính cách mạng được thiết kế để cải thiện chất lượng cuộc sống cho nhân loại. Nhiều thập kỷ sau, công nghệ này vẫn đang trải qua quá trình phát triển và cải tiến liên tục, đồng thời là một yếu tố quyết định quan trọng của thời đại kỹ thuật số. OCR đã trải qua một chặng đường dài và đang thực sự cải thiện chất lượng cuộc sống của phần lớn nhân loại. Ngày nay, nhiều ngành công nghiệp và ứng dụng sử dụng OCR. Trong những thập kỷ tới, nó sẽ đóng một vai trò quan trọng trong quá trình chuyển đổi kỹ thuật số toàn cầu.\cite{veryfi}
+
+\subsection{Nguyên tắc hoạt động của OCR}
+OCR hoạt động bằng cách phân tích hình ảnh văn bản và sau đó tạo ra một bản sao văn bản kỹ thuật số của hình ảnh đó. Quá trình này thường được thực hiện theo các bước sau:
+\begin{itemize}
+    \item \textbf{Quét tài liệu}: Tài liệu được quét bằng máy quét để tạo ra một hình ảnh kỹ thuật số của tài liệu.
+    \item \textbf{Phân tích và xử lý hình ảnh}: Trước khi nhận dạng văn bản, ảnh được tiền xử lý để làm sạch và cải thiện chất lượng. Điều này có thể bao gồm việc điều chỉnh độ tương phản, loại bỏ nhiễu, cắt biên và xoay ảnh để đảm bảo văn bản nằm ngang. Sau đó hình ảnh được phân tích để xác định các vùng văn bản.
+    \item \textbf{Nhận dạng ký tự}: Trong bước này, hình ảnh được chuyển đổi thành dạng dữ liệu văn bản bằng cách nhận dạng các ký tự riêng lẻ. Các thuật toán và mô hình máy học được sử dụng để so khớp các đặc trưng trong hình ảnh với các ký tự đã biết từ bộ dữ liệu huấn luyện.
+    \item \textbf{Phân tích cấu trúc}: Sau khi xác định được các ký tự, công cụ OCR cũng cố gắng xác định cấu trúc của văn bản, bao gồm việc xác định các đoạn, đoạn văn bản, tiêu đề, danh sách và các yếu tố cấu trúc khác.
+    \item \textbf{Sửa lỗi và kiểm tra}: Sau khi nhận dạng, dữ liệu văn bản thường cần được kiểm tra lại và sửa lỗi do các lỗi nhận dạng có thể xảy ra. Điều này có thể thực hiện tự động hoặc thông qua giao diện người dùng để đảm bảo tính chính xác của kết quả.
+    \item \textbf{Tạo bản sao văn bản kỹ thuật số}: Một bản sao văn bản kỹ thuật số của hình ảnh được tạo ra bằng cách kết hợp các ký tự đã được nhận dạng.
+\end{itemize}
+Các công nghệ OCR ngày càng phát triển, sử dụng các mô hình học sâu và học máy để cải thiện khả năng nhận dạng và xử lý ngôn ngữ tự nhiên, tạo ra kết quả chính xác hơn và phức tạp hơn.
+
+\section{Các thuật toán OCR}
+Mặc dù OCR tương đối cụ thể, nhưng nó liên quan đến nhiều khía cạnh của công nghệ, bao gồm phát hiện văn bản, nhận dạng văn bản, nhận dạng văn bản từ đầu đến cuối, phân tích tài liệu, v.v. Nghiên cứu học thuật về các công nghệ liên quan của OCR phát triển mạnh mẽ. Phần này đây sẽ giới thiệu sơ lược về một số công nghệ chính trong tác vụ OCR.
+\subsection{Phát hiện văn bản}
+Công việc phát hiện văn bản là để xác định vùng chứa văn bản trên ảnh đầu vào. Trong những năm gần đây, có nhiều nghiên cứu học thuật về phát hiện văn bản. Một lớp phương pháp coi việc phát hiện văn bản như một tình huống cụ thể trong việc phát hiện mục tiêu, và điều chỉnh các thuật toán phát hiện mục tiêu chung để phù hợp với việc phát hiện văn bản. Ví dụ, TextBoxes dựa trên một bộ phát hiện mục tiêu một giai đoạn là SSD. Thuật toán điều chỉnh khung mục tiêu để vừa với các dòng văn bản có tỷ lệ khía cạnh cực đoan, trong khi CTPN được phát triển từ Faster RCNN. Tuy nhiên, vẫn có một số khác biệt giữa phát hiện văn bản và phát hiện mục tiêu về thông tin mục tiêu và nhiệm vụ chính. Ví dụ, văn bản thường dài và trông giống "vạch", khoảng cách giữa các dòng nhỏ, văn bản có thể uốn cong, v.v. Do đó, nhiều thuật toán đặc biệt cho việc phát hiện văn bản đã được phát triển, như EAST, PSENet, DBNet, và nhiều thuật toán khác \cite{Dive-into-ocr-2022}.
+\begin{figure}
+    \includegraphics[scale=0.7]{chapter2/images/text-detection.png}
+    \centering
+    \caption{Ví dụ về nhiệm vụ phát hiện văn bản}
+\end{figure}
+
+Hiện tại, một số thuật toán phát hiện văn bản phổ biến có thể được chia ra một cách đại khái thành hai loại: \textbf{Thuật toán dựa trên Hồi quy} và \textbf{Thuật toán dựa trên Phân đoạn}. Cũng có một số thuật toán kết hợp cả hai loại này. Các thuật toán dựa trên hồi quy lấy cảm hứng từ các thuật toán phát hiện đối tượng chung, thực hiện việc hồi quy hộp phát hiện bằng cách đặt các anchor, hoặc thậm chí trực tiếp thực hiện hồi quy điểm ảnh. Loại phương pháp này hoạt động tốt trong việc phân biệt văn bản có hình dạng đều đặn, nhưng kém trong việc phát hiện văn bản có hình dạng không đều. Ví dụ, CTPN tốt trong việc nhận dạng văn bản ngang, nhưng kém trong việc phát hiện văn bản uốn cong và xoắn. SegLink phù hợp hơn với văn bản dài, nhưng không thích hợp cho việc phát hiện văn bản phân tán thưa thớt. Các thuật toán dựa trên phân đoạn giới thiệu Mask-RCNN, loại thuật toán này có thể hoạt động tốt hơn trong việc phát hiện trong các tình huống và văn bản có các hình dạng khác nhau, nhưng hạn chế là việc xử lý sau cùng phức tạp, vì vậy có thể chậm về tốc độ và không thể phát hiện được văn bản chồng lấn \cite{Dive-into-ocr-2022}.
+
+\begin{figure}[h]
+    \input{chapter2/text-detection-overview.tex}
+    \centering
+    \caption{Tổng quan về thuật toán phát hiện văn bản}
+\end{figure}
+
+\subsection{Nhận dạng văn bản}
+Nhận dạng văn bản là việc nhận biết nội dung văn bản trong hình ảnh, và đầu vào thường là từ phần vùng chứa văn bản của ảnh được cắt ra bằng hộp văn bản được tạo ra từ việc phát hiện văn bản. Nhận dạng văn bản có thể được chia thành hai loại chính: \textbf{Nhận dạng Văn bản Đều đặn} và \textbf{Nhận dạng Văn bản Không đều đặn} dựa trên đường viền của văn bản cần nhận dạng.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.4]{chapter2/images/regular-irregular-text.png}
+    \centering
+    \caption{Văn bản đều đặn (trái) và Văn bản không đều đặn (phải)}
+\end{figure}
+
+Văn bản đều đặn chủ yếu đề cập đến các phông chữ in, văn bản được quét, và các nguồn tương tự có hướng chính đều. Văn bản không đều đặn thường không nằm trong tư thế ngang, thường uốn cong, bị che khuất và mờ mờ. Các tình huống văn bản không đều đặn thách thức rất lớn, và đó cũng là hướng nghiên cứu chính trong việc nhận dạng văn bản.
+
+Các thuật toán nhận dạng văn bản đều đặn có thể được chia thành hai loại dựa trên các phương pháp giải mã khác nhau: Thuật toán dựa trên CTC và Thuật toán dựa trên Sequence2Sequence. Chúng khác nhau trong cách chuyển đổi các đặc trưng chuỗi mà mạng học học được thành kết quả nhận dạng cuối cùng. Một ví dụ đại diện cho thuật toán dựa trên CTC là CRNN cổ điển.
+
+\begin{figure}[p]
+    \input{chapter2/ctc-vs-attention.tex}
+    \centering
+    \caption{CTC-based recognition algorithm VS. Attention-based recognition algorithm}
+\end{figure}
+
+Các thuật toán nhận dạng cho văn bản không đều đặn phong phú hơn. Các phương pháp như STAR-Net sửa chữa đường viền của văn bản không đều đặn thành các hình chữ nhật đều đặn bằng cách thêm các mô-đun sửa chữa như TPS trước khi thực hiện việc nhận dạng. Các phương pháp dựa trên chú ý như RARE chú trọng hơn đến mối quan hệ giữa các phần trong chuỗi. Các phương pháp dựa trên phân đoạn xử lý mỗi ký tự trên dòng văn bản như một đơn vị riêng lẻ, làm cho việc nhận dạng ký tự đã phân đoạn dễ dàng hơn so với việc nhận dạng toàn bộ dòng văn bản sau khi sửa chữa. Ngoài ra, với sự phát triển nhanh chóng của Transformer và hiệu quả đã được xác minh trong các nhiệm vụ khác nhau trong những năm gần đây, nhiều thuật toán nhận dạng văn bản dựa trên transformer đã phát triển mạnh mẽ. Loại giải pháp này sử dụng cấu trúc transformer để giải quyết việc mô hình hóa sự phụ thuộc lâu dài trong CNN và đã đạt được kết quả tốt.
+
+\begin{figure}
+    \includegraphics[scale=0.37]{chapter2/images/recognition-based-charcter-segmentation.png}
+    \centering
+    \caption{Thuật toán nhận dạng dựa trên phân vùng ký tự}
+\end{figure}
+
+\subsection{Nhận dạng cấu trúc tài liệu}
+Công nghệ OCR có thể đáp ứng yêu cầu về phát hiện và nhận dạng văn bản. Tuy nhiên, trong các tình huống thực tế, điều chúng ta thường cần là thông tin có cấu trúc, chẳng hạn như trích xuất thông tin từ thẻ ID và hóa đơn, xác định có cấu trúc của bảng, và vân vân. Các tình huống ứng dụng của công nghệ OCR chủ yếu là trích xuất tài liệu nhanh, so sánh nội dung hợp đồng, so sánh thông tin tài chính trên các tài liệu cần thanh toán, và xác định tài liệu vận chuyển. Kết quả OCR + xử lý sau cùng là một kế hoạch cấu trúc thường được sử dụng, nhưng phức tạp và cần thiết phải được thiết kế cẩn thận, và thiếu sự tổng quát. Với sự phát triển liên tục của công nghệ OCR và nhu cầu về trích xuất thông tin có cấu trúc đang gia tăng, các công nghệ liên quan đến phân tích tài liệu thông minh, như phân tích bố cục, nhận dạng bảng, và trích xuất thông tin quan trọng, đã nhận được sự chú ý ngày càng tăng. \cite{Dive-into-ocr-2022}
+
+\subsubsection*{Phân tích bố cục}
+Phân tích bố cục được thực hiện để phân loại nội dung của hình ảnh tài liệu thành các loại như văn bản thuần túy, tiêu đề, bảng biểu, hình ảnh, v.v. Các phương pháp hiện tại thường thực hiện việc phát hiện hoặc phân đoạn chúng một cách riêng biệt. Ví dụ, Soto Carlos sử dụng thông tin ngữ cảnh và vị trí tự nhiên của nội dung tài liệu để cải thiện hiệu suất phát hiện vùng dựa trên thuật toán phát hiện mục tiêu Faster R-CNN. Sarkar Mausoom và đồng nghiệp đề xuất một cơ chế phân đoạn dựa trên tiên biết để huấn luyện mô hình phân đoạn tài liệu với các hình ảnh có độ phân giải cao, giải quyết vấn đề rằng các cấu trúc khác nhau trong các khu vực dày đặc không thể phân biệt và hợp nhất do việc giảm quá mức của hình ảnh gốc.
+
+\subsubsection*{Nhận dạng bảng}
+Nhận dạng bảng là việc xác định và chuyển thông tin bảng của tài liệu thành một tệp Excel. Có nhiều loại và phong cách bảng khác nhau trong hình ảnh văn bản, chẳng hạn như các hàng và cột khác nhau và các loại văn bản khác nhau. Ngoài ra, phong cách của tài liệu và môi trường ánh sáng khi chụp ảnh đã đặt ra những thách thức lớn cho việc nhận dạng bảng, làm cho việc nhận dạng bảng trở thành một vấn đề nghiên cứu khó khăn trong việc hiểu tài liệu. Có nhiều phương pháp nhận dạng bảng. Ví dụ, vào những ngày đầu tiên, có các thuật toán truyền thống dựa trên các quy tắc heuristics, như thuật toán T-Rect được đề xuất bởi Kieninger và cộng sự, thường sử dụng quy tắc thiết kế thủ công và phát hiện và phân tích miền kết nối. Trong những năm gần đây, khi học sâu tiếp tục phát triển, một số thuật toán nhận dạng cấu trúc bảng dựa trên mạng CNN đã xuất hiện, như DeepTabStR được đề xuất bởi Siddiqui Shoaib Ahmed và cộng sự và TabStruct-Net được đề xuất bởi Raja Sachin và cộng sự. Ngoài ra, với sự gia tăng của Mạng Neural Đồ thị, một số nhà nghiên cứu đã thử áp dụng Mạng Neural Đồ thị vào việc nhận dạng cấu trúc bảng và coi việc nhận dạng bảng như một vấn đề tái tạo đồ thị dựa trên Mạng Neural Đồ thị. Đây là cách mà TGRNet được đề xuất bởi Xue Wenyuan và cộng sự hoạt động. Hơn nữa, có các giải pháp end-to-end có kết quả đầu ra cấu trúc bảng dưới dạng HTML bằng mạng. Hầu hết trong số này áp dụng Seq2Seq để dự đoán cấu trúc bảng như những thuật toán dựa trên attention hoặc transformer, bao gồm TableMaster.
+
+\subsubsection*{Trích xuất thông tin chính}
+Trích xuất thông tin quan trọng (KIE) là một nhiệm vụ quan trọng trong Hỏi và Trả lời Văn bản (Document VQA). Nó liên quan đến việc trích xuất thông tin cần thiết từ hình ảnh, chẳng hạn như tên và số ID từ thẻ ID. Thông tin như vậy thường được xác định trong một nhiệm vụ, nhưng khác nhau giữa các nhiệm vụ khác nhau.
+
+\begin{figure}[h!]
+    \includegraphics[scale=0.56]{chapter2/images/re-vs-ser.png}
+    \centering
+    \caption{RE(trái) VS SER(phải)}
+    \label{fig8:ser-re}
+\end{figure}
+
+KIE thường được chia thành hai phần nhiệm vụ con để nghiên cứu (Hình \ref{fig8:ser-re}):
+\begin{itemize}
+    \item SER: Đây là việc nhận dạng thực thể ngữ nghĩa, phân loại từng đoạn văn bản được phát hiện. Ví dụ, nó chia văn bản thành tên và số thẻ ID như hình dưới đây.
+    \item RE: Đây là việc trích xuất mối quan hệ, phân loại từng đoạn văn bản. Ví dụ, nó có thể phân loại văn bản thành câu hỏi và câu trả lời, sau đó tìm câu trả lời tương ứng cho mỗi câu hỏi. Như hình dưới đây, các hộp đỏ và đen đại diện cho câu hỏi và câu trả lời tương ứng, và các mũi tên màu vàng chỉ sự tương ứng giữa câu hỏi và câu trả lời.
+\end{itemize}
+Phương pháp KIE thông thường được phát triển dựa trên nhận dạng thực thể đặt tên (NER), nhưng loại phương pháp này chỉ sử dụng thông tin văn bản trong hình ảnh mà không sử dụng thông tin hình ảnh và cấu trúc. Do đó, nó không đạt độ chính xác cao. Trong những năm gần đây, nhiều giải pháp đã bắt đầu kết hợp thông tin hình ảnh và cấu trúc với thông tin văn bản. Do sử dụng các nguyên tắc khác nhau trong việc kết hợp thông tin đa tầng, các phương pháp này có thể được chia thành bốn loại:
+\begin{itemize}
+    \item Phương pháp dựa trên lưới
+    \item Phương pháp dựa trên token
+    \item Phương pháp dựa trên Graph Convolutional Network
+    \item Phương pháp end-to-end
+\end{itemize}
+
+\section{OCR dựa trên mẫu và OCR dựa trên AI}
+Với số lượng ngày càng tăng của các giải pháp OCR có sẵn trên thị trường, điều cần thiết là phải hiểu các kỹ thuật chính được sử dụng bởi các công cụ này, cụ thể là OCR dựa trên mẫu và OCR dựa trên AI.
+\subsection{OCR dựa trên mẫu}
+OCR dựa trên mẫu là một cách tiếp cận cũ hơn, truyền thống hơn đối với OCR dựa trên các mẫu được xác định trước để nhận dạng và trích xuất văn bản từ tài liệu. Phương pháp này hoạt động tốt nhất khi xử lý các tài liệu có cấu trúc, chẳng hạn như hóa đơn, biểu mẫu hoặc biên lai, có bố cục nhất quán. \cite{template-ai-ocr}
+\begin{itemize}
+    \item[] \textbf{Ưu điểm:} \begin{enumerate}
+            \item Độ chính xác cao: Khi được sử dụng với các tài liệu có cấu trúc tuân theo định dạng nhất định, OCR dựa trên mẫu có thể đạt được tỷ lệ chính xác tuyệt vời.
+            \item Thời gian xử lý thấp hơn: Vì OCR dựa trên mẫu dựa trên các mẫu dựng sẵn, không yêu cầu nhiều sức mạnh xử lý hoặc thời gian để nhận dạng ký tự.
+            \item Có thể tùy chỉnh: Người dùng có thể tạo các mẫu tùy chỉnh cho các loại tài liệu cụ thể, đảm bảo kết quả chính xác.
+        \end{enumerate}
+    \item[] \textbf{Nhược điểm} \begin{enumerate}
+            \item Tính linh hoạt hạn chế: OCR dựa trên mẫu gặp khó khăn khi xử lý các tài liệu không tuân theo định dạng nhất quán hoặc có bố cục phức tạp.
+            \item Thiết lập tốn thời gian: Tạo các mẫu tùy chỉnh có thể là một quá trình tẻ nhạt, đặc biệt là khi xử lý nhiều loại tài liệu.
+            \item Không hiệu quả đối với văn bản viết tay: OCR dựa trên mẫu thường hoạt động kém khi xử lý văn bản viết tay hoặc phông chữ.
+        \end{enumerate}
+\end{itemize}
+
+Các trường hợp sử dụng tốt nhất cho OCR dựa trên mẫu: Cách tiếp cận này phù hợp nhất với các tổ chức xử lý khối lượng lớn tài liệu có cấu trúc với bố cục nhất quán, chẳng hạn như hóa đơn hoặc biểu mẫu.
+
+\subsection{OCR Dựa trên AI}
+OCR dựa trên AI tận dụng trí tuệ nhân tạo, máy học và mạng thần kinh để nhận dạng và trích xuất văn bản từ tài liệu. Cách tiếp cận này nâng cao hơn và có thể xử lý nhiều loại tài liệu, bao gồm cả tài liệu phi cấu trúc và bán cấu trúc. \cite{template-ai-ocr}
+\begin{itemize}
+    \item[] \textbf{Ưu điểm:} \begin{enumerate}
+            \item Độ chính xác và tính linh hoạt cao: OCR dựa trên AI có thể thích ứng với nhiều loại tài liệu và bố cục khác nhau, mang lại kết quả chính xác ngay cả khi xử lý các bố cục phức tạp hoặc không nhất quán.
+            \item Xử lý văn bản viết tay: OCR dựa trên AI được trang bị tốt hơn để nhận dạng và trích xuất phông chữ văn bản viết tay hoặc tập lệnh, làm cho nó linh hoạt hơn so với OCR dựa trên mẫu.
+            \item Cải tiến liên tục: Các thuật toán máy học cho phép OCR dựa trên AI cải thiện độ chính xác của nó theo thời gian khi nó xử lý nhiều tài liệu hơn.
+            \item Thiết lập nhanh hơn: OCR dựa trên AI không yêu cầu tạo mẫu tùy chỉnh, cho phép triển khai nhanh hơn.
+        \end{enumerate}
+    \item[] \textbf{Nhược điểm} \begin{enumerate}
+            \item Thời gian xử lý cao hơn: OCR dựa trên AI thường yêu cầu nhiều thời gian và sức mạnh xử lý hơn so với OCR dựa trên mẫu, vì nó phân tích tài liệu toàn diện hơn.
+            \item Chi phí cao hơn: Các giải pháp OCR dựa trên AI có thể đắt hơn do công nghệ tiên tiến và sự phát triển liên tục có liên quan.
+
+        \end{enumerate}
+\end{itemize}
+
+Các trường hợp sử dụng tốt nhất cho OCR dựa trên AI: Phương pháp này lý tưởng cho các tổ chức xử lý nhiều loại tài liệu, bao gồm cả tài liệu phi cấu trúc và bán cấu trúc hoặc yêu cầu trích xuất văn bản viết tay
+
+\section{Học sâu}
+Trong việc ứng dụng OCR để nhận dạng hóa đơn, mạng học sâu đã đóng một vai trò quan trọng và mang lại những cải tiến đáng kể cho quá trình này. Trước khi sự xuất hiện của học sâu, các hệ thống nhận dạng dựa trên các phương pháp truyền thống thường gặp khó khăn trong việc xử lý các biến thể phức tạp của hình ảnh hóa đơn và khả năng xử lý đa dạng của chúng. Nhưng với mạng nơron học sâu, khả năng học và tự điều chỉnh của mô hình đã mở ra những cánh cửa mới cho việc nhận dạng hóa đơn hiệu quả hơn.
+
+\subsection{Học sâu là gì?}
+Học sâu là một các tiếp cận của Trí tuệ nhân tạo. Cụ thể thì nó là một kiểu của học máy (Hình \ref{fig:venn1}), một kỹ thuật mà cho phép hệ thống máy tính tự học từ trải nghiệm và dữ liệu, nó sở hữu sức mạnh và sự linh hoạt tuyệt vời thông qua việc học cách biểu diễn như một hệ phân cấp khái niệm trong đó mỗi khái niệm được định nghĩa từ những khái niệm đơn giản hơn, và mỗi biểu diễn được tính tính toán từ những biểu diễn kém trừu tượng hơn. \cite{Goodfellow-et-al-2016}
+
+\begin{figure}
+    \includegraphics[scale=0.55]{chapter2/images/venn_diagram_deeplearning.png}
+    \centering
+    \caption{Biểu đồ Venn về Trí tuệ nhân tạo}
+    \label{fig:venn1}
+\end{figure}
+
+
+Một điểm đáng chú ý là học sâu cần một lượng lớn dữ liệu để huấn luyện mô hình một cách hiệu quả \cite{wiki-deep-learning}. Trong trường hợp OCR và nhận dạng hóa đơn, mạng nơron học sâu có khả năng học từ hàng nghìn hoặc thậm chí hàng triệu hình ảnh hóa đơn, điều này giúp mô hình hiểu rõ các đặc trưng và biểu diễn của dữ liệu hơn.
+
+Hiện nay các kiến trúc học sâu như mạng nơ-ron sâu, mạng niềm tin sâu, học tăng cường sâu, mạng nơ-ron tái phát, mạng nơ-ron tích chập và máy biến áp đã được áp dụng cho các lĩnh vực bao gồm thị giác máy tính, nhận dạng giọng nói, xử lý ngôn ngữ tự nhiên, dịch máy, tin sinh học, thiết kế thuốc, Phân tích hình ảnh y tế, khoa học khí hậu, kiểm tra vật liệu và các chương trình trò chơi trên bàn cờ, nơi chúng đã tạo ra kết quả tương đương và trong một số trường hợp vượt qua hiệu suất chuyên gia của con người.
+
+\subsection{Kiến trúc mạng nơ-ron nhân tạo}
+Mạng nơ-ron nhân tạo là một mô hình được lấy cảm hứng từ mạng nơ-ron thần kinh. Kết hợp với các kĩ thuật học sâu, nó đang trở thành một công cụ rất mạnh mẽ mang lại hiệu quả tốt nhất cho nhiều bài toán khó như nhận dạng ảnh, giọng nói hay xử lý ngôn ngữ tự nhiên. Một mạng nơ-ron được cấu thành bởi các nơ-ron đơn lẻ được gọi là các perceptron.
+
+Một perceptron sẽ nhận một hoặc nhiều đầu $\mathbf{x}$ vào dạng nhị phân và cho ra một kết quả $o$ dạng nhị phân duy nhất. Các đầu vào được điều phối tầm ảnh hưởng bởi các tham số trọng lượng tương ứng $\mathbf{w}$ của nó, còn kết quả đầu ra được quyết định dựa vào một ngưỡng quyết định $b$ nào đó:
+$$o = \begin{cases}
+        0 & \text{if } \sum_i w_i x_i +b \leq 0 \\
+        1 & \text{if } \sum_i w_i x_i +b \ge 0
+    \end{cases}$$
+
+Mạng nơ-ron là sự kết hợp của của các tầng perceptron hay còn được gọi là perceptron đa tầng như hình vẽ bên dưới:
+\begin{figure}[h]
+    \input{chapter2/neural-network-architecture.tex}
+    \centering
+    \caption{Kiến trúc một mạng Nơ-ron}
+
+\end{figure}
+
+Một mạng NN sẽ có 3 kiểu tầng \cite{aws-deep-learning}:
+\begin{itemize}
+    \item \textbf{Lớp đầu vào:} Một mạng nơ-ron nhân tạo sẽ có một số nút để nhập dữ liệu đầu vào. Các nút này tạo nên lớp đầu vào của hệ thống.
+    \item \textbf{Lớp ẩn:} Lớp đầu vào xử lý và chuyển dữ liệu đến các lớp sâu hơn trong mạng nơ-ron. Các lớp ẩn này xử lý thông tin ở các cấp độ khác nhau, thích ứng với hành vi của mình khi nhận được thông tin mới. Các mạng học sâu có hàng trăm lớp ẩn có thể được dùng để phân tích một vấn đề từ nhiều góc độ khác nhau.
+    \item \textbf{Lớp đầu ra:} Lớp đầu ra bao gồm các nút xuất dữ liệu. Các mô hình học sâu xuất ra đáp án ``có'' hoặc ``không'' chỉ có hai nút trong lớp đầu ra. Mặt khác, các mô hình có nhiều đầu ra hơn sẽ có nhiều nút hơn.
+\end{itemize}
+
+Trong mạng Nơ-ron, mỗi nút mạng là một sigmoid nơ-ron những hàm kích hoạt của chúng có thể khác nhau. Tuy nhiên trong thực tế người ta thường để chúng cùng dạng với nhau để tính toán cho thuận lợi.
+
+Ở mỗi tầng, số lượng các nút mạng (nơ-ron) có thể khác nhau tuỳ thuộc vào bài toán và cách giải quyết. Nhưng thường khi làm việc người ta để các tầng ẩn có số lượng nơ-ron bằng nhau. Ngoài ra, các nơ-ron ở các tầng thường được liên kết đôi một với nhau tạo thành mạng kết nối đầy đủ. Khi đó ta có thể tính được kích cỡ của mạng dựa vào số tầng và số nơ-ron.
+
+\subsection{ResNet}
+ResNet, viết tắt của ``Residual Network'', là một kiến trúc mạng nơ-ron sâu được giới thiệu bởi Kaiming He và đồng nghiệp vào năm 2015. \acrshort*{resnet} đã đạt được thành công lớn trong việc giải quyết vấn đề đào tạo mạng nơ-ron sâu với số lượng lớp ngày càng tăng mà không gặp vấn đề về độ sâu. Kiến trúc của ResNet đã giúp giải quyết vấn đề triệt tiêu gradient và giúp việc huấn luyện mạng nơ-ron sâu trở nên dễ dàng hơn.
+
+Một vấn đề thường gặp khi huấn luyện mạng nơ-ron sâu là hiện tượng vanishing gradient và exploding gradient, đặc biệt là khi mạng có nhiều lớp. Điều này dẫn đến khó khăn trong việc lan truyền ngược độ dốc trong quá trình học. ResNet giải quyết vấn đề này bằng cách sử dụng khối ``residual''.
+
+\subsubsection*{Identity Mapping}
+Identity mapping hay còn gọi là ánh xạ đồng nhất là một khái niệm quan trọng trong toán học và xử lý tín hiệu, đặc biệt là trong lĩnh vực của mạng nơ-ron và học sâu. Đơn giản, ánh xạ đồng nhất đề cập đến việc ánh xạ một giá trị đầu vào sang giá trị đầu ra mà không thay đổi giá trị hoặc cấu trúc của dữ liệu. Trong các mô hình học sâu, việc sử dụng ánh xạ đồng nhất có thể giúp cho việc huấn luyện mô hình trở nên hiệu quả hơn.
+
+Khi áp dụng trong mạng nơ-ron, ánh xạ đồng nhất thường được sử dụng như là một thành phần của các các khối residual trong kiến trúc ResNet. Trong ResNet cho phép thông tin từ tầng trước được truyền thẳng qua mà không qua bất kỳ biến đổi nào, thông qua phép toán ``identity shortcut''. Điều này giúp cho việc huấn luyện mô hình dễ dàng hơn và cải thiện khả năng học của mạng, đặc biệt là khi mạng trở nên rất sâu \cite{he2016identity}.
+
+\subsubsection*{Residual learning}
+Phương pháp tiếp cận này được gọi là ``Residual Learning'' được sử dụng trong việc đào tạo mạng nơ-ron sâu . Thay vì cố gắng trực tiếp xấp xỉ một phép ánh xạ mong muốn $\mathcal{H}(x)$ bằng cách sử dụng các lớp xếp chồng lên nhau, Mô hình đề xuất một phương pháp là xấp xỉ một hàm residual $\mathcal{F}(x)$ là hiệu của $\mathcal{H}(x)$ và đầu vào $x$. Điều này có nghĩa là phép ánh xạ ban đầu $\mathcal{H}(x)$ có thể được xây dựng lại như $\mathcal{F}(x) + x$ \cite{he2015deep}.
+
+Trong \cite{he2015deep} tác giả lập luận rằng vấn đề suy giảm trong mạng sâu, khi mô hình sâu hơn hoạt động kém hơn so với các mô hình nông, có thể do khó khăn trong việc xấp xỉ các phép ánh xạ đông nhất(identity mapping) bằng nhiều lớp phi tuyến. Trong trường hợp các lớp được thêm vào hoạt động như các phép ánh xạ đông nhất, một mạng sâu hơn nên hoạt động ít nhất cũng tốt như một mạng nông. Tuy nhiên, điều này thường không được quan sát.
+
+Bằng cách sắp xếp lại vấn đề thành việc xấp xỉ một hàm residual, quá trình tối ưu hóa có thể tập trung vào việc điều chỉnh trọng số của các lớp phi tuyến về gần không. Sự sắp xếp lại này cũng giúp trong các trường hợp mà hàm tối ưu gần với phép ánh xạ đồng nhất, làm cho quá trình tối ưu hóa dễ dàng hơn trong việc tìm các biến đổi liên quan đến phép ánh xạ đồng nhất thay vì học một hàm hoàn toàn mới.
+
+\subsubsection{Identity Mapping by Shortcuts}
+Residual learning được áp dụng cho một vài lớp xếp chồng lên nhau. Một khối xây dựng minh họa trong Hình \ref{residual-block}. Một cách chính thức, trong bài báo \cite{he2015deep} tác giả xem xét một khối xây dựng được định nghĩa như sau: 
+$$\mathbf{y} = \mathcal{F}(\mathbf{x}, \{W_i\}) + \mathbf{x}$$ 
+Ở đây $\mathbf{x}$ và $\mathbf{y}$ là vectơ đầu vào và đầu ra của các lớp được xem xét. Hàm $\mathcal{F}(\mathbf{x}, \{W_i\})$ biểu diễn sự ánh xạ dư cần học. Với ví dụ trong Hình \ref{residual-block} có hai lớp, $\mathcal{F} = W_2 \sigma (W_1 \mathbf{x})$ trong đó $\sigma$ biểu thị ReLU. Phép toán $\mathcal{F} + \mathbf{x}$ được thực hiện bởi một kết nối tắt và phép cộng từng phần tử.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.3]{chapter2/images/residual_block.png}
+    \centering
+    \caption{Một khối residual}
+    \label{residual-block}
+\end{figure}
+
+Kết nối tắt thực hiện ánh xạ đồng nhất giữa đầu vào và đầu ra của một khối xây dựng trong mạng thần kinh. Phương trình này không thêm tham số hay phức tạp tính toán. Điều này quan trọng trong so sánh giữa mạng thuần túy và mạng dư thừa. Giúp giải quyết vấn đề suy giảm gradient trong mạng sâu, cho phép huấn luyện hiệu quả mạng sâu hơn.
+
+\subsection{Transformer}
+Transformer là một kiến trúc mạng nơ-ron sâu được giới thiệu bởi Vaswani et al. trong bài báo ``Attention Is All You Need \cite{vaswani2023attention}'' vào năm 2017. Đây là một trong những tiến bộ quan trọng trong lĩnh vực xử lý ngôn ngữ tự nhiên và dịch máy dẫn đến những cải tiến đáng kể trong các ứng dụng như dịch máy, tổng hợp văn bản và nhiều nhiệm vụ khác liên quan đến ngôn ngữ.
+
+Kiến trúc Transformer dựa trên cơ chế attention (chú ý), cho phép mạng có khả năng xem xét toàn bộ các phần của dữ liệu đầu vào cùng một lúc, thay vì như các kiến trúc trước đây phải đi qua từng bước theo thứ tự. Kiến trúc này có thể hoạt động với cả dữ liệu tuỳ chỉnh dài ngắn mà không cần giới hạn về chiều dài chuỗi đầu vào.
+
+Transformer bao gồm hai phần chính: Bộ mã hóa (Encoder) và Bộ giải mã (Decoder). Cả hai phần đều sử dụng nhiều lớp tự chú ý (self-attention) để xác định sự quan hệ giữa các phần tử trong chuỗi đầu vào hoặc đầu ra. Sự chú ý tự cho phép mạng tập trung vào các phần tử quan trọng trong chuỗi và hiểu được mối quan hệ giữa chúng.
+
+Transformer đã trở thành cơ sở cho nhiều kiến trúc mạng nơ-ron tiến tiến trong xử lý ngôn ngữ tự nhiên và thậm chí trong các ứng dụng khác như xử lý hình ảnh. Ví dụ nổi tiếng nhất có thể kể đến là ``BERT'' và ``GPT'' , cả hai đều là các biến thể của kiến trúc Transformer và đã đạt được những kết quả ấn tượng trong nhiều nhiệm vụ liên quan đến xử lý ngôn ngữ tự nhiên.
+
+\subsubsection*{Kiến trúc Transformer}
+Transformer tuân theo kiến trúc tổng thể này bằng cách sử dụng các lớp tự chú ý xếp chồng và các lớp kết nối đầy đủ theo điểm cho cả bộ mã hóa và bộ giải mã, như được thể hiện ở nửa trái và nửa phải của Hình \ref{fig3}. 
+\begin{figure}[h]
+    \includegraphics[scale=0.65]{chapter2/images/transformer-architecture.png}
+    \centering
+    \caption{Kiến trúc tổng thể của Transformer \cite{vaswani2023attention}}
+    \label{fig3}
+\end{figure}
+
+\subsubsection*{Ngăn xếp Encoder và Decoder}
+\textbf{Bộ mã hóa}: Bộ giải mã có một ngăn xếp gồm $N = 6$ lớp tương tự nhau. Mỗi lớp bao gồm hai lớp con. Lớp đầu tiên là cơ chế Multi-Head self-attention, nơi mà mỗi từ trong câu đều ``tương tác'' với tất cả các từ khác để tạo ra sự chú ý chung trong ngữ cảnh. Lớp thứ hai là một mạng truyền thẳng kết nối đầy đủ theo từng vị trí, tức là thông tin từ mỗi vị trí trong câu được xử lý độc lập.
+
+Để duy trì thông tin và hỗ trợ quá trình học, sử dụng kết nối residual xung quanh cả hai lớp con. Kết nối residual cho phép thông tin truyền từ đầu vào của lớp này đến đầu ra một cách dễ dàng. Sau đó, chúng ta thực hiện chuẩn hóa lớp để điều chỉnh phạm vi giá trị đầu ra. Cụ thể, đầu ra của mỗi lớp con được chuẩn hóa thông qua phép tính $\text{LayerNorm}(x + \text{Sublayer}(x))$, trong đó $\text{Sublayer}(x)$ là chức năng được thực hiện bởi chính lớp con đó.
+
+Để đảm bảo tính nhất quán và khả năng kết nối residual, tất cả các lớp con trong mô hình cùng với các lớp nhúng đều tạo ra đầu ra với chiều $d_{model} = 512$, tức là có cùng kích thước đặc trưng để xử lý và truyền thông tin.
+
+\textbf{Bộ giải mã}: Bộ giải mã cũng được tạo thành từ một ngăn xếp gồm $N = 6$ lớp tương tự nhau. Bên cạnh hai lớp con trong mỗi lớp mã hóa, bộ giải mã thêm một lớp con thứ ba, thực hiện Multi-Head Attention (multi-head attention) qua đầu ra của ngăn xếp bộ mã hóa. Tương tự như bộ mã hóa, chúng ta sử dụng kết nối residual xung quanh mỗi lớp con, sau đó là chuẩn hóa lớp. Điều chỉnh lớp con tự chú ý trong ngăn xếp bộ giải mã để ngăn các vị trí tập trung vào các vị trí tiếp theo. Thao tác này, kết hợp với việc lớp nhúng đầu ra được dịch chuyển một vị trí, đảm bảo rằng các dự đoán cho vị trí $i$ chỉ phụ thuộc vào đầu ra đã biết tại các vị trí nhỏ hơn $i$.
+
+\subsubsection*{Attention}
+Một hàm chú ý có thể được mô tả như việc ánh xạ một truy vấn và một tập hợp các cặp khóa-giá trị thành một đầu ra, trong đó truy vấn, khóa, giá trị và đầu ra đều là các vector. Đầu ra được tính toán dưới dạng tổng các trọng số của các giá trị, trong đó trọng số được gán cho mỗi giá trị được tính bằng một hàm tương thích của truy vấn với khóa tương ứng.
+
+\subsubsection*{Scaled Dot-Product Attention}
+Scaled Dot-Product Attention là một phần quan trọng của kiến trúc Transformer và cơ chế chú ý tự. Đầu vào của phương pháp này gồm các truy vấn (queries) và các khóa (keys) có kích thước $d_k$, cùng với các giá trị (values) có kích thước $d_v$. Tính tích vô hướng giữa truy vấn và tất cả các khóa, chia từng kết quả cho $d_k$, sau đó áp dụng hàm softmax để thu được trọng số cho các giá trị. Thực hiện phép attention trên một tập hợp các truy vấn cùng lúc, gói chúng lại thành một ma trận $Q$. Các khóa và giá trị cũng được gói lại thành các ma trận $K$ và $V$. Kết quả đầu ra được tính bằng cách:
+\[
+    \text{Attention}(Q, K, V) = \text{softmax} (\frac{ QK^T }{ \sqrt{d_k} }) V   
+\]
+
+Bởi vì ảnh hưởng của tích vô hướng trở nên lớn về độ lớn, đẩy hàm softmax vào các vùng có độ dốc rất nhỏ.  Để chống lại tác động này, sử dụng tỷ lệ các tích vô hướng bằng \(\frac{1}{\sqrt{d_k}}\).
+
+\subsubsection*{Multi-Head Attention}
+Multi-Head Attention là một phần quan trọng trong kiến trúc Transformer. Trong Multi-Head Attention, một lớp chú ý thông thường được áp dụng nhiều lần với các trọng số khác nhau. Mỗi lần áp dụng này tạo ra một Đầu chú ý riêng biệt. Mỗi đầu chú ý có thể tập trung vào các phần khác nhau của thông tin đầu vào và tạo ra các biểu diễn khác nhau. Sau đó, đầu ra của các đầu chú ý này được kết hợp để tạo ra đầu ra cuối cùng của Multi-Head Attention.
+
+Một tầng Multi-Head Attention cho phép mô hình cùng lúc chú ý đến thông tin từ các không gian biểu diễn khác nhau tại các vị trí khác nhau. Với một đầu chú ý duy nhất, việc lấy trung bình ức chế khả năng này\cite{vaswani2023attention}.
+\begin{align*}
+    \text{MultiHead}(Q, K, V) &= \text{Concat}(\text{head}_1, \ldots, \text{head}_h)W^O \\
+    \text{where head}_i &= \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
+\end{align*}
+
+Ở đây phép chiếu là tham số của ma trận $W_i^Q \in \mathbb{R}^{d_{model} \times d_k}$,$ W_i^K \in \mathbb{R}^{d_{model} \times d_k}$, $W_i^V \in \mathbb{R}^{d_{model} \times d_k}$ và $W_i^O \in \mathbb{R}^{hd_v \times d_{model}}$
+
+Quá trình này giúp mô hình học cách tập trung vào các khía cạnh khác nhau của dữ liệu đầu vào và xử lý chúng một cách đa dạng. Multi-Head Attention giúp kiến trúc Transformer hiệu quả hơn trong việc học các mối quan hệ và tương tác phức tạp trong dữ liệu ngôn ngữ và hình ảnh.
+
+\subsubsection*{Position-wise Feed-Forward Networks}
+Ngoài các lớp con chú ý, mỗi lớp trong bộ mã hóa và giải mã của còn chứa một mạng lan truyền thẳng kết nối đầy đủ, được áp dụng độc lập và giống nhau cho mỗi vị trí. Điều này bao gồm hai phép biến đổi tuyến tính với một hàm kích hoạt ReLU ở giữa.
+\[
+    \text{FFN}(x) = \text{max}(0, xW_1 + b_1)W_2 + b_2    
+\]
+
+Trong khi các phép biến đổi tuyến tính giống nhau ở các vị trí khác nhau, chúng sử dụng các tham số khác nhau từ lớp này sang lớp khác. Một cách khác để mô tả điều này là như hai phép tích chập với kích thước kernel là 1. Không gian chiều của đầu vào và đầu ra là $d_{model} = 512$, và lớp bên trong có chiều $d_{ff} = 2048$.
+
+\subsubsection*{Position Encoding}
+Vì mô hình của Transformer không chứa hồi quy và không có tích chập, để mô hình có thể sử dụng thứ tự của chuỗi, ta cần phải đưa vào một số thông tin về vị trí tương đối hoặc tuyệt đối của các token trong chuỗi. Để làm điều này, mô hình thêm mã hóa vị trí vào lớp nhúng đầu vào ở phía dưới của các bộ mã hóa và giải mã. Các mã hóa vị trí có cùng kích thước $d_{model}$ như các lớp nhúng, để hai thành phần này có thể được tổng hợp. Có nhiều lựa chọn cho các mã hóa vị trí, có thể được học và cố định.
+
+Trong mô hình này sử dụng các hàm sine và cosine với các tần số khác nhau.
+\[
+    PE_{(pos, 2i)} = \sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})    
+\]
+\[
+    PE_{(pos, 2i+1)} = \cos(\frac{pos}{10000^{\frac{2i}{d_{model}}}})    
+\]
+
+Ở đây $pos$ là vị trí và $i$ là chiều. Mỗi chiều của mã hóa vị trí tương ứng với một hàm sin. Các bước sóng tạo thành một dãy hình học từ $2\pi$ đến $10000 \times 2\pi$. Hàm này được lựa chọn bởi vì tác giả \cite{vaswani2023attention}, giả định rằng nó sẽ cho phép mô hình dễ dàng học cách chú ý đến vị trí tương đối, vì đối với bất kỳ độ lệch cố định $k$ nào, $PE_{pos+k}$ có thể được biểu diễn dưới dạng một hàm tuyến tính của $PE_{pos} \ref{position_encoding}$.
+\begin{figure}[h]
+    \includegraphics[scale=0.40]{chapter2/images/positional_encoding.png}
+    \centering
+    \caption{Position encoding 128 chiều cho một câu có độ dài tối đa là 50}
+    \label{position_encoding}
+\end{figure}
+
+\subsection{LayoutXLM}
+LayoutXLM \cite{xu2021layoutxlm}, một mô hình đã được pre-trained đa phương thức để hiểu văn bản trong nhiều ngôn ngữ khác nhau. Mục tiêu chính của mô hình này là vượt qua rào cản ngôn ngữ trong việc hiểu các văn bản có chứa thông tin hình ảnh đa dạng. Điều độc đáo của LayoutXLM nằm ở việc nó kết hợp thông tin từ văn bản, cấu trúc bố cục và cả hình ảnh để huấn luyện một mô hình Transformer để hiểu tài liệu.
+
+Mô hình đã được huấn luyện bằng cách sử dụng 30 triệu tài liệu số từ 53 ngôn ngữ khác nhau. Kết quả thể hiện rằng LayoutXLM vượt trội hơn so với các mô hình đa ngôn ngữ khác khi được đánh giá trên bộ dữ liệu hiểu biểu mẫu XFUND trong 7 ngôn ngữ khác nhau.
+
+Tóm lại, đây thực sự là một bước đột phá trong nghiên cứu về việc huấn luyện mô hình đa phương tiện và đa ngôn ngữ để hiểu các tài liệu phức tạp chứa cả hình ảnh.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.42]{chapter2/images/layoutxml-architecture.png}
+    \caption{Kiến trúc của mô hình LayoutXLM}
+    \label{layoutxml}
+\end{figure}
+
+Mô hình LayoutXLM được xây dựng với một kiến trúc Transformer đa phương tiện. Kiến trúc được thể hiện trong Hình \ref{layoutxml}. Mô hình chấp nhận thông tin từ ba phương thức khác nhau, bao gồm văn bản, bố cục và hình ảnh, được mã hóa lần lượt bằng các lớp nhúng văn bản, nhúng bố cục và nhúng hình ảnh. Các nhúng văn bản và hình ảnh được nối lại, sau đó cộng với nhúng bố cục để thu được nhúng đầu vào. Những nhúng đầu vào được mã hóa bởi một Transformer đa phương tiện với cơ chế tự-chú ý có thông tin vị trí. Cuối cùng, biểu diễn ngữ cảnh đầu ra có thể được sử dụng cho các lớp cụ thể cho các nhiệm vụ tiếp theo. 
+
+\subsubsection{Kiến trúc mô hình}
+\paragraph*{Text Embedding}
+Tuân theo thực hiện thông thường, mô hình sử dụng WordPiece để tách thành các từ trong dãy văn bản từ OCR và gán mỗi từ vào một phân đoạn cụ thể $s_i \in \{\mathtt{[A]}, \mathtt{[B]}\}$. Sau đó, thêm $\mathtt{[CLS]}$ ở đầu của dãy và $\mathtt{[SEP]}$ ở cuối mỗi phân đoạn văn bản. Các $\mathtt{[PAD]}$ bổ sung được đặt ở cuối để đảm bảo độ dài cuối cùng của chuỗi chính xác là độ dài tối đa của chuỗi $L$. Nhúng văn bản cuối cùng là tổng của ba embedding. Token embedding đại diện cho chính token, position embedding 1D đại diện cho chỉ số của token, và embedding phân đoạn được sử dụng để phân biệt các phân đoạn văn bản khác nhau. Một cách chính xác hơn, mô hình có text embedding thứ $i$ $(0 \leq i < L)$ như sau \cite{xu2022layoutlmv2}:
+\[
+    \mathbf{t}_i = \text{TokEmb}(w_i) + \text{PosEmb1D}(i) + \text{SegEmb}(s_i)
+\]
+
+\paragraph*{Visual Embedding}
+Do mô hình gặp khó khăn trong việc bắt kịp các chi tiết trong hình ảnh toàn bộ trang, nên cần chuyển đổi hình ảnh thành chuỗi có độ dài cố định bằng cách sử dụng bản đồ đặc trưng của mã hóa hình ảnh CNN. Mô hình dùng kiến trúc ResNeXt-FPN làm nền tảng mã hóa hình ảnh. Hình ảnh được chuẩn hóa kích thước và đưa vào mã hóa. Bản đồ đặc trưng đầu ra được làm phẳng thành chuỗi embedding hình ảnh. Một lớp chiếu áp dụng cho mỗi embedding để đồng nhất kích thước với text embedding. Thêm position embedding 1D để bổ sung thông tin vị trí. Tất cả embedding hình ảnh gán vào phân đoạn hình ảnh.
+
+Cho một hình ảnh trang tài liệu $I$, nó được điều chỉnh kích thước thành $224 \times 224$ rồi được đưa vào bộ mã hóa hình ảnh. Sau đó, bản đồ đặc trưng đầu ra lấy trung bình để có kích thước cố định với chiều rộng là $W$ và chiều cao là $H$. Tiếp theo, nó được làm phẳng thành một chuỗi embedding hình ảnh có độ dài là $W \times H$. Chuỗi này được gọi là VisTokEmb($I$). Một lớp chiếu tuyến tính được áp dụng cho mỗi token embedding hình ảnh để đồng nhất kích thước chiều với text embedding. Vì bộ mã hóa hình ảnh dựa trên CNN không thể bắt được thông tin vị trí, chúng tôi cũng thêm position embedding 1D vào các token embedding hình ảnh này. position embedding 1D được sử dụng chung với lớp text embedding. Đối với embedding phân đoạn, chúng tôi gán tất cả các token embedding hình ảnh vào phân đoạn hình ảnh $\mathtt{[C]}$.
+embedding hình ảnh thứ $i$ $(0 \leq i < W H)$ có thể được biểu diễn như sau \cite{xu2022layoutlmv2}:
+\[
+    \mathbf{v}_i = \text{Proj}(\text{VisTokEmb}(I)_i) + \text{PosEmb1D}(i) + \text{SegEmb}([\mathtt{C}])    
+\]
+
+\paragraph*{Layout Embedding}
+Lớp Layout Embedding dùng để nhúng thông tin bố cục không gian được biểu diễn bởi các khung chữ nhật của các token từ kết quả OCR, trong đó chiều rộng, chiều cao khung cùng với tọa độ góc được xác định. Tất cả các tọa độ được chuẩn hóa và định lượng thành các số nguyên trong khoảng [0, 1000], và sử dụng 2 lớp embedding riêng biệt để nhúng các đặc trưng trục $x$ và trục $y$. Với hộp giới hạn chuẩn hóa của token văn bản/thị giác thứ $i$ $(0 \leq i < W H + L)$ là $\text{box}_i = (x_{min}, x_{max}, y_{min}, y_{max}, width, height)$, lớp layout embedding nối tất cả 6 đặc trưng của hộp giới hạn thành một vector position embedding 2D ở cấp độ token \cite{xu2022layoutlmv2}.
+\[
+    \mathbf{l}_i = \text{Concat}(\text{PosEmb2D}_\text{x}(x_{\text{min}}, x_{\text{max}}, width), \text{PosEmb2D}_{\text{y}}(y_{\text{min}}, y_{\text{max}}, height))
+\]
+Như vậy, lớp nhúng bố cục dùng để mã hóa thông tin vị trí không gian của các token dựa trên kết quả OCR thành các vector nhúng, giúp mô hình hiểu được mối quan hệ không gian giữa các token.
+
+\paragraph*{Multi-modal Encoder with Spatial-Aware Self-Attention Mechanism}
+Bộ mã hóa kết hợp nhúng hình ảnh và văn bản thành một chuỗi đơn, tích hợp thông tin không gian thông qua nhúng bố cục. Bộ mã hóa hoạt động giống như kiến trúc Transformer, sử dụng nhiều lớp tự chú ý liên tiếp tiếp theo bởi các mạng tiến thẳng. Để giải quyết việc hiểu quả việc nắm bắt mối quan hệ cục bộ trong bố cục tài liệu, một cơ chế tự chú ý nhận thức vị trí được giới thiệu. Khác với tự chú ý ban đầu, phụ thuộc vào thông tin vị trí tuyệt đối, tự chú ý nhận thức vị trí xem xét thông tin vị trí tương đối một cách rõ ràng. Cơ chế này liên quan đến một đầu vào duy nhất trong một lớp tự chú ý, với kích thước ẩn $d_{head}$ và các ma trận chiếu $WQ$, $WK$, và $WV$. Điểm chú ý giữa truy vấn $xi$ và khóa $xj$ được tính toán bằng quá trình chiếu và chuẩn hóa.
+\[
+    \alpha_{ij} = \frac{1}{\sqrt{d_{head}}}(\mathbf{x}_i \mathbf{W}^Q) (\mathbf{x}_j \mathbf{W}^K)^T
+\]
+
+Xem xét khoảng cách rộng lớn của các vị trí, mô hình hóa vị trí tương quan ngữ nghĩa và vị trí tương quan không gian dưới dạng các thành phần bias để ngăn việc thêm quá nhiều tham số. Thực hành tương tự đã được chứng minh hiệu quả trong các kiến trúc Transformer chỉ có văn bản \cite{vaswani2023attention}. Giả sử $\mathbf{b}^{(1D)}$, $\mathbf{b}^{(2D_x)}$ và $\mathbf{b}^{(2D_y)}$ là các bias vị trí tương quan 1D và 2D có thể học được tương ứng. Các bias này khác nhau giữa các đầu chú ý nhưng được chia sẻ trong tất cả các lớp mã hóa. Giả sử $(x_i, y_i)$ là tọa độ góc trên bên trái của hộp giới hạn thứ $i$, chúng ta thu được điểm chú ý nhận thức vị trí không gian như sau:
+\[
+    \alpha'_{ij} = \alpha_{ij} + \mathbf{b}_{j-i}^{(1\text{D})} + \mathbf{b}_{x_j-x_i}^{(2\text{D}_x)} + \mathbf{b}_{y_j-y_i}^{(2\text{D}_y)}
+\]
+
+Cuối cùng, các vector đầu ra được biểu diễn dưới dạng trung bình có trọng số của tất cả các vector giá trị đã được chiếu tương ứng với các điểm chú ý nhận thức vị trí không gian đã được chuẩn hóa \cite{xu2022layoutlmv2}.
+
+\[
+    \mathbf{h}_i = \sum_j \frac{\exp(\alpha'_{ij})}{\sum_k \exp(\alpha'_{ik})} \mathbf{x}_j \mathbf{W}^V    
+\]
+
+\subsubsection{Nhiệm vụ tiền huấn luyện}
+\paragraph*{Masked Visual-Language Modeling}
+Masked Visual-Language Modeling giúp mô hình học tốt hơn trong phần ngôn ngữ với các dấu vết chéo-modality. Mô hình ngẫu nhiên che đi một số token văn bản và yêu cầu mô hình phục hồi các token bị che. Trong khi đó, thông tin về bố cục vẫn không thay đổi, điều này có nghĩa là mô hình biết vị trí của từng mã thông báo bị che trên trang. Các biểu diễn đầu ra của các token bị che từ bộ mã hóa được đưa vào một bộ phân loại trên toàn bộ từ vựng, dựa trên một mất mát cross-entropy. Để tránh rò rỉ dấu vết hình ảnh, Mô hình che khu vực hình ảnh tương ứng với các token bị che trên đầu vào hình ảnh trang gốc trước khi đưa nó vào bộ mã hóa hình ảnh.
+
+\paragraph*{Text-Image Alignment}
+Để giúp mô hình học được sự tương ứng vị trí không gian giữa hình ảnh và tọa độ của các hộp giới hạn, Mô hình đề xuất Nhiệm vụ \acrfull*{tia} như một nhiệm vụ căn chỉnh chéo chi tiết hơn. Trong nhiệm vụ \acrshort*{tia}, một số dòng văn bản được chọn ngẫu nhiên và các khu vực hình ảnh tương ứng của chúng được che trên hình ảnh tài liệu. Thao tác này được gọi là ``covering'' để tránh sự nhầm lẫn với thao tác ``masking'' trong \acrshort*{mvlm}. Trong quá trình tiền huấn luyện, một lớp phân loại được xây dựng trên đầu ra của bộ mã hóa. Lớp này dự đoán một nhãn cho mỗi mã thông báo văn bản tùy thuộc vào việc nó được che, tức là [\texttt{Covered}] hoặc [\texttt{Not Covered}], và tính mất mát nhị phân cross-entropy. Xem xét độ phân giải của hình ảnh đầu vào có hạn, và một số yếu tố trong tài liệu như biển báo và thanh trong một hình ảnh có thể giống như các vùng văn bản bị che, nhiệm vụ tìm kiếm một vùng hình ảnh bị che cỡ từ có thể gây nhiễu. Do đó, thao tác che được thực hiện ở mức dòng văn bản. Khi \acrshort*{mvlm} và \acrshort*{tia} được thực hiện đồng thời, các mất mát \acrshort*{tia} của các mã thông báo bị che trong \acrshort*{mvlm} không được tính vào. Điều này ngăn mô hình học được sự tương ứng không hữu ích nhưng trực tiếp từ [\texttt{MASK}] đến [\texttt{Covered}].
+
+\paragraph*{Text-Image Matching}
+Hơn nữa, một nhiệm vụ căn chỉnh chéo chi tiết hơn, Nhiệm vụ \acrfull*{tim}, được áp dụng để giúp mô hình học sự tương ứng giữa hình ảnh tài liệu và nội dung văn bản. Phương pháp đưa biểu diễn đầu ra tại [\texttt{CLS}] vào một bộ phân loại để dự đoán xem hình ảnh và văn bản có đến từ cùng một trang tài liệu hay không. Các đầu vào thông thường được sử dụng là các mẫu tích cực. Để xây dựng một mẫu tiêu cực, một hình ảnh có thể được thay thế bằng một hình ảnh trang từ tài liệu khác hoặc bị bỏ qua. Để ngăn mô hình gian lận bằng cách tìm các đặc trưng của nhiệm vụ, phương pháp thực hiện các thao tác masking và covering tương tự cho các hình ảnh trong các mẫu tiêu cực. Nhãn mục tiêu \acrshort*{tim} trong các mẫu tiêu cực được thiết lập là [\texttt{Covered}] cho tất cả. Phương pháp áp dụng mất mát nhị phân cross-entropy trong quá trình tối ưu hóa.
+
+\subsection{DBNet} \label{dbnet}
+\acrfull*{dbnet} \cite{liao2019realtime}, đây là một mô hình mạng nơ-ron sử dụng trong lĩnh vực phát hiện văn bản. Phương pháp này tập trung vào vấn đề chuyển đổi hình ảnh văn bản đa dạng thành hình ảnh nhị phân, đồng thời huấn luyện mạng theo cách có thể tối ưu hóa quá trình này. Phương pháp nhị phân hoá khác biệt của DBNet cho phép giữ lại thông tin quan trọng trong hình ảnh và loại bỏ thông tin không cần thiết, giúp cải thiện độ chính xác của quá trình nhận dạng ký tự.
+
+DB là một thuật toán dựa trên phân đoạn để phát hiện văn bản, sử dụng một mô-đun Nhị phân hóa Ngưỡng Khả vi (DB) khác biệt để phân biệt vùng văn bản khỏi nền với một ngưỡng động.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{chapter2/images/tradition-db-pipeline.png}
+    \centering
+    \caption{Pipeline truyền thống (luồng màu xanh) và pipeline của DB (luồng màu đỏ) }
+    \label{}
+\end{figure}
+
+Những mũi tên màu xanh trong hình minh họa cho quy trình của các thuật toán phát hiện văn bản dựa trên phân đoạn thông thường. Loại phương pháp này sử dụng một ngưỡng cố định để tạo ra bản đồ phân đoạn nhị phân sau khi phân đoạn, sau đó áp dụng các thuật toán heuristics như gom cụm pixel để có được vùng văn bản.
+Những mũi tên màu đỏ trong hình minh họa cho luồng của thuật toán DB. Sự khác biệt lớn nhất so với các giải pháp thông thường là DB có một bản đồ ngưỡng, và nó sẽ dự đoán ngưỡng tại mỗi điểm pixel của hình ảnh thông qua mạng neural, thay vì chỉ định một giá trị cố định. Do đó, nó có thể phân biệt tốt hơn giữa nền và vùng văn bản.
+
+Thuật toán DB có những ưu điểm sau:
+\begin{enumerate}
+    \item Cấu trúc thuật toán đơn giản và không cần xử lý sau quá trình tính toán phức tạp
+    \item Dữ liệu nguồn mở của nó có độ chính xác và hiệu suất tốt
+\end{enumerate}
+Sau khi có bản đồ xác suất, thuật toán truyền thống dựa trên phân đoạn hình ảnh sẽ đặt tất cả các điểm ảnh có giá trị thấp hơn ngưỡng t thành 0 và ngược lại thành 1. Công thức là: 
+$$
+B_{i, j} = \begin{cases}
+    1, \text{if } P_{i, j} \geq t, \\
+    0, \text{otherwise}
+\end{cases} 
+$$
+
+Nhưng phương pháp nhị phân tiêu chuẩn không có khả năng khác biệt, từ đó khiến mạng không thể được huấn luyện theo kiểu end-to-end (tức là không thể tích hợp vào quá trình lan truyền ngược). Để giải quyết vấn đề này, thuật toán DB sử dụng Differentiable Binarization, giúp xấp xỉ step function của phương pháp nhị phân tiêu chuẩn. Nó sử dụng công thức khác:
+\[
+    \hat{B} = \frac{1}{1+e^{-k(P_{i, j} - T_{i, j})}}    
+\]
+
+Ở trên, $P$ đề cập đến bản đồ xác suất, $T$ đề cập đến bản đồ ngưỡng, và $k$ là hệ số tăng được thiết lập là 50 dưới một quy tắc thực tế trong thí nghiệm. Hình \ref{fig11}(a) dưới đây cho thấy sự khác biệt giữa phương pháp nhị phân tiêu chuẩn và phân đoạn khác biệt.
+
+Khi sử dụng hàm mất mát cross-entropy, mất mát của các mẫu dương và mẫu âm lần lượt là $l_+$ và $l_-$:
+\[
+    l_+ = -\log(\frac{1}{1+e^{-k(P_{i, j}-T_{i, j})}})
+\]
+\[
+    l_- = -\log(1 - \frac{1}{1 + e^{-k(P_{i, j} - T_{i, j})}})
+\]
+
+Nhập $x$ vào để lấy đạo hàm riêng có thể dẫn đến:
+\[
+    \frac{\delta l_+}{\delta x} = -kf(x)e^{-kx}
+\]
+\[
+    \frac{\delta l_-}{\delta x} = -kf(x)   
+\]
+
+Có thể thấy rằng hệ số tăng sẽ làm phình to độ dốc của dự đoán lỗi, từ đó tối ưu hóa mô hình để đạt được kết quả tốt hơn. Trong Hình \ref{fig11}(b), phần của $x < 0$ đại diện cho trường hợp mẫu tích cực được dự đoán thành mẫu tiêu cực. Có thể thấy rằng hệ số tăng k làm phình to độ dốc. Hình \ref{fig11}(c) hiển thị $x > 0$, đề cập đến trường hợp mẫu tiêu cực được dự đoán thành mẫu tích cực, và độ dốc cũng được phình to.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.5]{chapter2/images/derivative-DB.png}
+    \centering
+    \caption{Minh họa về phân đoạn khác biệt và đạo hàm của nó. (a) So sánh số liệu giữa phương pháp nhị phân tiêu chuẩn (SB) và phân đoạn khác biệt (DB). (b) Đạo hàm của $l_+$. (c) Đạo hàm của $l_-$. \cite{liao2019realtime}}
+    \label{fig11}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[scale=0.45]{chapter2/images/architecture-db.png}
+    \centering
+    \caption{Kiến trúc của phương pháp DB}
+    \label{fig12}
+\end{figure}
+
+Cấu trúc tổng quan của thuật toán DB (Hình \ref{fig12}), các đặc điểm của hình ảnh đầu vào được trích xuất thông qua mạng Backbone và FPN, sau đó chúng được nối liền để tạo ra một đặc điểm có kích thước là một phần tư của hình ảnh gốc. Sau đó, lớp tích chập được sử dụng để tạo ra bản đồ xác suất dự đoán và bản đồ ngưỡng, và sau đó tạo ra đường viền qua quá trình xử lý sau cùng của DB.
+
+\subsection{TransformerOCR} \label{transformerocr}
+Để nhận dạng văn bản bằng tiếng việt, em sử dụng mã nguồn mở VietOCR đây là một mô hình được cài đặt trên TransformerOCR. Dùng để nhận dạng chữ viết tay, chữ đánh máy cho Tiếng Việt.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.65]{chapter2/images/overview-transOCR.png}
+    \centering
+    \caption{Kiến trúc tổng qua của TransformerOCR \cite{feng2020scene}}
+    \label{overview-transOCR}
+\end{figure}
+
+TransformerOCR là một sự kết hợp tuyệt vời giữa mô hình CNN và Transformer Hình \ref{overview-transOCR}, được áp dụng rộng rãi trong lĩnh vực nhận dạng ký tự quang học. Mô hình bao gồm hai mô-đun chính: mô-đun trích xuất đặc trưng và mô-đun transformer. Mô-đun trích xuất đặc trưng được sử dụng ban đầu để tạo ra các bản đồ đặc trưng từ một hình ảnh đầu vào. Sau đó, các bản đồ đặc trưng được đưa vào mô-đun transformer như là nhúng từ đầu vào.
+
+\subsubsection*{Mô-đun Trích xuất đặc trưng}
+Có rất nhiều mạng \acrshort*{cnn} có thể được sử dụng để trích xuất đặc trưng. Mô hình \acrshort*{cnn} dùng trong bài toán \acrshort*{ocr} nhận đầu vào là một ảnh, thông thường có kích thước với chiều dài lớn hơn nhiều so với chiều rộng, do đó việc điều chỉnh tham số stride size của tầng pooling là cực kì quan trọng. Việc chọn kích thước stride size của các lớp pooling cuối cùng là $w \times x = 2 \times 1$ trong mô hình OCR. Không thay đổi stride size phù hợp với kích thước ảnh thì sẽ dẫn đến kết quả nhận dạng của mô hình sẽ tệ.
+
+Đối với mô hình VGG, việc thay đổi pooling size khá dễ do kiến trúc đơn giản, tuy nhiên đối với mô hình phức tạp khác như resnet việc điều chỉnh tham số pooling size hơi phức tạp do một ảnh bị downsampling không chỉ bởi tầng pooling mà còn tại các tầng convolution khác.
+
+Một ảnh qua mô hình CNN, sẽ cho một feature maps có kích thước (width $\times$ height) $\times$ batch $\times$ channels, feature maps này sẽ trở thành đầu vào cho mô hình Transformer.
+
+\subsubsection*{Mô-đun Transformer}
+Transformer là một mô hình cách mạng trong xử lý ngôn ngữ tự nhiên. Nhờ cơ chế attention mạnh mẽ, transformer vượt trội hơn đáng kể so với hầu hết các mô hình attention dựa trên RNN. Khác với local attention dựa trên RNN, transformer có phạm vi global attention. Như được minh họa trong Hình \ref{overview-transOCR}, transformer có cấu trúc mã hóa-giải mã. Bộ mã hóa ánh xạ các bản đồ đặc trưng $(x_1, ..., x_{n})$ do mô-đun trích xuất đặc trưng tạo ra thành một chuỗi các biểu diễn liên tục $z = (z_1, ..., z_{n})$. Dựa trên $z$, bộ giải mã sau đó tạo ra một chuỗi đầu ra $(y_1, ..., y_m)$ của các ký hiệu một phần tử tại một thời điểm. Ở mỗi bước, mô hình là tự hồi quy, tiêu thụ các ký hiệu được tạo ra trước đó như đầu vào bổ sung khi tạo ra ký hiệu tiếp theo \cite{feng2020scene}.
+
+Trong mô hình này, hình ảnh đầu vào có góc nhìn hai chiều. Do đó, mã hóa vị trí cố định một chiều không phù hợp. Thay vào đó, mô hình sử dụng nhúng vị trí có thể học được trong mô hình đề xuất. Nhờ cơ chế Attention mạnh mẽ của transformer, mô hình thực hiện lưu giữ đầu ra CNN dưới dạng Spatial attention. Tại mỗi bước giải mã, một mô-đun Attention nhìn thấy spatial attention. Bằng cách này, mô hình đạt được hiệu suất tốt nhất trên các bộ dữ liệu nhận dạng văn bản không đều và kết quả có thể so sánh trên các tập dữ liệu văn bản thông thường
+
+Tại sao không sử dụng các mô hình chú ý dựa trên RNN? Lý do chính là, RNN xử lý chuỗi đầu vào một cách tuần tự, cơ chế này khiến cho RNN có xu hướng thu thập thông tin cục bộ hơn. Cái tồi tệ hơn là RNN không có khả năng bù đắp cho sự mất mát thông tin không gian khi chuyển đổi bản đồ đặc trưng hai chiều thành một chiều. Nhưng transformer xử lý chuỗi đầu vào theo cách song song, mỗi đặc trưng đơn lẻ có thể có tất cả sự chú ý từ đầu vào. Mặc dù việc sắp xếp lại bản đồ đặc trưng từ hai chiều thành một chiều sẽ mất thông tin không gian, mã hóa vị trí học được có khả năng bù đắp cho sự mất mát này \cite{feng2020scene}.
+
+\subsection{Ứng dụng trong OCR}
+Học sâu đã được chứng minh là có hiệu quả hơn các phương pháp OCR truyền thống \cite{ai-vs-traditional}, đặc biệt là đối với các tài liệu có chất lượng thấp hoặc bị định dạng phức tạp.
+
+Một số ứng dụng của Học sâu trong OCR bao gồm:
+\begin{itemize}
+    \item Nhận dạng hóa đơn: Học sâu có thể được sử dụng để nhận dạng các trường thông tin quan trọng trên hóa đơn, chẳng hạn như tên người mua, người bán, ngày giao dịch, số lượng, giá và tổng số tiền. Điều này có thể giúp tiết kiệm thời gian và chi phí cho các doanh nghiệp, đồng thời cải thiện độ chính xác của việc xử lý hóa đơn.
+    \item Nhận dạng tài liệu y tế: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu y tế, chẳng hạn như tên bệnh nhân, chẩn đoán, phương pháp điều trị và các loại thuốc được kê đơn. Điều này có thể giúp cải thiện chất lượng chăm sóc bệnh nhân và giảm chi phí chăm sóc sức khỏe.
+    \item Nhận dạng tài liệu pháp lý: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu pháp lý, chẳng hạn như tên các bên liên quan, ngày tháng, các điều khoản của thỏa thuận và các điều khoản của hợp đồng. Điều này có thể giúp các luật sư và chuyên gia pháp lý tìm kiếm thông tin nhanh chóng và dễ dàng hơn.
+    \item Nhận dạng tài liệu tài chính: Học sâu có thể được sử dụng để nhận dạng thông tin quan trọng trên tài liệu tài chính, chẳng hạn như tên công ty, giá cổ phiếu, số lượng cổ phiếu và giá trị thị trường của cổ phiếu. Điều này có thể giúp các nhà đầu tư và các chuyên gia tài chính đưa ra quyết định đầu tư tốt hơn.
+\end{itemize}
+Học sâu là một công nghệ mạnh mẽ có thể được sử dụng để cải thiện độ chính xác và hiệu quả của OCR. Với sự phát triển của Học sâu, OCR sẽ trở nên dễ dàng và thuận tiện hơn trong tương lai.
+
+Chương này em đã mô tả các lý thuyết liên quan đến OCR, học sâu và các thuật toán, phương pháp nổi bật của từng nhiệm vụ riêng lẻ. Trong chương tiếp theo em sẽ giới thiệu về các công cụ và thư viện cần thiết.

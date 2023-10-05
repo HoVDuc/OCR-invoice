@@ -1,0 +1,23 @@
+\tikzstyle{process} = [rectangle, draw, text centered, minimum height=2em]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{connector} = [draw, -latex']
+
+\begin{tikzpicture}
+    \node [draw=none] at (-5, 1.5) (input-image) {\includegraphics[scale=0.6]{chapter5/images/text-image.png}};
+    \node [draw=none] at (-6, 0) (input) {input};
+    \node[process] at (0, 0) (box) {
+        \begin{tikzpicture}
+            \node [process] at (-3.5, 0) (cnn) {\footnotesize VGG19};
+            \node [process] at (0, 0) (transformer) {\footnotesize Transformer};
+            \node [process] at (4, 0) (beamsearch) {\footnotesize Beam Search};
+
+            \path [connector] (cnn) -- (transformer);
+            \path [connector] (transformer) -- (beamsearch);
+        \end{tikzpicture}
+    };
+    \node [draw=none] at (6, 0) (output) {output};
+    \node [draw=none] at (5, -1.5) (input-image) {\footnotesize VM+ QNH 1060-1062 Trần Phú};
+
+    \path [connector] (input) -- (box);
+    \path [connector] (box) -- (output);
+\end{tikzpicture}

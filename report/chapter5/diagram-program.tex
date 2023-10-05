@@ -1,0 +1,59 @@
+\tikzstyle{terminator} = [rectangle, draw, text centered, rounded corners, minimum height=2em]
+\tikzstyle{process} = [rectangle, draw, text centered, minimum height=2em]
+\tikzstyle{decision} = [diamond, aspect=2, draw, text centered, minimum height=2em]
+\tikzstyle{data}=[trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, minimum height=2em]
+\tikzstyle{connector} = [draw, -latex']
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{link} = [circle, draw, minimum height=0.2em]
+
+\begin{tikzpicture}
+    \node [terminator, fill=blue!5] at (0,0) (start) {\textbf{Start}};
+    \node [data, fill=blue!30] at (0,-2) (data) {Image};
+    \node [decision, fill=green!30] at (0,-5) (decision1) {Valid image?};
+    \node [process, fill=red!20] at (5,-5) (error) {Error};
+    \node [process, fill=red!20] at (-3.7,-9) (error2) {Error};
+    \node [process, fill=orange!30] at (-3.5,-7) (pre-processing) {Pre-processing};
+    \node [process, fill=orange!30] at (3.5,-7) (text-detection) {Text Detection};
+    \node [decision, fill=green!30] at (0,-9) (decision2) {Have text?};
+    \node [process, fill=orange!30] at (-3.5,-12) (crop-image) {Crop Image};
+    \node [process, fill=orange!30] at (-3.5,-13.5) (recognition) {Recognition};
+    \node [process, fill=orange!30] at (3.5,-13) (kie) {KIE};
+    \node [process, fill=orange!30] at (0,-14.5) (post-process) {Post-processing};
+    \node [data, fill=blue!30] at (-3.5,-17.3) (excel) {Excel};
+    \node [data, fill=blue!30] at (3.5,-17.3) (visual) {Image Visualized};
+    \node [link, fill=black] at (0, -19.5) (link1) {.};
+    \node [link, fill=black] at (-5.7, -9) (link2) {.};
+
+    \node [terminator, fill=blue!5] at (0,-21) (end) {\textbf{End}};
+    \node[draw=none] at (3, -4.75) (no) {False};
+    \node[draw=none] at (-2, -8.5) (no) {False};
+    \node[draw=none] at (-4.2, -5.8) (yes) {True};
+    \node[draw=none] at (-0.7, -10.5) (yes) {True};
+
+    \path [connector] (start) -- (data);
+    \path [connector] (data) -- (decision1);
+    \path [connector] (decision1) -- (error);
+    \path [connector] (decision1) -| (pre-processing);
+    \path [connector] (pre-processing) -- (text-detection);
+    \path [connector] (text-detection) |- (decision2);
+    \path [connector] (decision2) -- (error2);
+    \path [connector] (error2) -- (link2);
+    \path [connector] (error) |- (data);
+
+    \draw [arrow] (decision2.south) |- ++ (0, -1) -| (kie);
+    \draw [arrow] (decision2.south) |- ++ (0, -1) -| (crop-image);
+
+    \path [connector] (crop-image) -- (recognition);
+    \path [connector] (recognition) |- (post-process);
+    \path [connector] (kie) |- (post-process);
+
+    \draw [arrow] (post-process.south) |- ++ (0, -1) -| (excel);
+    \draw [arrow] (post-process.south) |- ++ (0, -1) -| (visual);
+
+    \draw [arrow] (excel.south) |- ++ (0, -1) -| (link1.north);
+    \draw [arrow] (visual.south) |- ++ (0, -1) -| (link1.north);
+
+    \draw [arrow] (link1.east) -| ++ (-6, 0) |- (data);
+
+    \path [connector] (link1) -- (end);
+\end{tikzpicture}

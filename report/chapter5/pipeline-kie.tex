@@ -1,0 +1,28 @@
+\tikzstyle{process} = [rectangle, draw, text centered, minimum height=2em]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{connector} = [draw, -latex']
+
+\begin{tikzpicture}
+    \node [draw=none] at (0, 0) (input) {input};
+    \node [draw=none] at (5, 2.1) (none) {\scriptsize ocr system};
+    \node [draw=none, rotate=22] at (1.5, 0.8) (none) {\scriptsize image};
+    \node [draw=none, rotate=0] at (1.5, 0.15) (none) {\scriptsize text};
+    \node [draw=none, rotate=345] at (3.5, -1.0) (none) {\scriptsize layout};
+    \node [process] at (5, 1.25) (image) {Image Embedding};
+    \node [process] at (5, 0) (text) {Text Embedding};
+    \node [process] at (8, -2) (layout) {Layout Embedding};
+    \draw [, dashed] (3, 2.5) rectangle (7, -0.5);
+    \node [process, rotate=90] at (9, 1) (concat) {Concat};
+    \node [draw=none] at (9, -0.75) (no) {\Large $\oplus $};
+    \node [process, rotate=90] at (12, 0) (model) {Multi-modal Transformer};
+    \node [draw=none] at (14, 0) (output) {output};
+
+    \path [connector] (input) -- (image.west);
+    \path [connector] (input) -- (text);
+    \path [connector] (input) -- (layout.west);
+    \path [connector] (image.east) -- (concat);
+    \path [connector] (text.east) -- (concat);
+    \path [connector] (concat) -- (model);
+    \path [connector] (layout.east) -- (model);
+    \path [connector] (model) -- (output);
+\end{tikzpicture}
