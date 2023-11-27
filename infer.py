@@ -17,15 +17,12 @@ class Inference:
         self.config = main(otp)
         self.ser_engine = SerPredictor(self.config)
     
-    
-    
     def process_info(self, results):
         info = {
             'SELLER': '',
             'ADDRESS': '',
             'STAFF': '',
             'TIMESTAMP': '',
-            'CODE': '',
             'PRODUCTS': [],
             'TOTAL_COST': 0
         }
@@ -49,13 +46,7 @@ class Inference:
                     else:
                         products[-1][label] = transcription
                 else:
-                    if label == 'TIMESTAMP':
-                        text = transcription
-                        code, time = text.split('Ngày')
-                        info['CODE'] = code.strip()
-                        info['TIMESTAMP'] = time[1:]
-                    else:
-                        info[label] = transcription
+                    info[label] = transcription
                         
         info['PRODUCTS'] = products 
         return json.dumps(info, indent=1, ensure_ascii=False)

@@ -27,7 +27,7 @@ def draw_ser_results(image,
              np.random.permutation(range(255)))
     color_map = {
         idx: (color[0][idx], color[1][idx], color[2][idx])
-        for idx in range(1, 255)
+        for idx in range(0, 255)
     }
     if isinstance(image, np.ndarray):
         image = Image.fromarray(image)
@@ -41,7 +41,8 @@ def draw_ser_results(image,
         if ocr_info["pred_id"] not in color_map:
             continue
         color = color_map[ocr_info["pred_id"]]
-        text = "{}: {}".format(ocr_info["pred"], ocr_info["transcription"])
+        # text = "{}: {}".format(ocr_info["pred"], ocr_info["transcription"])
+        text = "{}: {}".format(ocr_info["pred"], "")
 
         if "bbox" in ocr_info:
             # draw with ocr engine
