@@ -70,13 +70,13 @@ class Inference:
         info_ = json.loads(info)
         product_rows = []
         for product in info_["PRODUCTS"]:
-            product_row = [info_["SELLER"], info_["ADDRESS"], info_["STAFF"], info_["TIMESTAMP"], info_["CODE"],
+            product_row = [info_["SELLER"], info_["ADDRESS"], info_["STAFF"], info_["TIMESTAMP"],
                            product["PRODUCT"], product["NUMBER"], product["PRICE"], info_["TOTAL_COST"]]
             product_rows.append(product_row)
 
         # Create a Pandas DataFrame
-        columns = ["SELLER", "ADDRESS", "STAFF", "TIMESTAMP",
-                   "CODE", "PRODUCT", "NUMBER", "PRICE", "TOTAL_COST"]
+        columns = ["SELLER", "ADDRESS", "STAFF", "TIMESTAMP", 
+                   "PRODUCT", "NUMBER", "PRICE", "TOTAL_COST"]
         df = pd.DataFrame(product_rows, columns=columns)
 
         # Create an Excel file
