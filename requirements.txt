@@ -27,7 +27,7 @@ gevent
 gdown
 prefetch_generator
 opencv-python
-pillow
+Pillow==9.5.0
 matplotlib
 pyclipper
 shapely
