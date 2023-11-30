@@ -339,3 +339,4 @@ pretrain_models/
 infer_kie.ipynb
 invoice.xlsx
 weights
+data/
