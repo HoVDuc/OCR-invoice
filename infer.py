@@ -21,7 +21,6 @@ class Inference:
         info = {
             'SELLER': '',
             'ADDRESS': '',
-            'STAFF': '',
             'TIMESTAMP': '',
             'PRODUCTS': [],
             'TOTAL_COST': 0
@@ -29,17 +28,18 @@ class Inference:
 
         current_product = {
             'PRODUCT': '',
-            'NUMBER': 0,
-            'PRICE': 0
+            'NUM': 0,
+            'VALUE': 0
         }
 
         products = []
+        print(results)
         for result in results:
             label = result['pred']
             transcription = result['transcription']
 
             if label != 'O':
-                if label in ['PRODUCT', 'NUMBER', 'PRICE']:
+                if label in ['PRODUCT', 'NUM', 'VALUE']:
                     if label == 'PRODUCT':
                         current_product['PRODUCT'] = transcription
                         products.append(current_product.copy())
@@ -67,27 +67,27 @@ class Inference:
         img_res = draw_ser_results(image_path, result)
         info = self.process_info(result)
 
-        info_ = json.loads(info)
-        product_rows = []
-        for product in info_["PRODUCTS"]:
-            product_row = [info_["SELLER"], info_["ADDRESS"], info_["STAFF"], info_["TIMESTAMP"],
-                           product["PRODUCT"], product["NUMBER"], product["PRICE"], info_["TOTAL_COST"]]
-            product_rows.append(product_row)
+        # info_ = json.loads(info)
+        # product_rows = []
+        # for product in info_["PRODUCTS"]:
+        #     product_row = [info_["SELLER"], info_["ADDRESS"], info_["STAFF"], info_["TIMESTAMP"],
+        #                    product["PRODUCT"], product["NUMBER"], product["PRICE"], info_["TOTAL_COST"]]
+        #     product_rows.append(product_row)
 
-        # Create a Pandas DataFrame
-        columns = ["SELLER", "ADDRESS", "STAFF", "TIMESTAMP", 
-                   "PRODUCT", "NUMBER", "PRICE", "TOTAL_COST"]
-        df = pd.DataFrame(product_rows, columns=columns)
+        # # Create a Pandas DataFrame
+        # columns = ["SELLER", "ADDRESS", "STAFF", "TIMESTAMP", 
+        #            "PRODUCT", "NUMBER", "PRICE", "TOTAL_COST"]
+        # df = pd.DataFrame(product_rows, columns=columns)
 
-        # Create an Excel file
-        path_save = './invoice.xlsx'
-        try:
-            excel = pd.read_excel(path_save)
-            dataframe = pd.concat([excel, df])
-        except:
-            print('Created invoice.xlsx')
-            dataframe = df
-        dataframe.to_excel(path_save, index=False, engine="openpyxl")
+        # # Create an Excel file
+        # path_save = './invoice.xlsx'
+        # try:
+        #     excel = pd.read_excel(path_save)
+        #     dataframe = pd.concat([excel, df])
+        # except:
+        #     print('Created invoice.xlsx')
+        #     dataframe = df
+        # dataframe.to_excel(path_save, index=False, engine="openpyxl")
         return img_res, info
 
 
@@ -96,6 +96,8 @@ def GUI():
         'config': args.config,
         'otp': {
             'Architecture.Backbone.checkpoints': args.checkpoint,
+            'Global.use_gpu': args.use_gpu,
+            'Global.det_limit_type': args.det_limit_type
         }
     }
     infer = Inference(otp)
@@ -112,6 +114,8 @@ if __name__ == "__main__":
     parse = ArgumentParser()
     parse.add_argument('--config', type=str, default='')
     parse.add_argument('--checkpoint', type=str, default='')
+    parse.add_argument('--det_limit_type', type=str, default='max')
     parse.add_argument('--share_link', action='store_true', default=False)
+    parse.add_argument('--use_gpu', action='store_true', default=False)
     args = parse.parse_args()
     GUI()

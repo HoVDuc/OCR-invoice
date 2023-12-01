@@ -87,10 +87,14 @@ class SerPredictor(object):
         from paddleocr import PaddleOCR
 
         self.ocr_engine = PaddleOCR(
+            use_gpu=global_config['use_gpu'],
+            det_db_box_thresh=0.3,
+            det_db_unclip_ratio=2.0,
+            det_limit_type=global_config['det_limit_type'],
             use_angle_cls=False,
             show_log=False,
             det_model_dir=global_config.get("kie_det_model_dir", None),
-            use_gpu=global_config['use_gpu'])
+        )
         
         # create data ops
         transforms = []
@@ -114,10 +118,11 @@ class SerPredictor(object):
         self.model.eval()
 
     def recog(self, image, transcripts):
-        for trans in tqdm(transcripts):
-            x, y, w, h = trans['bbox']
-            roi = Image.fromarray(image[y:h, x:w])
-            trans['transcription'] = self.detector.predict(roi)
+        for trans in tqdm(transcripts[0]):
+            if trans['pred_id'] != 0:
+                x, y, w, h = trans['bbox']
+                roi = Image.fromarray(image[y:h, x:w])
+                trans['transcription'] = self.detector.predict(roi)
         return transcripts 
 
     def __call__(self, data):
@@ -130,11 +135,11 @@ class SerPredictor(object):
             
         data["image"] = img
         batch = transform(data, self.ops)
-        self.recog(data['image'], batch[7])
         batch = to_tensor(batch)
         preds = self.model(batch)
         post_result = self.post_process_class(
             preds, segment_offset_ids=batch[6], ocr_infos=batch[7])
+        self.recog(data['image'], batch[7])
         return post_result, batch
 
 

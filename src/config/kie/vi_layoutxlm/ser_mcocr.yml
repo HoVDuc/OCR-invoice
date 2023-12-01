@@ -20,7 +20,7 @@ Global:
   rec_config_path: ./src/config/rec/vgg-transformer.yml
   save_res_path: ./output/ser/xfund_zh/res
   kie_rec_model_dir:
-  kie_det_model_dir:
+  kie_det_model_dir: ./inference/det_db
 
 Architecture:
   model_type: kie
@@ -32,7 +32,7 @@ Architecture:
     checkpoints:
     # one of base or vi
     mode: vi
-    num_classes: &num_classes 13
+    num_classes: &num_classes 17
 
 Loss:
   name: VQASerTokenLayoutLMLoss
