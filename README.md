@@ -9,7 +9,8 @@ OCR-invoice đây là đồ án tốt nghiệp của tôi, ứng dụng những 
 - Lưu trữ thông tin dưới dạng Excel
 
 ## Installation:
-[Link demo](https://colab.research.google.com/drive/1BMDhx9qrrCrFNYobLh-HUr3jeVxYL6Oi?usp=sharing)
+- [Link demo](https://colab.research.google.com/drive/1BMDhx9qrrCrFNYobLh-HUr3jeVxYL6Oi?usp=sharing)
+- [Data](https://drive.google.com/file/d/1WKz_K7f_c6hlbSzedeLARUMjy6TO_hnA/view?usp=drive_link)
 ### Requiremets:
 - Python3.9
 - Pytorch == 1.13.1
