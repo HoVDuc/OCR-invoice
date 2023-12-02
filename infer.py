@@ -33,7 +33,6 @@ class Inference:
         }
 
         products = []
-        print(results)
         for result in results:
             label = result['pred']
             transcription = result['transcription']
@@ -97,7 +96,10 @@ def GUI():
         'otp': {
             'Architecture.Backbone.checkpoints': args.checkpoint,
             'Global.use_gpu': args.use_gpu,
-            'Global.det_limit_type': args.det_limit_type
+            'Global.det_limit_type': args.det_limit_type,
+            'Global.rec_weight': './src/weights/vgg_transformerocr_1M_500k.pth',
+            'Global.rec_config_path': './src/config/rec/vgg-transformer.yml',
+            'Global.kie_det_model_dir': './src/weights/det_db/'
         }
     }
     infer = Inference(otp)
@@ -112,10 +114,20 @@ def GUI():
 
 if __name__ == "__main__":
     parse = ArgumentParser()
-    parse.add_argument('--config', type=str, default='')
-    parse.add_argument('--checkpoint', type=str, default='')
-    parse.add_argument('--det_limit_type', type=str, default='max')
-    parse.add_argument('--share_link', action='store_true', default=False)
-    parse.add_argument('--use_gpu', action='store_true', default=False)
+    parse.add_argument('--config', 
+                       type=str,
+                       default='./src/config/kie/vi_layoutxlm/ser_mcocr.yml')
+    parse.add_argument('--checkpoint', 
+                       type=str, 
+                       default='./src/weights/best_model/best_accuracy')
+    parse.add_argument('--det_limit_type', 
+                       type=str, 
+                       default='max')
+    parse.add_argument('--share_link', 
+                       action='store_true', 
+                       default=False)
+    parse.add_argument('--use_gpu', 
+                       action='store_true', 
+                       default=False)
     args = parse.parse_args()
     GUI()

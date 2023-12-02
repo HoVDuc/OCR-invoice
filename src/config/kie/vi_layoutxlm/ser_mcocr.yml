@@ -16,11 +16,11 @@ Global:
   # you can use the following config
   # infer_img: train_data/XFUND/zh_val/val.json
   # infer_mode: False
-  rec_weight: ./src/weights/vgg_transformerocr_1M_500k.pth
-  rec_config_path: ./src/config/rec/vgg-transformer.yml
+  rec_weight: 
+  rec_config_path: 
   save_res_path: ./output/ser/xfund_zh/res
   kie_rec_model_dir:
-  kie_det_model_dir: ./inference/det_db
+  kie_det_model_dir: 
 
 Architecture:
   model_type: kie
