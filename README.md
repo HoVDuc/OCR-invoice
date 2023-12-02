@@ -38,10 +38,10 @@ python -m pip install paddlepaddle-gpu==2.5.2 -i https://pypi.tuna.tsinghua.edu.
 
 ```
 # download weight
-wget https://github.com/HoVDuc/OCR-invoice/releases/download/v0.2/
+wget https://github.com/HoVDuc/OCR-invoice/releases/download/v0.2/weights.tar.xz
 
 # unzip 
-tar -xf ocr-weights.zip -C ./src/
+tar -xf weights.tar.xz -C ./src/
 ```
 
 ## Inference
