@@ -491,7 +491,7 @@ class PaddleOCR(predict_system.TextSystem):
         # download model if using paddle infer
         if not params.use_onnx:
             maybe_download(params.det_model_dir, det_url)
-            maybe_download(params.rec_model_dir, rec_url)
+            # maybe_download(params.rec_model_dir, rec_url)
             maybe_download(params.cls_model_dir, cls_url)
 
         if params.det_algorithm not in SUPPORT_DET_MODEL:

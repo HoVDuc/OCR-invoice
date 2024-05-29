@@ -32,9 +32,6 @@ import cv2
 import json
 import paddle
 
-from src.ocr.tools.predictor import Predictor
-from src.ocr.tools.config import Cfg
-
 from ppocr.data import create_operators, transform
 from ppocr.modeling.architectures import build_model
 from ppocr.postprocess import build_post_process
@@ -72,14 +69,7 @@ class SerPredictor(object):
         self.post_process_class = build_post_process(config['PostProcess'],
                                                      global_config)
         # build model
-        self.model = build_model(config['Architecture'])
-        self.config = Cfg.load_config_from_file(global_config['rec_config_path'])
-        self.config['predictor']['import'] = global_config['rec_weight']
-        self.config['predictor']['beamsearch'] = True
-        self.config['cnn']['pretrained'] = False
-        self.config['device'] = 'cuda' if global_config['use_gpu'] else 'cpu'
-        self.detector = Predictor(self.config)
-        
+        self.model = build_model(config['Architecture'])        
 
         load_model(
             config, self.model, model_type=config['Architecture']["model_type"])
@@ -94,6 +84,8 @@ class SerPredictor(object):
             use_angle_cls=False,
             show_log=False,
             det_model_dir=global_config.get("kie_det_model_dir", None),
+            rec_model_dir=global_config['rec_weight'],
+            rec_char_dict_path=global_config['rec_config_path'],
         )
         
         # create data ops
@@ -117,14 +109,6 @@ class SerPredictor(object):
                                     global_config)
         self.model.eval()
 
-    def recog(self, image, transcripts):
-        for trans in tqdm(transcripts[0]):
-            if trans['pred_id'] != 0:
-                x, y, w, h = trans['bbox']
-                roi = Image.fromarray(image[y:h, x:w])
-                trans['transcription'] = self.detector.predict(roi)
-        return transcripts 
-
     def __call__(self, data):
         try:
             with open(data["img_path"], 'rb') as f:
@@ -139,7 +123,6 @@ class SerPredictor(object):
         preds = self.model(batch)
         post_result = self.post_process_class(
             preds, segment_offset_ids=batch[6], ocr_infos=batch[7])
-        self.recog(data['image'], batch[7])
         return post_result, batch
 
 

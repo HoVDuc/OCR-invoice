@@ -18,6 +18,7 @@ import subprocess
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(__dir__)
 sys.path.insert(0, os.path.abspath(os.path.join(__dir__, '../..')))
+sys.path.append('./src/')
 
 os.environ["FLAGS_allocator_strategy"] = 'auto_growth'
 
@@ -35,24 +36,38 @@ import tools.infer.predict_cls as predict_cls
 from ppocr.utils.utility import get_image_file_list, check_and_read
 from ppocr.utils.logging import get_logger
 from tools.infer.utility import draw_ocr_box_txt, get_rotate_crop_image, get_minarea_rect_crop
+
+from src.ocr.tools.predictor import Predictor
+from src.ocr.tools.config import Cfg
+
 logger = get_logger()
 
 
 class TextSystem(object):
     def __init__(self, args):
+        self.args = args
         if not args.show_log:
             logger.setLevel(logging.INFO)
 
         self.text_detector = predict_det.TextDetector(args)
-        self.text_recognizer = predict_rec.TextRecognizer(args)
+        self.init_recogizer()
+        # self.text_recognizer = predict_rec.TextRecognizer(args)
         self.use_angle_cls = args.use_angle_cls
         self.drop_score = args.drop_score
         if self.use_angle_cls:
             self.text_classifier = predict_cls.TextClassifier(args)
 
-        self.args = args
         self.crop_image_res_index = 0
 
+    def init_recogizer(self):
+        # self.config = Cfg.load_config_from_file(global_config['rec_config_path'])
+        self.config = Cfg.load_config_from_file(self.args.rec_char_dict_path)
+        self.config['predictor']['import'] = self.args.rec_model_dir
+        self.config['predictor']['beamsearch'] = True
+        self.config['cnn']['pretrained'] = False
+        self.config['device'] = 'cuda'
+        self.text_recognizer = Predictor(self.config)
+        
     def draw_crop_rec_res(self, output_dir, img_crop_list, rec_res):
         os.makedirs(output_dir, exist_ok=True)
         bbox_num = len(img_crop_list)
@@ -102,7 +117,8 @@ class TextSystem(object):
             logger.debug("cls num  : {}, elapsed : {}".format(
                 len(img_crop_list), elapse))
 
-        rec_res, elapse = self.text_recognizer(img_crop_list)
+        rec_res, scores = self.text_recognizer.predict_batch(img_crop_list, return_prob=True)
+        elapse = 0
         time_dict['rec'] = elapse
         logger.debug("rec_res num  : {}, elapsed : {}".format(
             len(rec_res), elapse))
@@ -110,11 +126,10 @@ class TextSystem(object):
             self.draw_crop_rec_res(self.args.crop_res_save_dir, img_crop_list,
                                    rec_res)
         filter_boxes, filter_rec_res = [], []
-        for box, rec_result in zip(dt_boxes, rec_res):
-            text, score = rec_result
+        for box, rec_result, score in zip(dt_boxes, rec_res, scores):
             if score >= self.drop_score:
                 filter_boxes.append(box)
-                filter_rec_res.append(rec_result)
+                filter_rec_res.append([rec_result])
         end = time.time()
         time_dict['all'] = end - start
         return filter_boxes, filter_rec_res, time_dict
@@ -245,7 +260,7 @@ def main(args):
     logger.info("The predict total time is {}".format(time.time() - _st))
     if args.benchmark:
         text_sys.text_detector.autolog.report()
-        text_sys.text_recognizer.autolog.report()
+        # text_sys.text_recognizer.autolog.report()
 
     with open(
             os.path.join(draw_img_save_dir, "system_results.txt"),

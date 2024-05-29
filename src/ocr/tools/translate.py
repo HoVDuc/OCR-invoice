@@ -163,6 +163,7 @@ def process_image(image, image_height, image_min_width, image_max_width):
     Returns:
         np.array: Ảnh được xử lý
     """
+    image = Image.fromarray(image)
     img = image.convert('RGB')  # Đưa về màu RGB
 
     w, h = img.size
