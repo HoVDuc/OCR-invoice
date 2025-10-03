@@ -1,0 +1,452 @@
+# ===================================================================
+# Gemini Invoice Extractor Configuration
+# ===================================================================
+# This configuration file controls all aspects of the Gemini-based
+# invoice extraction system.
+#
+# Last Updated: 2025-10-03
+# ===================================================================
+
+# -------------------------------------------------------------------
+# API Configuration
+# -------------------------------------------------------------------
+api:
+  # Gemini API key (use environment variable for security)
+  api_key: ${GEMINI_API_KEY}
+  
+  # Gemini model version
+  # Options: "gemini-1.5-flash", "gemini-1.5-pro", "gemini-flash-latest"
+  model_version: "gemini-flash-latest"
+  
+  # Generation configuration
+  generation:
+    temperature: 0.1        # Lower = more consistent (0.0-1.0)
+    top_p: 0.95            # Nucleus sampling threshold
+    top_k: 40              # Top-k sampling
+    max_output_tokens: 2048 # Maximum response length
+    candidate_count: 1      # Number of responses to generate
+  
+  # Retry configuration
+  retry:
+    max_retries: 5         # Maximum number of retry attempts
+    base_delay: 1.0        # Initial delay in seconds
+    max_delay: 60.0        # Maximum delay between retries
+    exponential_backoff: true  # Use exponential backoff
+    
+  # Request timeout (seconds)
+  timeout: 30
+
+# -------------------------------------------------------------------
+# Prompt Configuration
+# -------------------------------------------------------------------
+prompts:
+  # System prompt file path (relative to project root)
+  system_prompt_path: "prompts/extraction_vi.txt"
+  
+  # Default user prompt
+  default_user_prompt: "Extract invoice data to JSON"
+  
+  # Language for extraction
+  # Options: "vi" (Vietnamese), "en" (English)
+  language: "vi"
+  
+  # Prompt templates directory
+  templates_dir: "prompts"
+
+# -------------------------------------------------------------------
+# Image Preprocessing Configuration
+# -------------------------------------------------------------------
+preprocessing:
+  # Maximum image dimension (width or height)
+  # Images larger than this will be resized
+  max_image_size: 4096
+  
+  # Minimum image dimension
+  min_image_size: 100
+  
+  # Resize method
+  # Options: "lanczos", "bicubic", "bilinear", "nearest"
+  resize_method: "lanczos"
+  
+  # Auto-enhance image quality
+  enhance_quality: false
+  
+  # Contrast enhancement factor (1.0 = no change, 2.0 = double)
+  contrast_factor: 1.5
+  
+  # Supported image formats
+  supported_formats:
+    - "jpg"
+    - "jpeg"
+    - "png"
+    - "bmp"
+    - "tiff"
+    - "webp"
+  
+  # Maximum file size in MB
+  max_file_size_mb: 10
+  
+  # Convert all images to RGB mode
+  force_rgb: true
+
+# -------------------------------------------------------------------
+# Extraction Configuration
+# -------------------------------------------------------------------
+extraction:
+  # Schema version for extracted data
+  schema_version: "1.0"
+  
+  # Required fields in extraction result
+  required_fields:
+    - "SELLER"
+    - "TIMESTAMP"
+    - "PRODUCTS"
+    - "TOTAL_COST"
+  
+  # Optional fields
+  optional_fields:
+    - "ADDRESS"
+    - "TAX_CODE"
+    - "PAYMENT_METHOD"
+    - "STAFF"
+  
+  # Return raw response without validation
+  return_raw: false
+  
+  # Include confidence scores (if available)
+  include_confidence: false
+
+# -------------------------------------------------------------------
+# Validation Configuration
+# -------------------------------------------------------------------
+validation:
+  # Strict validation mode
+  # If true, raises errors on validation failures
+  # If false, logs warnings and continues with partial data
+  strict_mode: true
+  
+  # Validate JSON structure against schema
+  validate_structure: true
+  
+  # Validate field data types
+  validate_types: true
+  
+  # Validate total cost calculation
+  validate_total: true
+  
+  # Allowed variance in total calculation (±)
+  # For example: 0.01 = 1% variance allowed
+  total_variance_tolerance: 100.0  # VND
+  
+  # Allow empty optional fields
+  allow_empty_optional: true
+  
+  # Validate product fields
+  product_validation:
+    required_fields:
+      - "PRODUCT"
+      - "NUM"
+      - "VALUE"
+    allow_zero_quantity: false
+    allow_zero_value: false
+
+# -------------------------------------------------------------------
+# Normalization Configuration
+# -------------------------------------------------------------------
+normalization:
+  # Auto-normalize extracted data
+  auto_normalize: true
+  
+  # Currency normalization
+  currency:
+    # Default currency symbol
+    default_symbol: "VND"
+    
+    # Remove currency symbols from values
+    remove_symbols: true
+    
+    # Decimal separator (used in Vietnam)
+    decimal_separator: "."
+    
+    # Thousand separator
+    thousand_separator: ","
+    
+    # Force float conversion
+    force_float: true
+  
+  # Timestamp normalization
+  timestamp:
+    # Auto-parse timestamps
+    auto_parse: true
+    
+    # Supported date formats (in order of priority)
+    formats:
+      - "%d/%m/%Y %H:%M"
+      - "%d-%m-%Y %H:%M"
+      - "%d/%m/%y %H:%M"
+      - "%d-%m-%y %H:%M"
+      - "%d/%m/%Y"
+      - "%d-%m-%Y"
+      - "%Y-%m-%d %H:%M:%S"
+      - "%Y/%m/%d %H:%M"
+    
+    # Output format
+    output_format: "%Y-%m-%d %H:%M:%S"
+    
+    # Timezone (if needed)
+    timezone: "Asia/Ho_Chi_Minh"
+  
+  # Text normalization
+  text:
+    # Strip whitespace from strings
+    strip_whitespace: true
+    
+    # Normalize Unicode characters
+    normalize_unicode: true
+    
+    # Convert to lowercase (for specific fields)
+    lowercase_fields: []
+
+# -------------------------------------------------------------------
+# Output Configuration
+# -------------------------------------------------------------------
+output:
+  # Default output format
+  # Options: "json", "txt", "excel", "csv"
+  default_format: "json"
+  
+  # JSON output settings
+  json:
+    indent: 2
+    ensure_ascii: false  # Preserve Vietnamese characters
+    sort_keys: false
+  
+  # Include metadata in output
+  include_metadata: true
+  
+  # Metadata fields
+  metadata:
+    - "extraction_timestamp"
+    - "model_version"
+    - "confidence_score"
+    - "processing_time"
+  
+  # Output directory for saved results
+  output_dir: "output"
+  
+  # Create subdirectories by date
+  organize_by_date: false
+  
+  # Visualization settings
+  visualization:
+    enabled: true
+    font_path: "doc/fonts/BeVietnamPro-Black.ttf"
+    show_bounding_boxes: false
+    color_scheme: "default"
+
+# -------------------------------------------------------------------
+# Batch Processing Configuration
+# -------------------------------------------------------------------
+batch:
+  # Enable batch processing
+  enabled: true
+  
+  # Maximum number of parallel workers
+  # Set to 1 for sequential processing
+  # Free tier API limit: 15 RPM, so max_workers=3 is safe
+  max_workers: 3
+  
+  # Continue processing on errors
+  continue_on_error: true
+  
+  # Save individual results
+  save_individual_results: true
+  
+  # Generate batch summary
+  generate_summary: true
+  
+  # Summary file name
+  summary_filename: "batch_summary.json"
+  
+  # Progress tracking
+  show_progress: true
+  
+  # Glob patterns for file discovery
+  file_patterns:
+    - "*.jpg"
+    - "*.jpeg"
+    - "*.png"
+
+# -------------------------------------------------------------------
+# Logging Configuration
+# -------------------------------------------------------------------
+logging:
+  # Logging level
+  # Options: "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"
+  level: "INFO"
+  
+  # Log to file
+  log_to_file: true
+  
+  # Log file path
+  log_file: "logs/gemini_extractor.log"
+  
+  # Log rotation
+  rotation: "10 MB"  # Rotate when file reaches 10 MB
+  
+  # Log retention
+  retention: "30 days"  # Keep logs for 30 days
+  
+  # Log format
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
+  
+  # Console output
+  console:
+    enabled: true
+    colorize: true
+  
+  # Log API requests/responses (debugging)
+  log_api_calls: false
+  
+  # Log extraction results (debugging)
+  log_results: false
+
+# -------------------------------------------------------------------
+# Performance Configuration
+# -------------------------------------------------------------------
+performance:
+  # Enable caching
+  enable_cache: false
+  
+  # Cache directory
+  cache_dir: "cache"
+  
+  # Cache expiration (hours)
+  cache_expiration: 24
+  
+  # Pre-load models/resources
+  preload: false
+  
+  # Memory optimization
+  memory:
+    # Clear cache after each extraction
+    clear_cache_after_extraction: false
+    
+    # Maximum memory usage (MB)
+    max_memory_mb: 2048
+
+# -------------------------------------------------------------------
+# Error Handling Configuration
+# -------------------------------------------------------------------
+error_handling:
+  # Fallback strategy on extraction failure
+  # Options: "raise", "return_empty", "return_partial"
+  fallback_strategy: "raise"
+  
+  # Save failed extractions for debugging
+  save_failures: true
+  
+  # Failed extractions directory
+  failures_dir: "output/failures"
+  
+  # Include error traceback in output
+  include_traceback: true
+  
+  # Notification on errors
+  notify_on_error: false
+  
+  # Email notification settings (if enabled)
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    from_email: ""
+    to_email: ""
+    password: ${EMAIL_PASSWORD}
+
+# -------------------------------------------------------------------
+# Development & Testing
+# -------------------------------------------------------------------
+development:
+  # Enable debug mode
+  debug: false
+  
+  # Use test/mock API (for development)
+  mock_api: false
+  
+  # Test data directory
+  test_data_dir: "tests/data"
+  
+  # Save all API requests/responses for debugging
+  save_debug_data: false
+  
+  # Debug data directory
+  debug_data_dir: "debug"
+
+# -------------------------------------------------------------------
+# Security Configuration
+# -------------------------------------------------------------------
+security:
+  # Validate file paths (prevent path traversal)
+  validate_paths: true
+  
+  # Allowed directories for file operations
+  allowed_directories:
+    - "doc/image"
+    - "invoices"
+    - "output"
+    - "tests/data"
+  
+  # Sanitize file names
+  sanitize_filenames: true
+  
+  # Maximum path length
+  max_path_length: 255
+  
+  # Check file signatures (magic bytes)
+  verify_file_signatures: true
+
+# -------------------------------------------------------------------
+# Integration Configuration
+# -------------------------------------------------------------------
+integration:
+  # Enable webhooks
+  webhooks:
+    enabled: false
+    url: ""
+    on_success: true
+    on_failure: true
+  
+  # Database integration
+  database:
+    enabled: false
+    connection_string: ""
+    save_to_db: false
+  
+  # Export to Excel
+  excel:
+    enabled: false
+    template_path: ""
+    output_path: "output/invoices.xlsx"
+    append_mode: true
+
+# -------------------------------------------------------------------
+# Custom Fields Configuration
+# -------------------------------------------------------------------
+custom_fields:
+  # Enable extraction of custom fields
+  enabled: false
+  
+  # List of additional fields to extract
+  fields: []
+  # Example:
+  # - field_name: "DISCOUNT"
+  #   field_type: "float"
+  #   required: false
+  # - field_name: "PAYMENT_METHOD"
+  #   field_type: "string"
+  #   required: false
+
+# ===================================================================
+# End of Configuration
+# ===================================================================
