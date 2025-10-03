@@ -1,0 +1,72 @@
+# ===================================================================
+# Gemini Invoice Extractor - Simple Configuration
+# ===================================================================
+# This is a minimal configuration for quick setup.
+# For full options, see gemini_config.yaml
+# ===================================================================
+
+# API Configuration
+api:
+  api_key: ${GEMINI_API_KEY}
+  model_version: "gemini-flash-latest"
+  
+  generation:
+    temperature: 0.1
+    max_output_tokens: 2048
+  
+  retry:
+    max_retries: 5
+    base_delay: 1.0
+
+# Prompts
+prompts:
+  system_prompt_path: "prompts/extraction_vi.txt"
+  language: "vi"
+
+# Image Preprocessing
+preprocessing:
+  max_image_size: 4096
+  supported_formats:
+    - "jpg"
+    - "jpeg"
+    - "png"
+  max_file_size_mb: 10
+
+# Validation
+validation:
+  strict_mode: true
+  validate_total: true
+  total_variance_tolerance: 100.0
+
+# Normalization
+normalization:
+  auto_normalize: true
+  currency:
+    remove_symbols: true
+    force_float: true
+  timestamp:
+    auto_parse: true
+
+# Output
+output:
+  default_format: "json"
+  output_dir: "output"
+  json:
+    indent: 2
+    ensure_ascii: false
+
+# Batch Processing
+batch:
+  max_workers: 3
+  continue_on_error: true
+
+# Logging
+logging:
+  level: "INFO"
+  log_to_file: true
+  log_file: "logs/gemini_extractor.log"
+
+# Error Handling
+error_handling:
+  fallback_strategy: "raise"
+  save_failures: true

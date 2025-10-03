@@ -29,15 +29,7 @@ class GeminiInvoiceExtractor:
     6. Output formatting
     """
     
-    def __init__(
-        self,
-        api_key: str,
-        system_prompt_path: str,
-        model_version: str = "gemini-1.5-flash",
-        max_image_size: int = 4096,
-        validate_strict: bool = True,
-        auto_normalize: bool = True
-    ):
+    def __init__(self, exp):
         """
         Initialize the Gemini Invoice Extractor
         
@@ -51,21 +43,17 @@ class GeminiInvoiceExtractor:
         """
         # Initialize components
         self.preprocessor = ImageProcessor()
-        self.gemini_client = GeminiClient(
-            api_key=api_key,
-            system_prompt_path=system_prompt_path,
-            model_version=model_version
-        )
+        self.gemini_client = GeminiClient(exp)
         self.validator = DataValidator()
         self.normalizer = DataNormalizer()
         
         # Configuration
-        self.max_image_size = max_image_size
-        self.validate_strict = validate_strict
-        self.auto_normalize = auto_normalize
-        
-        logger.info(f"GeminiInvoiceExtractor initialized with model: {model_version}")
-    
+        self.max_image_size = exp.get('preprocessing.max_image_size', 1024)
+        self.validate_strict = exp.get('validation.strict_mode', True)
+        self.auto_normalize = exp.get('normalization.auto_normalize', True)
+
+        logger.info(f"GeminiInvoiceExtractor initialized with model: {self.gemini_client.model_version}")
+
     def extract(
         self,
         image_path: Union[str, Path],

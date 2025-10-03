@@ -17,20 +17,20 @@ from dotenv import load_dotenv
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from gemini_extractor.pipeline import GeminiInvoiceExtractor, BatchProcessor
+from gemini_extractor.config import load_config
 
 # Load environment variables
 load_dotenv()
+config = load_config()
 
 def main():
     """Batch processing example"""
     
     # Configuration
-    API_KEY = os.getenv("GEMINI_API_KEY")
-    SYSTEM_PROMPT_PATH = "prompts/extraction_vi.txt"
     INPUT_DIR = "/home/anlab/Downloads/test-invoice"  # Directory with invoice images
     OUTPUT_DIR = "output/batch_results"
     
-    if not API_KEY:
+    if not config.get('api.api_key'):
         print("Error: GEMINI_API_KEY not found in environment variables")
         return
     
@@ -44,11 +44,7 @@ def main():
     
     # Initialize extractor
     print("Initializing Gemini Invoice Extractor...")
-    extractor = GeminiInvoiceExtractor(
-        api_key=API_KEY,
-        system_prompt_path=SYSTEM_PROMPT_PATH,
-        model_version="gemini-flash-latest"
-    )
+    extractor = GeminiInvoiceExtractor(config)
     
     # Initialize batch processor
     batch_processor = BatchProcessor(extractor)

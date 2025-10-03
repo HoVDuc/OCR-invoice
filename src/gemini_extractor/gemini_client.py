@@ -1,7 +1,5 @@
-import os
 import random
 import time
-import traceback
 import google.generativeai as genai
 from loguru import logger
 from google.api_core import exceptions as google_exceptions
@@ -12,17 +10,18 @@ class GeminiClient:
     Manages API authentication and requests
     """
 
-    def __init__(self, api_key: str, system_prompt_path: str, model_version: str = "gemini-1.5-flash"):
+    def __init__(self, exp):
         """Initialize with API credentials"""
-        self.model_version = model_version
-        genai.configure(api_key=api_key)
+        self.exp = exp
+        self.model_version = exp.get('api.model_version', 'gemini-1.5-flash')
+        genai.configure(api_key=exp.get('api.api_key'))
         generation_config = genai.GenerationConfig(
-            temperature=1,
-            top_p=0.95,
-            top_k=40,
-            candidate_count=1,
+            temperature=exp.get('api.generation.temperature', 0.2),
+            top_p=exp.get('api.generation.top_p', 0.8),
+            top_k=exp.get('api.generation.top_k', 40),
+            candidate_count=exp.get('api.generation.candidate_count', 1),
         )
-        system_instruction = self.load_system_prompt(system_prompt_path)
+        system_instruction = self.load_system_prompt(exp.get('prompts.system_prompt_path'))
         self.model = genai.GenerativeModel(self.model_version,
                                            system_instruction=system_instruction,
                                            generation_config=generation_config)
@@ -35,7 +34,10 @@ class GeminiClient:
     def generate_content(self, image: bytes, prompt: str) -> dict:
         """Send request to Gemini API"""
         logger.info("Sending request to Gemini API...")
-        response = self.handle_rate_limits(self.model.generate_content, [prompt, image])
+        response = self.handle_rate_limits(self.model.generate_content, [prompt, image],
+                                           max_retries=self.exp.get('api.retry.max_retries', 5),
+                                           base_delay=self.exp.get('api.retry.base_delay', 1.0),
+                                           max_delay=self.exp.get('api.retry.max_delay', 60.0))
         if not self.validate_response(response):
             logger.error("Invalid response from Gemini API")
             raise ValueError("Invalid response from Gemini API")
@@ -122,47 +124,3 @@ class GeminiClient:
         except (ValueError, AttributeError) as e:
             logger.error(f"❌ No valid text in response: {e}")
             return False
-
-if __name__ == "__main__":
-    import json
-    from dotenv import load_dotenv
-    from PIL import Image
-    from validator import DataValidator, DataNormalizer
-    from formatter import to_table
-    load_dotenv()
-
-    gemini_client = GeminiClient(api_key=os.getenv("GEMINI_API_KEY"),
-                                 system_prompt_path="/media/anlab/data/hovduc/github/OCR-invoice/prompts/extraction_vi.txt",
-                                 model_version="gemini-flash-latest")
-    response = gemini_client.generate_content(image=Image.open("/home/anlab/Downloads/Image (3).jpeg"),
-                                              prompt="Extract invoice data to JSON")
-    
-    data = response.text.replace('```json', '').replace('```', '')
-    try:
-        data_dict = json.loads(data)
-        validator = DataValidator()
-        if not validator.validate_json_structure(data_dict):
-            raise ValueError("Invalid JSON structure")
-        data_dict = validator.validate_field_types(data_dict)
-        normalizer = DataNormalizer()
-
-        # Clean seller & timestamp
-        data_dict["SELLER"] = data_dict.get("SELLER", "").strip()
-        try:
-            data_dict["TIMESTAMP"] = normalizer.parse_timestamp(data_dict["TIMESTAMP"])
-        except ValueError as e:
-            print(f"⚠️ Timestamp error: {e}")
-            data_dict["TIMESTAMP"] = None
-
-        for prod in data_dict["PRODUCTS"]:
-            prod["VALUE"] = normalizer.normalize_currency(prod["VALUE"])
-        
-        # 3. Validate types & totals
-        data_dict = validator.validate_field_types(data_dict)
-    
-    except Exception as e:
-        logger.error(traceback.print_exc())
-        print(f"❌ Failed to parse JSON: {e}")
-        data_dict = {}
-
-    to_table(data_dict)    

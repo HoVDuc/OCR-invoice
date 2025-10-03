@@ -16,17 +16,18 @@ from dotenv import load_dotenv
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from gemini_extractor.pipeline import GeminiInvoiceExtractor
+from gemini_extractor.config import load_config
 
 # Load environment variables
 load_dotenv()
+config = load_config()
 
 def main():
     """Main extraction example"""
     
     # Configuration
     API_KEY = os.getenv("GEMINI_API_KEY")
-    SYSTEM_PROMPT_PATH = "prompts/extraction_vi.txt"
-    IMAGE_PATH = "/home/anlab/Downloads/Image (2).jpeg"
+    IMAGE_PATH = "/home/anlab/Downloads/test-invoice/Image (2).jpeg"
     
     if not API_KEY:
         print("Error: GEMINI_API_KEY not found in environment variables")
@@ -36,13 +37,7 @@ def main():
     
     # Initialize extractor
     print("Initializing Gemini Invoice Extractor...")
-    extractor = GeminiInvoiceExtractor(
-        api_key=API_KEY,
-        system_prompt_path=SYSTEM_PROMPT_PATH,
-        model_version="gemini-flash-latest",
-        validate_strict=True,
-        auto_normalize=True
-    )
+    extractor = GeminiInvoiceExtractor(config)
     
     # Extract and display
     print(f"\nProcessing invoice: {IMAGE_PATH}")
@@ -64,4 +59,5 @@ def main():
         traceback.print_exc()
 
 if __name__ == "__main__":
+    
     main()
