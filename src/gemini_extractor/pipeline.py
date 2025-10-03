@@ -234,8 +234,8 @@ class GeminiInvoiceExtractor:
                 
                 try:
                     timestamp_str = data_dict.get("TIMESTAMP", "")
-                    if timestamp_str:
-                        data_dict["TIMESTAMP"] = self.normalizer.parse_timestamp(timestamp_str)
+                    # if timestamp_str:
+                    #     data_dict["TIMESTAMP"] = self.normalizer.parse_timestamp(timestamp_str)
                 except ValueError as e:
                     logger.warning(f"Timestamp parsing error: {e}")
                     data_dict["TIMESTAMP"] = timestamp_str  # Keep as string
