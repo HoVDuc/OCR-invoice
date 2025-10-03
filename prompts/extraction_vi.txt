@@ -1,0 +1,28 @@
+EXTRACTION PROMPT TEMPLATE:
+--------------------------
+Analyze this invoice image and extract the following information in JSON format:
+
+{
+  "SELLER": "Store/Company name",
+  "ADDRESS": "Full address",
+  "TIMESTAMP": "Date and time of sale",
+  "PRODUCTS": [
+    {
+      "PRODUCT": "Product name and description",
+      "NUM": "Quantity",
+      "VALUE": "Price"
+    }
+  ],
+  "TOTAL_COST": "Total amount"
+}
+
+Rules:
+1. Extract text exactly as shown in Vietnamese
+2. For PRODUCTS, capture complete product descriptions including unit prices
+3. NUM should be numeric (convert if needed)
+4. VALUE should be numeric without currency symbols
+5. TOTAL_COST is the final total amount
+6. If a field is not found, use empty string "" or empty array []
+7. Preserve Vietnamese diacritics accurately
+
+Output only valid JSON, no additional text.
