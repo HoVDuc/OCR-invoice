@@ -28,8 +28,8 @@ class GeminiInvoiceExtractor:
     5. Data validation & normalization
     6. Output formatting
     """
-    
-    def __init__(self, exp):
+
+    def __init__(self, exp, model_version: str = "gemini-flash-latest"):
         """
         Initialize the Gemini Invoice Extractor
         
@@ -43,7 +43,7 @@ class GeminiInvoiceExtractor:
         """
         # Initialize components
         self.preprocessor = ImageProcessor()
-        self.gemini_client = GeminiClient(exp)
+        self.gemini_client = GeminiClient(exp, model_version)
         self.validator = DataValidator()
         self.normalizer = DataNormalizer()
         
@@ -417,33 +417,3 @@ class BatchProcessor:
         
         logger.info(f"Batch processing complete: {results['success']}/{results['total']} successful")
         return results
-
-
-# Convenience function for quick usage
-def extract_invoice(
-    image_path: str,
-    api_key: str,
-    system_prompt_path: str,
-    display: bool = True
-) -> Dict[str, Any]:
-    """
-    Quick extraction function for single invoice
-    
-    Args:
-        image_path: Path to invoice image
-        api_key: Gemini API key
-        system_prompt_path: Path to system prompt file
-        display: If True, display formatted table
-        
-    Returns:
-        Extracted invoice data
-    """
-    extractor = GeminiInvoiceExtractor(
-        api_key=api_key,
-        system_prompt_path=system_prompt_path
-    )
-    
-    if display:
-        return extractor.extract_and_display(image_path)
-    else:
-        return extractor.extract(image_path)

@@ -321,6 +321,7 @@ async def health_check():
 @app.post("/extract", response_model=ExtractionResponse)
 async def extract_invoice(
     file: UploadFile = File(..., description="Invoice image file"),
+    model_name: Optional[str] = Form(default="gemini-flash-latest", description="Model name to use"),
     prompt: Optional[str] = Form(default="Extract invoice data to JSON"),
     return_raw: Optional[bool] = Form(default=False),
     save_result: Optional[bool] = Form(default=True)
@@ -337,12 +338,16 @@ async def extract_invoice(
     Returns:
         Extracted invoice data
     """
+    # if config.get('api.model_version') != model_name:
+    #     # Reload extractor with new model
+    extractor = GeminiInvoiceExtractor(config, model_name)
+    
     if extractor is None:
         raise HTTPException(
             status_code=503,
             detail="Extractor not initialized. Check server logs."
         )
-    
+
     start_time = datetime.now()
     file_path = None
     
@@ -759,7 +764,7 @@ async def reload_configuration():
         config.reload()
         
         # Reinitialize extractor with new config
-        extractor = GeminiInvoiceExtractor(config)
+        extractor = GeminiInvoiceExtractor(config, config.get('api.model_version'))
         batch_processor = BatchProcessor(extractor)
         
         logger.info("🔄 Configuration reloaded and extractor reinitialized")

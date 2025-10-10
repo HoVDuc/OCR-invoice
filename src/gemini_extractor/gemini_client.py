@@ -10,10 +10,10 @@ class GeminiClient:
     Manages API authentication and requests
     """
 
-    def __init__(self, exp):
+    def __init__(self, exp, model_version):
         """Initialize with API credentials"""
         self.exp = exp
-        self.model_version = exp.get('api.model_version', 'gemini-1.5-flash')
+        self.model_version = model_version 
         genai.configure(api_key=exp.get('api.api_key'))
         generation_config = genai.GenerationConfig(
             temperature=exp.get('api.generation.temperature', 0.2),
